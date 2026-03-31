@@ -14,8 +14,20 @@
         .project-card { background: #1a1a1a; padding: 25px; border-radius: 8px; text-align: center; border: 1px solid #333; transition: transform 0.3s ease; }
         .project-card:hover { transform: translateY(-5px); border-color: #555; }
         
-        .project-image { height: 200px; background: #2a2a2a; margin-bottom: 20px; border-radius: 4px; display: flex; align-items: center; justify-content: center; color: #666; font-size: 0.9em; overflow: hidden; }
-        .project-image img { width: 100%; height: 100%; object-fit: cover; }
+        /* IMAGE GALLERY CSS */
+        .scroll-hint { font-size: 0.75em; color: #888; text-transform: uppercase; letter-spacing: 1px; text-align: right; margin-bottom: 5px; }
+        .project-image { 
+            height: 200px; background: #2a2a2a; margin-bottom: 20px; border-radius: 4px; 
+            display: flex; overflow-x: auto; overflow-y: hidden; scroll-snap-type: x mandatory;
+        }
+        .project-image::-webkit-scrollbar { height: 8px; }
+        .project-image::-webkit-scrollbar-thumb { background: #555; border-radius: 4px; }
+        .project-image::-webkit-scrollbar-track { background: #1a1a1a; }
+        .project-image img { 
+            width: 100%; height: 100%; object-fit: cover; 
+            flex: 0 0 100%; scroll-snap-align: center; 
+        }
+        .placeholder-img { flex: 0 0 100%; display: flex; align-items: center; justify-content: center; color: #666; font-size: 0.9em; }
         
         h3 { margin: 10px 0; font-size: 1.4em; }
         .role { color: #4CAF50; font-weight: bold; font-size: 0.9em; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 10px;}
@@ -46,21 +58,27 @@
             <h2 style="text-align: center; margin-bottom: 40px; font-size: 2em;">Filmography & Production</h2>
             <div class="projects-grid">
                 <div class="project-card">
-                    <div class="project-image">Upload 'yuvaratna.jpg'</div>
+                    <div class="project-image">
+                        <div class="placeholder-img">Upload 'yuvaratna.jpg'</div>
+                    </div>
                     <h3>Yuvaratna</h3>
                     <p class="role">Production Support</p>
                     <p class="details">Major commercial Kannada release (2019). Supported large-scale shoot operations.</p>
                 </div>
                 
                 <div class="project-card">
-                    <div class="project-image">Upload 'spooky-college.jpg'</div>
+                    <div class="project-image">
+                        <div class="placeholder-img">Upload 'spooky-college.jpg'</div>
+                    </div>
                     <h3>Spooky College</h3>
                     <p class="role">Assistant Director</p>
                     <p class="details">Full-length Kannada Feature Film. Handled shot planning, scheduling, and on-set coordination.</p>
                 </div>
 
                 <div class="project-card">
-                    <div class="project-image">Upload 'smile-i-hate.jpg'</div>
+                    <div class="project-image">
+                        <div class="placeholder-img">Upload 'smile-i-hate.jpg'</div>
+                    </div>
                     <h3>The Smile I Hate</h3>
                     <p class="role">Writer / Director / Performer</p>
                     <p class="details">Independent Short Film (2023). Managed end-to-end production with a peer-recognised directorial vision.</p>
@@ -75,30 +93,41 @@
                 
                 <!-- TECHNOSPORT CARD -->
                 <div class="project-card">
+                    <div class="scroll-hint">➔ Scroll to see more</div>
                     <div class="project-image">
-                        <img src="./Techno Sport.png" alt="Technosport Campaign Image">
+                        <img src="./Techno%20Sport.png" alt="Technosport Campaign Image">
+                        <img src="./TEchno%20Sport%201.png" alt="Technosport Image 2">
                     </div>
                     <h3>Technosport</h3>
                     <p class="role">Creative Copywriter (McCann)</p>
                     <p class="details">Ideated and developed a 360° campaign concept and festival-led brand activation. Translated brief into a pitch-ready framework.</p>
-                    <a href="./TECHNO SPORT MOVE EASY.pdf" target="_blank" class="btn btn-small">View Pitch / Script</a>
+                    <a href="./TECHNO%20SPORT%20MOVE%20EASY.pdf" target="_blank" class="btn btn-small">View Pitch / Script</a>
                 </div>
 
                 <!-- CAMPA COLA CARD -->
                 <div class="project-card">
+                    <div class="scroll-hint">➔ Scroll to see more</div>
                     <div class="project-image">
-                        <img src="./Campa IPL.png" alt="Campa Cola IPL Campaign">
+                        <img src="./Campa%20IPL.png" alt="Campa Cola IPL Campaign">
+                        <img src="./Campa%20IPL%201.png" alt="Campa Image 1">
+                        <img src="./Campa%20IPL%202.png" alt="Campa Image 2">
+                        <img src="./Campa%20IPL%203.png" alt="Campa Image 3">
+                        <img src="./Campa-Cola-Food%20Court-V2-01.jpg" alt="Campa Food Court">
+                        <img src="./Campa-Cola-Food%20Court-V2-02.jpg" alt="Campa Food Court">
                     </div>
                     <h3>Campa Cola</h3>
                     <p class="role">Creative Copywriter (McCann)</p>
                     <p class="details">Developed creative routes, content themes, and pitch decks for major brand activations including the IPL and Ramadan campaigns.</p>
-                    <a href="./Campa Power up Ramadan KV.pdf" target="_blank" class="btn btn-small">View Ramadan KV Pitch</a>
+                    <a href="./Campa%20Power%20up%20Ramadan%20KV.pdf" target="_blank" class="btn btn-small">View Ramadan KV Pitch</a>
                 </div>
 
                 <!-- NESTLE MAGGI CARD -->
                 <div class="project-card">
+                    <div class="scroll-hint">➔ Scroll to see more</div>
                     <div class="project-image">
-                        <img src="./Nestle Maggie.png" alt="Nestle Maggi Campaign">
+                        <img src="./Nestle%20Maggie.png" alt="Nestle Maggi Campaign">
+                        <img src="./Nestle%20Maggie%201.png" alt="Maggi Image 2">
+                        <img src="./Nestle%20Maggie%202.png" alt="Maggi Image 3">
                     </div>
                     <h3>Maggi (Nestlé)</h3>
                     <p class="role">Creative Copywriter (McCann)</p>
