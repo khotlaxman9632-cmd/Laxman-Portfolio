@@ -5,221 +5,319 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Laxman Khot - Film Production & Creative Strategy</title>
     <!-- Importing a Modern Creative Font -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
     <style>
+        /* --- GLOBAL & DRAMATIC BACKGROUND --- */
         body { 
             margin: 0; 
             font-family: 'Poppins', sans-serif; 
-            background-color: #0b0914; 
+            background-color: #030305; /* Pitch black/deepest blue */
             color: #fff; 
             overflow-x: hidden; 
+            /* Cinematic Vignette Overlay */
+            background-image: radial-gradient(circle at center, transparent 0%, #000 100%);
+            background-attachment: fixed;
         }
 
-        /* ANIMATED BACKGROUND ORBS (Pink, Orange, Purple) */
-        .bg-orb {
+        /* --- 3D CINEMATIC LIGHT FLARES --- */
+        .light-flare {
             position: fixed;
             border-radius: 50%;
-            filter: blur(120px); 
+            filter: blur(140px); 
             z-index: -1; 
-            opacity: 0.6;
-            animation: float 10s infinite ease-in-out alternate; 
+            opacity: 0.5;
+            animation: drift 15s infinite ease-in-out alternate; 
         }
-        .orb-1 { width: 500px; height: 500px; background: #e52e71; top: -150px; left: -100px; }
-        .orb-2 { width: 600px; height: 600px; background: #ff8a00; bottom: -200px; right: -100px; animation-delay: -3s; }
-        .orb-3 { width: 400px; height: 400px; background: #4a00e0; top: 30%; left: 30%; animation-delay: -6s; }
+        /* Crimson Red */
+        .flare-1 { width: 600px; height: 600px; background: #ff2a5f; top: -100px; left: -150px; }
+        /* Sci-Fi Cyan */
+        .flare-2 { width: 700px; height: 700px; background: #00f0ff; bottom: -200px; right: -150px; animation-delay: -5s; }
+        /* Golden Hour Amber */
+        .flare-3 { width: 500px; height: 500px; background: #fac000; top: 40%; left: 35%; animation-delay: -10s; }
 
-        @keyframes float {
-            0% { transform: translate(0, 0) scale(1); }
-            33% { transform: translate(70px, -50px) scale(1.15); }
-            66% { transform: translate(-50px, 80px) scale(0.85); }
-            100% { transform: translate(20px, -20px) scale(1.05); }
+        @keyframes drift {
+            0% { transform: translate(0, 0) scale(1) rotate(0deg); }
+            50% { transform: translate(100px, 100px) scale(1.2) rotate(180deg); }
+            100% { transform: translate(-50px, -50px) scale(0.9) rotate(360deg); }
+        }
+
+        /* --- ENTRANCE ANIMATION (Movie Intro Style) --- */
+        .fade-up {
+            opacity: 0;
+            transform: translateY(40px);
+            animation: fadeUpAnim 1.2s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+        }
+        @keyframes fadeUpAnim {
+            to { opacity: 1; transform: translateY(0); }
         }
         
-        /* Glassmorphism Header */
+        /* Delay classes for staggered intro */
+        .delay-1 { animation-delay: 0.2s; }
+        .delay-2 { animation-delay: 0.4s; }
+        .delay-3 { animation-delay: 0.6s; }
+        
+        /* --- HEADER --- */
         header { 
-            padding: 80px 20px; 
+            padding: 100px 20px 80px; 
             text-align: center; 
-            border-bottom: 1px solid rgba(255,255,255,0.05); 
-            background: rgba(11, 9, 20, 0.4); 
-            backdrop-filter: blur(15px);
+            position: relative;
         }
         
-        /* TEXT COLORS (Golden, Sky Blue, Light Green) */
         h1 { 
             margin: 0; 
-            font-size: 4em; 
+            font-size: 5em; 
             text-transform: uppercase; 
-            letter-spacing: 4px; 
-            /* Golden to Light Sky Blue Gradient */
-            background: linear-gradient(to right, #FFD700, #87CEFA); 
-            -webkit-background-clip: text; 
-            -webkit-text-fill-color: transparent; 
-            font-weight: 700;
+            letter-spacing: 8px; 
+            font-weight: 800;
+            color: #fff;
+            text-shadow: 0 0 30px rgba(0, 240, 255, 0.4), 0 0 80px rgba(255, 42, 95, 0.4);
         }
         
         p.subtitle { 
-            color: #87CEFA; /* Light Sky Blue */
-            font-size: 1.3em; 
-            letter-spacing: 2px; 
+            color: #00f0ff; 
+            font-size: 1.4em; 
+            letter-spacing: 4px; 
             margin-top: 15px; 
-            font-weight: 300;
+            font-weight: 400;
+            text-transform: uppercase;
         }
         
-        .container { max-width: 1200px; margin: 0 auto; padding: 60px 20px; position: relative; z-index: 1;}
+        .container { max-width: 1250px; margin: 0 auto; padding: 40px 20px; position: relative; z-index: 1;}
         
-        /* Heading Styles */
         h2 {
             text-align: center;
-            margin-bottom: 50px;
-            font-size: 2.2em;
-            letter-spacing: 1px;
+            margin-bottom: 60px;
+            font-size: 2.5em;
+            letter-spacing: 2px;
             color: #fff;
+            text-transform: uppercase;
+            border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+            display: inline-block;
+            padding-bottom: 10px;
+            left: 50%;
+            position: relative;
+            transform: translateX(-50%);
         }
         
-        .projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 40px; }
+        /* --- TRUE 3D GLASS CARDS --- */
+        .projects-grid { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); 
+            gap: 50px; 
+            perspective: 1200px; /* Establishes the 3D space */
+        }
         
-        /* Glassmorphism Project Cards */
         .project-card { 
-            background: rgba(28, 24, 38, 0.4); 
-            backdrop-filter: blur(20px); 
-            padding: 30px; 
-            border-radius: 16px; 
+            background: rgba(15, 15, 20, 0.6); 
+            backdrop-filter: blur(15px); 
+            padding: 35px; 
+            border-radius: 20px; 
             text-align: center; 
             border: 1px solid rgba(255, 255, 255, 0.05); 
-            transition: all 0.4s ease; 
+            box-shadow: 0 20px 40px rgba(0,0,0,0.8), inset 0 1px 0 rgba(255,255,255,0.1);
+            transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1); 
+            transform-style: preserve-3d; /* Allows child elements to pop out */
         }
+        
         .project-card:hover { 
-            transform: translateY(-10px); 
-            border-color: #87CEFA; /* Sky Blue glow border on hover */
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5); 
-            background: rgba(28, 24, 38, 0.6);
+            transform: translateY(-15px) rotateX(5deg) rotateY(-5deg); /* Physical 3D Tilt */
+            border-color: rgba(0, 240, 255, 0.4); 
+            box-shadow: -20px 30px 50px rgba(0,0,0,0.9), 0 0 30px rgba(0, 240, 255, 0.15); 
+            background: rgba(20, 20, 28, 0.8);
+        }
+
+        /* Making inner elements levitate on hover */
+        .project-card:hover h3, 
+        .project-card:hover .project-image,
+        .project-card:hover .role,
+        .project-card:hover .btn-small {
+            transform: translateZ(30px); /* Pushes elements outward toward the viewer */
         }
         
         /* IMAGE GALLERY & VIDEO CSS */
         .scroll-hint { 
             font-size: 0.75em; 
-            color: #FFD700; /* Golden */
+            color: #fac000; 
             text-transform: uppercase; 
-            letter-spacing: 1.5px; 
+            letter-spacing: 2px; 
             text-align: right; 
-            margin-bottom: 8px; 
+            margin-bottom: 12px; 
             font-weight: 600;
+            transition: transform 0.5s;
         }
         .project-image { 
-            height: 200px; 
+            height: 220px; 
             background: #000; 
             margin-bottom: 25px; 
-            border-radius: 8px; 
+            border-radius: 12px; 
             display: flex; 
             overflow-x: auto; 
             overflow-y: hidden; 
             scroll-snap-type: x mandatory; 
             position: relative;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.7);
+            transition: transform 0.5s cubic-bezier(0.23, 1, 0.32, 1);
         }
-        .project-image::-webkit-scrollbar { height: 8px; }
-        .project-image::-webkit-scrollbar-thumb { background: linear-gradient(to right, #87CEFA, #90EE90); border-radius: 4px; } /* Sky Blue to Light Green */
+        .project-image::-webkit-scrollbar { height: 6px; }
+        .project-image::-webkit-scrollbar-thumb { background: #00f0ff; border-radius: 3px; } 
         .project-image::-webkit-scrollbar-track { background: #111; }
-        .project-image img { 
+        .project-image img, .project-image iframe { 
             width: 100%; height: 100%; object-fit: cover; 
             flex: 0 0 100%; scroll-snap-align: center; 
         }
         
-        h3 { margin: 10px 0; font-size: 1.6em; font-weight: 600; }
+        h3 { 
+            margin: 15px 0 10px; 
+            font-size: 1.8em; 
+            font-weight: 700; 
+            transition: transform 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+        }
         .role { 
-            color: #90EE90; /* Light Green */
+            color: #ff2a5f; 
             font-weight: 600; 
             font-size: 0.9em; 
             text-transform: uppercase; 
-            letter-spacing: 1.5px; 
+            letter-spacing: 2px; 
             margin-bottom: 15px;
+            transition: transform 0.5s;
         }
-        .details { color: #d1d0df; font-size: 0.95em; line-height: 1.6; font-weight: 300; }
+        .details { 
+            color: #a3a3c2; 
+            font-size: 1em; 
+            line-height: 1.7; 
+            font-weight: 300; 
+            transition: transform 0.5s;
+        }
         
         /* About Section */
-        .about-text { max-width: 800px; margin: 20px auto; color: #d1d0df; line-height: 1.9; text-align: left; font-size: 1.1em; font-weight: 300;}
-        .about-text strong { color: #fff; font-weight: 600; }
+        .about-text { max-width: 900px; margin: 20px auto; color: #b3b3cc; line-height: 2; text-align: center; font-size: 1.15em; font-weight: 300;}
+        .about-text strong { color: #fff; font-weight: 600; color: #fac000;}
         
-        /* Glassmorphism Skills Box */
         .skills { 
-            max-width: 800px; 
-            margin: 40px auto; 
+            max-width: 900px; 
+            margin: 50px auto; 
             text-align: left; 
-            background: rgba(28, 24, 38, 0.4); 
+            background: rgba(15, 15, 20, 0.6); 
             backdrop-filter: blur(20px);
-            padding: 35px; 
-            border-radius: 16px; 
+            padding: 40px; 
+            border-radius: 20px; 
             border: 1px solid rgba(255, 255, 255, 0.05); 
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.8);
+            display: flex;
+            flex-wrap: wrap;
+            gap: 40px;
         }
-        .skills h4 { margin-top: 0; color: #FFD700; font-size: 1.2em; letter-spacing: 1px; text-transform: uppercase;} /* Golden */
+        .skills-col { flex: 1; min-width: 300px; }
+        .skills h4 { margin-top: 0; color: #00f0ff; font-size: 1.3em; letter-spacing: 2px; text-transform: uppercase;} 
         
         /* Footer */
-        footer { text-align: center; padding: 60px 20px; color: #777; border-top: 1px solid rgba(255,255,255,0.05); margin-top: 60px; background: rgba(0, 0, 0, 0.5); backdrop-filter: blur(10px); }
-        a { color: #87CEFA; text-decoration: none; padding-bottom: 2px; transition: color 0.3s, border-color 0.3s; }
-        a:hover { color: #FFD700; }
+        footer { text-align: center; padding: 80px 20px; color: #666; border-top: 1px solid rgba(255,255,255,0.05); margin-top: 100px; background: #020203; }
+        a { color: #ff2a5f; text-decoration: none; padding-bottom: 2px; transition: color 0.3s, text-shadow 0.3s; }
+        a:hover { color: #00f0ff; text-shadow: 0 0 10px rgba(0, 240, 255, 0.5); }
         
-        /* Vibrant Buttons */
+        /* Cinematic Hover Buttons */
         .btn { 
             display: inline-block; 
-            padding: 14px 32px; 
-            /* Sky Blue to Light Green Gradient */
-            background: linear-gradient(45deg, #87CEFA, #90EE90); 
-            color: #080c12 !important; /* Dark text so it's readable on bright colors */
+            padding: 16px 40px; 
+            background: transparent;
+            color: #fff !important; 
             text-decoration: none; 
             border-radius: 30px; 
-            font-weight: 700; 
-            letter-spacing: 1px;
-            margin-top: 25px; 
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(135, 206, 250, 0.4);
+            font-weight: 600; 
+            letter-spacing: 2px;
+            margin-top: 30px; 
+            transition: all 0.4s ease;
             text-transform: uppercase;
             font-size: 0.9em;
+            border: 2px solid #ff2a5f;
+            box-shadow: 0 0 15px rgba(255, 42, 95, 0.2);
+            position: relative;
+            overflow: hidden;
         }
         .btn:hover { 
-            transform: scale(1.05); 
-            box-shadow: 0 8px 25px rgba(144, 238, 144, 0.6); 
-            /* Flips the gradient direction on hover */
-            background: linear-gradient(45deg, #90EE90, #87CEFA);
+            background: #ff2a5f;
+            box-shadow: 0 0 30px rgba(255, 42, 95, 0.6);
+            transform: translateY(-3px);
         }
         
         .btn-small { 
             padding: 10px 24px; 
-            font-size: 0.85em; 
+            font-size: 0.8em; 
             margin-top: 20px;
+            border: 1px solid #00f0ff;
+            box-shadow: 0 0 10px rgba(0, 240, 255, 0.2);
+        }
+        .btn-small:hover {
+            background: #00f0ff;
+            color: #000 !important;
+            box-shadow: 0 0 20px rgba(0, 240, 255, 0.6);
         }
     </style>
 </head>
 <body>
 
-    <!-- ANIMATED GLOWING BACKGROUND ORBS -->
-    <div class="bg-orb orb-1"></div>
-    <div class="bg-orb orb-2"></div>
-    <div class="bg-orb orb-3"></div>
+    <!-- CINEMATIC LIGHT FLARES -->
+    <div class="light-flare flare-1"></div>
+    <div class="light-flare flare-2"></div>
+    <div class="light-flare flare-3"></div>
 
-    <header>
+    <header class="fade-up">
         <h1>Laxman Khot</h1>
         <p class="subtitle">Film Production & Creative Strategy</p>
     </header>
     
     <div class="container">
         
+        <!-- ABOUT SECTION -->
+        <section class="about fade-up delay-1">
+            <p class="about-text">
+                I am a media professional with on-set experience across Kannada feature films, independent filmmaking, and broadcast media — backed by creative strategy work at <strong>McCann Worldgroup</strong>. I am comfortable across production coordination, script development, and multi-department collaboration.
+            </p>
+            <p class="about-text">
+                Having handled end-to-end production on independent short films, I understand everything from script analysis and location scouting to talent management, scheduling, and post-production. With a multilingual background, I have a strong instinct for culturally authentic storytelling.
+            </p>
+            
+            <div class="skills">
+                <div class="skills-col">
+                    <h4>Industry Experience</h4>
+                    <ul style="color: #b3b3cc; line-height: 2.2; margin-bottom: 0;">
+                        <li><strong style="color: #fff;">Creative Copywriter</strong> at McCann Worldgroup</li>
+                        <li><strong style="color: #fff;">AI Linguist & Scriptwriter</strong> at Krutrim AI (Ola)</li>
+                        <li><strong style="color: #fff;">Copy Editor</strong> at NewFirst Kannada TV</li>
+                        <li><strong style="color: #fff;">Filmmaker</strong> at IFP 50-Hour Challenge</li>
+                    </ul>
+                </div>
+                <div class="skills-col">
+                    <h4>Languages</h4>
+                    <ul style="color: #b3b3cc; line-height: 2.2; list-style-type: none; padding-left: 0; margin-bottom: 0;">
+                        <li>› <strong style="color: #fff;">Hindi</strong> — Fluent</li>
+                        <li>› <strong style="color: #fff;">English</strong> — Proficient</li>
+                        <li>› <strong style="color: #fff;">Kannada</strong> — Native</li>
+                        <li>› <strong style="color: #fff;">Telugu</strong> — Intermediate</li>
+                        <li>› <strong style="color: #fff;">Tamil · Marathi · Malayalam</strong> — Basic</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div style="text-align: center;">
+                <a href="./Laxman_Khot_CV_v19_1.docx" class="btn" download>Download CV</a>
+            </div>
+        </section>
+
         <!-- FILMOGRAPHY PROJECTS SECTION -->
-        <section class="projects">
+        <section class="projects fade-up delay-2" style="margin-top: 120px;">
             <h2>Filmography & Production</h2>
             <div class="projects-grid">
                 
-                <!-- YUVARATNA WITH SIDE-SCROLLING VIDEOS -->
+                <!-- YUVARATNA -->
                 <div class="project-card">
                     <div class="scroll-hint">➔ Scroll for Hindi Trailer</div>
                     <div class="project-image">
-                        <!-- Kannada Trailer -->
                         <div style="flex: 0 0 100%; scroll-snap-align: center; height: 100%;">
-                            <iframe width="100%" height="100%" src="https://www.youtube.com/embed/a1L1EviALUg" title="Yuvaratna Kannada Trailer" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="border-radius: 4px;"></iframe>
+                            <iframe width="100%" height="100%" src="https://www.youtube.com/embed/a1L1EviALUg" title="Yuvaratna Kannada Trailer" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="border-radius: 12px;"></iframe>
                         </div>
-                        <!-- Hindi Trailer -->
                         <div style="flex: 0 0 100%; scroll-snap-align: center; height: 100%;">
-                            <iframe width="100%" height="100%" src="https://www.youtube.com/embed/o_E53tfZP1A" title="Yuvaratna Hindi Trailer" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="border-radius: 4px;"></iframe>
+                            <iframe width="100%" height="100%" src="https://www.youtube.com/embed/o_E53tfZP1A" title="Yuvaratna Hindi Trailer" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="border-radius: 12px;"></iframe>
                         </div>
                     </div>
                     <h3>Yuvaratna</h3>
@@ -230,7 +328,7 @@
                 <!-- SPOOKY COLLEGE -->
                 <div class="project-card">
                     <div class="project-image" style="display: block;">
-                        <iframe width="100%" height="100%" src="https://www.youtube.com/embed/S-R_RO49UdY" title="Spooky College Trailer" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="border-radius: 4px; position: absolute; top: 0; left: 0;"></iframe>
+                        <iframe width="100%" height="100%" src="https://www.youtube.com/embed/S-R_RO49UdY" title="Spooky College Trailer" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="border-radius: 12px; position: absolute; top: 0; left: 0;"></iframe>
                     </div>
                     <h3>Spooky College</h3>
                     <p class="role">Assistant Director</p>
@@ -240,7 +338,7 @@
                 <!-- THE SMILE I HATE -->
                 <div class="project-card">
                     <div class="project-image" style="display: block;">
-                        <iframe width="100%" height="100%" src="https://www.youtube.com/embed/-gAihzkv0gY" title="The Smile I Hate Short Film" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="border-radius: 4px; position: absolute; top: 0; left: 0;"></iframe>
+                        <iframe width="100%" height="100%" src="https://www.youtube.com/embed/-gAihzkv0gY" title="The Smile I Hate Short Film" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="border-radius: 12px; position: absolute; top: 0; left: 0;"></iframe>
                     </div>
                     <h3>The Smile I Hate</h3>
                     <p class="role">Writer / Director / Performer</p>
@@ -250,7 +348,7 @@
         </section>
 
         <!-- CREATIVE STRATEGY SECTION -->
-        <section class="projects" style="margin-top: 100px;">
+        <section class="projects fade-up delay-3" style="margin-top: 120px;">
             <h2>Creative Strategy & Campaigns</h2>
             <div class="projects-grid">
                 
@@ -300,46 +398,14 @@
             </div>
         </section>
 
-        <!-- ABOUT SECTION -->
-        <section class="about" style="margin-top: 100px; text-align: center;">
-            <h2>About Me</h2>
-            <p class="about-text">
-                I am a media professional with on-set experience across Kannada feature films, independent filmmaking, and broadcast media — backed by creative strategy work at <strong>McCann Worldgroup</strong>. I am comfortable across production coordination, script development, and multi-department collaboration. 
-            </p>
-            <p class="about-text">
-                Having handled end-to-end production on independent short films, I understand everything from script analysis and location scouting to talent management, scheduling, and post-production. With a multilingual background, I have a strong instinct for culturally authentic storytelling.
-            </p>
-            
-            <div class="skills">
-                <h4>Recent Industry Experience</h4>
-                <ul style="color: #d1d0df; line-height: 2; margin-bottom: 30px;">
-                    <li><strong style="color: #fff;">Creative Copywriter</strong> at McCann Worldgroup (Campaigns for ITC, Reliance, Nestlé)</li>
-                    <li><strong style="color: #fff;">AI Linguist & Content Scriptwriter</strong> at Krutrim AI (Ola)</li>
-                    <li><strong style="color: #fff;">Copy Editor</strong> at NewFirst Kannada TV Channel</li>
-                    <li><strong style="color: #fff;">Filmmaker</strong> at IFP 50-Hour Challenge ("Finesse" and "ShanShray")</li>
-                </ul>
-
-                <h4>Languages</h4>
-                <ul style="color: #d1d0df; line-height: 2; list-style-type: none; padding-left: 0;">
-                    <li>› <strong style="color: #fff;">Hindi</strong> — Fluent</li>
-                    <li>› <strong style="color: #fff;">English</strong> — Proficient</li>
-                    <li>› <strong style="color: #fff;">Kannada</strong> — Native</li>
-                    <li>› <strong style="color: #fff;">Telugu</strong> — Intermediate</li>
-                    <li>› <strong style="color: #fff;">Tamil · Marathi · Malayalam</strong> — Basic</li>
-                </ul>
-            </div>
-
-            <!-- CV DOWNLOAD BUTTON -->
-            <a href="./Laxman_Khot_CV_v19_1.docx" class="btn" download>Download My CV (Word)</a>
-        </section>
     </div>
     
     <!-- FOOTER -->
     <footer>
-        <h2 style="font-size: 1.8em; margin-bottom: 20px;">Let's Work Together</h2>
+        <h2 style="font-size: 1.8em; margin-bottom: 20px; border: none; letter-spacing: 4px;">Let's Work Together</h2>
         <p style="margin-bottom: 10px;">Email: <a href="mailto:khotlaxman9632@gmail.com">khotlaxman9632@gmail.com</a></p>
-        <p style="margin-bottom: 30px;">Phone: +91 96326 17304 | Based in New Delhi, India</p>
-        <p>&copy; 2026 Laxman Khot. All rights reserved.</p>
+        <p style="margin-bottom: 30px; color: #a3a3c2;">Phone: +91 96326 17304 | Based in New Delhi, India</p>
+        <p style="font-size: 0.8em; color: #444;">&copy; 2026 Laxman Khot. All rights reserved.</p>
     </footer>
 </body>
 </html>
