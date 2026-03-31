@@ -14,8 +14,13 @@
         .video-placeholder { width: 100%; max-width: 800px; height: 450px; background: #222; margin: 20px auto; display: flex; align-items: center; justify-content: center; border: 1px solid #444; }
         .projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
         .project-card { background: #222; padding: 20px; border-radius: 8px; text-align: center; }
+        .project-image { height: 180px; background: #333; margin-bottom: 15px; border-radius: 4px; display: flex; align-items: center; justify-content: center; color: #777; }
         footer { text-align: center; padding: 40px; color: #777; border-top: 1px solid #333; margin-top: 40px; }
         a { color: #fff; text-decoration: none; border-bottom: 1px solid #fff; padding-bottom: 2px; }
+        
+        /* New styling for the CV Button */
+        .btn { display: inline-block; padding: 12px 24px; background: #fff; color: #111; text-decoration: none; border-radius: 4px; font-weight: bold; margin-top: 20px; border-bottom: none; }
+        .btn:hover { background: #ddd; }
     </style>
 </head>
 <body>
@@ -30,33 +35,38 @@
                 <p>[ Embed your YouTube/Vimeo Showreel Here ]</p>
             </div>
         </section>
+        
         <section class="projects">
             <h2 style="text-align: center; margin-bottom: 40px;">Selected Works</h2>
             <div class="projects-grid">
                 <div class="project-card">
-                    <div style="height: 180px; background: #333; margin-bottom: 15px;"></div>
+                    <div class="project-image">Image 1 Placeholder</div>
                     <h3>Short Film: "The Horizon"</h3>
                     <p>Director / Cinematographer</p>
                 </div>
                 <div class="project-card">
-                    <div style="height: 180px; background: #333; margin-bottom: 15px;"></div>
+                    <div class="project-image">Image 2 Placeholder</div>
                     <h3>Commercial: Brand X</h3>
                     <p>Video Editor</p>
                 </div>
                 <div class="project-card">
-                    <div style="height: 180px; background: #333; margin-bottom: 15px;"></div>
+                    <div class="project-image">Image 3 Placeholder</div>
                     <h3>Music Video: "Echoes"</h3>
                     <p>Producer</p>
                 </div>
             </div>
         </section>
+
         <section class="about" style="margin-top: 60px; text-align: center;">
             <h2>About Me</h2>
             <p style="max-width: 600px; margin: 20px auto; color: #bbb; line-height: 1.6;">
                 Hello! I am Laxman, a passionate filmmaker and video producer specializing in storytelling through visual media.
             </p>
+            <!-- Here is the new CV Button linked to your file! -->
+            <a href="./Laxman_Khot_CV_v19_1.docx" class="btn" download>Download My CV</a>
         </section>
     </div>
+    
     <footer>
         <h2>Let's Work Together</h2>
         <p>Email: <a href="mailto:contact@example.com">contact@example.com</a></p>
