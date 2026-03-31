@@ -13,7 +13,10 @@
         .projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
         .project-card { background: #1a1a1a; padding: 25px; border-radius: 8px; text-align: center; border: 1px solid #333; transition: transform 0.3s ease; }
         .project-card:hover { transform: translateY(-5px); border-color: #555; }
-        .project-image { height: 200px; background: #2a2a2a; margin-bottom: 20px; border-radius: 4px; display: flex; align-items: center; justify-content: center; color: #666; font-size: 0.9em; }
+        
+        .project-image { height: 200px; background: #2a2a2a; margin-bottom: 20px; border-radius: 4px; display: flex; align-items: center; justify-content: center; color: #666; font-size: 0.9em; overflow: hidden; }
+        .project-image img { width: 100%; height: 100%; object-fit: cover; }
+        
         h3 { margin: 10px 0; font-size: 1.4em; }
         .role { color: #4CAF50; font-weight: bold; font-size: 0.9em; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 10px;}
         .details { color: #aaa; font-size: 0.95em; line-height: 1.5; }
@@ -23,8 +26,11 @@
         footer { text-align: center; padding: 50px 20px; color: #777; border-top: 1px solid #333; margin-top: 60px; background: #0a0a0a; }
         a { color: #fff; text-decoration: none; border-bottom: 1px solid #fff; padding-bottom: 2px; transition: color 0.3s, border-color 0.3s; }
         a:hover { color: #4CAF50; border-color: #4CAF50; }
-        .btn { display: inline-block; padding: 14px 28px; background: #fff; color: #111; text-decoration: none; border-radius: 4px; font-weight: bold; margin-top: 20px; border-bottom: none; transition: background 0.3s; }
+        
+        .btn { display: inline-block; padding: 14px 28px; background: #fff; color: #111; text-decoration: none; border-radius: 4px; font-weight: bold; margin-top: 20px; border-bottom: none; transition: background 0.3s; cursor: pointer; }
         .btn:hover { background: #ddd; }
+        .btn-small { padding: 10px 20px; font-size: 0.9em; background: #4CAF50; color: #fff; margin-top: 15px;}
+        .btn-small:hover { background: #45a049; }
     </style>
 </head>
 <body>
@@ -35,11 +41,10 @@
     
     <div class="container">
         
-        <!-- PROJECTS SECTION -->
+        <!-- FILMOGRAPHY PROJECTS SECTION -->
         <section class="projects">
-            <h2 style="text-align: center; margin-bottom: 40px; font-size: 2em;">Filmography & Projects</h2>
+            <h2 style="text-align: center; margin-bottom: 40px; font-size: 2em;">Filmography & Production</h2>
             <div class="projects-grid">
-                
                 <div class="project-card">
                     <div class="project-image">Upload 'yuvaratna.jpg'</div>
                     <h3>Yuvaratna</h3>
@@ -59,6 +64,45 @@
                     <h3>The Smile I Hate</h3>
                     <p class="role">Writer / Director / Performer</p>
                     <p class="details">Independent Short Film (2023). Managed end-to-end production with a peer-recognised directorial vision.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- CREATIVE STRATEGY SECTION -->
+        <section class="projects" style="margin-top: 80px;">
+            <h2 style="text-align: center; margin-bottom: 40px; font-size: 2em;">Creative Strategy & Campaigns</h2>
+            <div class="projects-grid">
+                
+                <!-- TECHNOSPORT CARD -->
+                <div class="project-card">
+                    <div class="project-image">
+                        <img src="./Techno Sport.png" alt="Technosport Campaign Image">
+                    </div>
+                    <h3>Technosport</h3>
+                    <p class="role">Creative Copywriter (McCann)</p>
+                    <p class="details">Ideated and developed a 360° campaign concept and festival-led brand activation. Translated brief into a pitch-ready framework.</p>
+                    <a href="./TECHNO SPORT MOVE EASY.pdf" target="_blank" class="btn btn-small">View Pitch / Script</a>
+                </div>
+
+                <!-- CAMPA COLA CARD -->
+                <div class="project-card">
+                    <div class="project-image">
+                        <img src="./Campa IPL.png" alt="Campa Cola IPL Campaign">
+                    </div>
+                    <h3>Campa Cola</h3>
+                    <p class="role">Creative Copywriter (McCann)</p>
+                    <p class="details">Developed creative routes, content themes, and pitch decks for major brand activations including the IPL and Ramadan campaigns.</p>
+                    <a href="./Campa Power up Ramadan KV.pdf" target="_blank" class="btn btn-small">View Ramadan KV Pitch</a>
+                </div>
+
+                <!-- NESTLE MAGGI CARD -->
+                <div class="project-card">
+                    <div class="project-image">
+                        <img src="./Nestle Maggie.png" alt="Nestle Maggi Campaign">
+                    </div>
+                    <h3>Maggi (Nestlé)</h3>
+                    <p class="role">Creative Copywriter (McCann)</p>
+                    <p class="details">Ideated brand activations and festival-led content themes, collaborating across Creative, Strategy, and Planning teams.</p>
                 </div>
 
             </div>
