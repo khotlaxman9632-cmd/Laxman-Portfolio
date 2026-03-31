@@ -3,73 +3,106 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Laxman - Film Production Portfolio</title>
+    <title>Laxman Khot - Film Production & Creative Strategy</title>
     <style>
-        body { margin: 0; font-family: 'Helvetica Neue', sans-serif; background-color: #111; color: #fff; }
-        header { padding: 40px; text-align: center; border-bottom: 1px solid #333; }
-        h1 { margin: 0; font-size: 3em; text-transform: uppercase; letter-spacing: 2px; }
-        p.subtitle { color: #aaa; font-size: 1.2em; }
+        body { margin: 0; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; background-color: #111; color: #fff; }
+        header { padding: 50px 20px; text-align: center; border-bottom: 1px solid #333; background: #1a1a1a; }
+        h1 { margin: 0; font-size: 3.5em; text-transform: uppercase; letter-spacing: 3px; }
+        p.subtitle { color: #aaa; font-size: 1.2em; letter-spacing: 1px; margin-top: 10px; }
         .container { max-width: 1200px; margin: 0 auto; padding: 40px 20px; }
         .showreel { text-align: center; margin-bottom: 60px; }
-        .video-placeholder { width: 100%; max-width: 800px; height: 450px; background: #222; margin: 20px auto; display: flex; align-items: center; justify-content: center; border: 1px solid #444; }
-        .projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
-        .project-card { background: #222; padding: 20px; border-radius: 8px; text-align: center; }
-        .project-image { height: 180px; background: #333; margin-bottom: 15px; border-radius: 4px; display: flex; align-items: center; justify-content: center; color: #777; }
-        footer { text-align: center; padding: 40px; color: #777; border-top: 1px solid #333; margin-top: 40px; }
-        a { color: #fff; text-decoration: none; border-bottom: 1px solid #fff; padding-bottom: 2px; }
-        
-        /* New styling for the CV Button */
-        .btn { display: inline-block; padding: 12px 24px; background: #fff; color: #111; text-decoration: none; border-radius: 4px; font-weight: bold; margin-top: 20px; border-bottom: none; }
+        .video-placeholder { width: 100%; max-width: 900px; height: 500px; background: #222; margin: 20px auto; display: flex; align-items: center; justify-content: center; border: 1px solid #444; border-radius: 8px; color: #777;}
+        .projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
+        .project-card { background: #1a1a1a; padding: 25px; border-radius: 8px; text-align: center; border: 1px solid #333; transition: transform 0.3s ease; }
+        .project-card:hover { transform: translateY(-5px); border-color: #555; }
+        .project-image { height: 200px; background: #2a2a2a; margin-bottom: 20px; border-radius: 4px; display: flex; align-items: center; justify-content: center; color: #666; font-size: 0.9em; }
+        h3 { margin: 10px 0; font-size: 1.4em; }
+        .role { color: #4CAF50; font-weight: bold; font-size: 0.9em; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 10px;}
+        .details { color: #aaa; font-size: 0.95em; line-height: 1.5; }
+        .about-text { max-width: 800px; margin: 20px auto; color: #ccc; line-height: 1.8; text-align: left; font-size: 1.1em; }
+        .skills { max-width: 800px; margin: 30px auto; text-align: left; background: #1a1a1a; padding: 25px; border-radius: 8px; border: 1px solid #333; }
+        .skills h4 { margin-top: 0; color: #fff; }
+        footer { text-align: center; padding: 50px 20px; color: #777; border-top: 1px solid #333; margin-top: 60px; background: #0a0a0a; }
+        a { color: #fff; text-decoration: none; border-bottom: 1px solid #fff; padding-bottom: 2px; transition: color 0.3s, border-color 0.3s; }
+        a:hover { color: #4CAF50; border-color: #4CAF50; }
+        .btn { display: inline-block; padding: 14px 28px; background: #fff; color: #111; text-decoration: none; border-radius: 4px; font-weight: bold; margin-top: 20px; border-bottom: none; transition: background 0.3s; }
         .btn:hover { background: #ddd; }
     </style>
 </head>
 <body>
     <header>
-        <h1>Laxman</h1>
-        <p class="subtitle">Filmmaker & Video Producer</p>
+        <h1>Laxman Khot</h1>
+        <p class="subtitle">Film Production & Creative Strategy</p>
     </header>
+    
     <div class="container">
+        <!-- SHOWREEL SECTION -->
         <section class="showreel">
-            <h2>Showreel 2026</h2>
+            <h2>Showreel</h2>
             <div class="video-placeholder">
                 <p>[ Embed your YouTube/Vimeo Showreel Here ]</p>
             </div>
         </section>
         
+        <!-- PROJECTS SECTION -->
         <section class="projects">
-            <h2 style="text-align: center; margin-bottom: 40px;">Selected Works</h2>
+            <h2 style="text-align: center; margin-bottom: 40px; font-size: 2em;">Filmography & Projects</h2>
             <div class="projects-grid">
+                
                 <div class="project-card">
-                    <div class="project-image">Image 1 Placeholder</div>
-                    <h3>Short Film: "The Horizon"</h3>
-                    <p>Director / Cinematographer</p>
+                    <div class="project-image">Upload 'spooky-college.jpg'</div>
+                    <h3>Spooky College</h3>
+                    <p class="role">Assistant Director</p>
+                    <p class="details">Full-length Kannada Feature Film. Handled shot planning, scheduling, and on-set coordination.</p>
                 </div>
+
                 <div class="project-card">
-                    <div class="project-image">Image 2 Placeholder</div>
-                    <h3>Commercial: Brand X</h3>
-                    <p>Video Editor</p>
+                    <div class="project-image">Upload 'smile-i-hate.jpg'</div>
+                    <h3>The Smile I Hate</h3>
+                    <p class="role">Writer / Director / Performer</p>
+                    <p class="details">Independent Short Film (2023). Managed end-to-end production with a peer-recognised directorial vision.</p>
                 </div>
+
                 <div class="project-card">
-                    <div class="project-image">Image 3 Placeholder</div>
-                    <h3>Music Video: "Echoes"</h3>
-                    <p>Producer</p>
+                    <div class="project-image">Upload 'ifp-challenge.jpg'</div>
+                    <h3>IFP 50-Hour Challenge</h3>
+                    <p class="role">Filmmaker</p>
+                    <p class="details">Scripted, shot, and delivered "Finesse" and "ShanShray" under live production pressure for Asia's largest content festival.</p>
                 </div>
+
             </div>
         </section>
 
-        <section class="about" style="margin-top: 60px; text-align: center;">
-            <h2>About Me</h2>
-            <p style="max-width: 600px; margin: 20px auto; color: #bbb; line-height: 1.6;">
-                Hello! I am Laxman, a passionate filmmaker and video producer specializing in storytelling through visual media.
+        <!-- ABOUT SECTION -->
+        <section class="about" style="margin-top: 80px; text-align: center;">
+            <h2 style="font-size: 2em;">About Me</h2>
+            <p class="about-text">
+                I am a media professional with on-set experience across Kannada feature films, independent filmmaking, and broadcast media — backed by creative strategy work at <strong>McCann Worldgroup</strong>. I am comfortable across production coordination, script development, and multi-department collaboration. 
             </p>
-            <!-- Here is the new CV Button linked to your file! -->
-            <a href="./Laxman_Khot_CV_v19_1.docx" class="btn" download>Download My CV</a>
+            <p class="about-text">
+                Having handled end-to-end production on independent short films, I understand everything from script analysis and location scouting to talent management, scheduling, and post-production. Fluent across 7 languages (Hindi, English, Kannada, Telugu, Tamil, Marathi, Malayalam), I have a strong instinct for culturally authentic storytelling.
+            </p>
+            
+            <div class="skills">
+                <h4>Recent Industry Experience</h4>
+                <ul style="color: #bbb; line-height: 1.8;">
+                    <li><strong>Creative Copywriter</strong> at McCann Worldgroup (Campaigns for ITC, Reliance, Nestlé)</li>
+                    <li><strong>AI Linguist & Content Scriptwriter</strong> at Krutrim AI (Ola)</li>
+                    <li><strong>Copy Editor</strong> at NewFirst Kannada TV Channel</li>
+                    <li><strong>Junior Artist / Production Support</strong> on "Yuvaratna" (Kannada Feature Film)</li>
+                </ul>
+            </div>
+
+            <!-- CV DOWNLOAD BUTTON -->
+            <a href="./Laxman_Khot_CV_v19_1.docx" class="btn" download>Download My CV (Word)</a>
         </section>
     </div>
     
+    <!-- FOOTER -->
     <footer>
         <h2>Let's Work Together</h2>
-        <p>Email: <a href="mailto:contact@example.com">contact@example.com</a></p>
+        <p style="margin-bottom: 10px;">Email: <a href="mailto:khotlaxman9632@gmail.com">khotlaxman9632@gmail.com</a></p>
+        <p style="margin-bottom: 30px;">Phone: +91 96326 17304 | Based in New Delhi, India</p>
         <p>&copy; 2026 Laxman Khot. All rights reserved.</p>
     </footer>
 </body>
