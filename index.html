@@ -10,30 +10,23 @@
         body { 
             margin: 0; 
             font-family: 'Poppins', sans-serif; 
-            /* A deep navy/black background to make the new bright colors pop */
-            background-color: #080c12; 
+            background-color: #0b0914; 
             color: #fff; 
             overflow-x: hidden; 
         }
 
-        /* FASTER ANIMATED BACKGROUND ORBS WITH NEW COLORS */
+        /* ANIMATED BACKGROUND ORBS (Pink, Orange, Purple) */
         .bg-orb {
             position: fixed;
             border-radius: 50%;
-            filter: blur(90px); /* Reduced blur slightly so you can see them move better */
+            filter: blur(120px); 
             z-index: -1; 
-            opacity: 0.7;
-            animation: float 10s infinite ease-in-out alternate; /* Faster animation */
+            opacity: 0.6;
+            animation: float 10s infinite ease-in-out alternate; 
         }
-        
-        /* Light Sky Blue */
-        .orb-1 { width: 500px; height: 500px; background: #87CEFA; top: -100px; left: -50px; }
-        
-        /* Golden */
-        .orb-2 { width: 550px; height: 550px; background: #FFD700; bottom: -150px; right: -50px; animation-delay: -3s; }
-        
-        /* Light Green */
-        .orb-3 { width: 450px; height: 450px; background: #90EE90; top: 30%; left: 40%; animation-delay: -6s; }
+        .orb-1 { width: 500px; height: 500px; background: #e52e71; top: -150px; left: -100px; }
+        .orb-2 { width: 600px; height: 600px; background: #ff8a00; bottom: -200px; right: -100px; animation-delay: -3s; }
+        .orb-3 { width: 400px; height: 400px; background: #4a00e0; top: 30%; left: 30%; animation-delay: -6s; }
 
         @keyframes float {
             0% { transform: translate(0, 0) scale(1); }
@@ -47,10 +40,11 @@
             padding: 80px 20px; 
             text-align: center; 
             border-bottom: 1px solid rgba(255,255,255,0.05); 
-            background: rgba(8, 12, 18, 0.5); 
+            background: rgba(11, 9, 20, 0.4); 
             backdrop-filter: blur(15px);
         }
         
+        /* TEXT COLORS (Golden, Sky Blue, Light Green) */
         h1 { 
             margin: 0; 
             font-size: 4em; 
@@ -64,7 +58,7 @@
         }
         
         p.subtitle { 
-            color: #b0c4de; 
+            color: #87CEFA; /* Light Sky Blue */
             font-size: 1.3em; 
             letter-spacing: 2px; 
             margin-top: 15px; 
@@ -86,19 +80,19 @@
         
         /* Glassmorphism Project Cards */
         .project-card { 
-            background: rgba(20, 24, 34, 0.5); /* Semi-transparent dark blueish-grey */
+            background: rgba(28, 24, 38, 0.4); 
             backdrop-filter: blur(20px); 
             padding: 30px; 
             border-radius: 16px; 
             text-align: center; 
-            border: 1px solid rgba(255, 255, 255, 0.08); 
+            border: 1px solid rgba(255, 255, 255, 0.05); 
             transition: all 0.4s ease; 
         }
         .project-card:hover { 
             transform: translateY(-10px); 
             border-color: #87CEFA; /* Sky Blue glow border on hover */
-            box-shadow: 0 15px 35px rgba(135, 206, 250, 0.2); 
-            background: rgba(20, 24, 34, 0.7);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5); 
+            background: rgba(28, 24, 38, 0.6);
         }
         
         /* IMAGE GALLERY & VIDEO CSS */
@@ -151,11 +145,11 @@
             max-width: 800px; 
             margin: 40px auto; 
             text-align: left; 
-            background: rgba(20, 24, 34, 0.5); 
+            background: rgba(28, 24, 38, 0.4); 
             backdrop-filter: blur(20px);
             padding: 35px; 
             border-radius: 16px; 
-            border: 1px solid rgba(255, 255, 255, 0.08); 
+            border: 1px solid rgba(255, 255, 255, 0.05); 
             box-shadow: 0 10px 30px rgba(0,0,0,0.3);
         }
         .skills h4 { margin-top: 0; color: #FFD700; font-size: 1.2em; letter-spacing: 1px; text-transform: uppercase;} /* Golden */
