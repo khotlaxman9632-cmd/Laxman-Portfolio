@@ -259,7 +259,7 @@
             font-weight: 300;
         }
 
-        /* --- CERTIFICATE GRID (PDF VERSION) --- */
+        /* --- CERTIFICATE GRID (UPDATED FOR PDFs) --- */
         .cert-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -270,44 +270,46 @@
             display: block;
         }
         .cert-item {
-            border-top: 1px solid var(--dark-border);
-            padding-top: 20px;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
+            transition: all 0.4s ease;
+            display: flex;
+            flex-direction: column;
+            cursor: pointer;
         }
-        
-        .cert-item::before {
-            content: "VIEW PDF ->";
-            position: absolute;
-            top: 25px;
-            right: 0;
-            font-family: 'Inter', sans-serif;
-            font-size: 0.65rem;
-            letter-spacing: 2px;
+        .cert-media {
+            width: 100%;
+            aspect-ratio: 1.414; /* Standard certificate ratio */
+            background: #0a0a0a;
+            margin-bottom: 20px;
+            border: 1px solid var(--dark-border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
             color: var(--grey);
-            opacity: 0;
-            transition: all 0.3s ease;
-            transform: translateX(10px);
+            font-family: 'Inter', sans-serif;
+            font-size: 0.8rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            transition: all 0.4s ease;
         }
-
-        .cert-item:hover {
-            border-color: #ffffff;
+        .cert-item:hover .cert-media {
+            background: #151515;
+            border-color: var(--grey);
+            color: #fff;
             transform: translateY(-5px);
         }
-        
-        .cert-item:hover::before {
-            opacity: 1;
-            transform: translateX(0);
-        }
-
         .cert-title {
             font-family: 'Playfair Display', serif;
             font-size: 1.5rem;
             color: var(--fg);
             margin: 0 0 10px 0;
             font-weight: 400;
-            transition: color 0.3s ease;
+            border-top: 1px solid var(--dark-border);
+            padding-top: 15px;
+            transition: border-color 0.3s ease, color 0.3s ease;
+        }
+        .cert-item:hover .cert-title {
+            border-color: var(--grey);
+            color: #fff;
         }
         .cert-org {
             font-size: 0.75rem;
@@ -568,32 +570,44 @@
                 <!-- CERTIFICATE 1 (Cinematic Composition) -->
                 <a href="./Certificate-%20Cinematic%20Composition.pdf" target="_blank" class="cert-link">
                     <div class="cert-item">
+                        <div class="cert-media">
+                            <span>[ View PDF ]</span>
+                        </div>
                         <h3 class="cert-title">Cinematic Composition</h3>
-                        <div class="cert-org">Certification Details / 2025</div>
+                        <div class="cert-org">Certification</div>
                     </div>
                 </a>
 
                 <!-- CERTIFICATE 2 (Claude 101) -->
                 <a href="./certificate-Claude%20101.pdf" target="_blank" class="cert-link">
                     <div class="cert-item">
-                        <h3 class="cert-title">Claude 101 Certification</h3>
-                        <div class="cert-org">Anthropic / 2026</div>
+                        <div class="cert-media">
+                            <span>[ View PDF ]</span>
+                        </div>
+                        <h3 class="cert-title">Claude 101</h3>
+                        <div class="cert-org">Anthropic</div>
                     </div>
                 </a>
-                
+
                 <!-- CERTIFICATE 3 (IFC 13) -->
                 <a href="./IFC%2013.pdf" target="_blank" class="cert-link">
                     <div class="cert-item">
+                        <div class="cert-media">
+                            <span>[ View PDF ]</span>
+                        </div>
                         <h3 class="cert-title">IFC 13</h3>
-                        <div class="cert-org">Certification Details / 2026</div>
+                        <div class="cert-org">Certification</div>
                     </div>
                 </a>
 
                 <!-- CERTIFICATE 4 (IFP 15) -->
                 <a href="./IFP%2015.pdf" target="_blank" class="cert-link">
                     <div class="cert-item">
+                        <div class="cert-media">
+                            <span>[ View PDF ]</span>
+                        </div>
                         <h3 class="cert-title">IFP 15</h3>
-                        <div class="cert-org">Certification Details / 2026</div>
+                        <div class="cert-org">Certification</div>
                     </div>
                 </a>
 
