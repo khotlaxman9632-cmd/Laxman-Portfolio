@@ -210,23 +210,28 @@
             display: flex;
             overflow-x: auto;
             scroll-snap-type: x mandatory;
-            scrollbar-width: none;
         }
-        .card-media::-webkit-scrollbar { display: none; }
+        
+        .card-media::-webkit-scrollbar { height: 6px; }
+        .card-media::-webkit-scrollbar-track { background: #111; }
+        .card-media::-webkit-scrollbar-thumb { background: #333; border-radius: 3px; }
+        .card-media::-webkit-scrollbar-thumb:hover { background: #555; }
 
-        /* Grayscale to Color Cinematic Reveal */
-        .card-media img, .card-media iframe {
+        .card-media-item {
+            flex: 0 0 100%;
+            scroll-snap-align: center;
+            height: 100%;
+        }
+        .card-media-item img, .card-media-item iframe {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            flex: 0 0 100%;
-            scroll-snap-align: start;
             border: none;
             filter: grayscale(100%) contrast(1.2) brightness(0.9);
             transition: filter 0.8s ease;
         }
-        .project-card:hover .card-media img, 
-        .project-card:hover .card-media iframe {
+        .project-card:hover .card-media-item img, 
+        .project-card:hover .card-media-item iframe {
             filter: grayscale(0%) contrast(1) brightness(1);
         }
 
@@ -252,6 +257,70 @@
             color: #888;
             margin-bottom: 25px;
             font-weight: 300;
+        }
+
+        /* --- CERTIFICATE GRID --- */
+        .cert-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+        }
+        .cert-link {
+            text-decoration: none;
+            display: block;
+        }
+        .cert-item {
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            cursor: pointer;
+        }
+        .cert-media {
+            width: 100%;
+            aspect-ratio: 1.414; /* Standard certificate ratio */
+            background: #111;
+            margin-bottom: 20px;
+            overflow: hidden;
+            border: 1px solid var(--dark-border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--grey);
+            font-family: 'Inter', sans-serif;
+            font-size: 0.8rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+        .cert-media img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: grayscale(100%) contrast(1.2) brightness(0.9);
+            transition: all 0.8s ease;
+        }
+        .cert-item:hover .cert-media img {
+            filter: grayscale(0%) contrast(1) brightness(1);
+            transform: scale(1.03); 
+        }
+        .cert-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            color: var(--fg);
+            margin: 0 0 10px 0;
+            font-weight: 400;
+            border-top: 1px solid var(--dark-border);
+            padding-top: 15px;
+            transition: border-color 0.3s ease, color 0.3s ease;
+        }
+        .cert-item:hover .cert-title {
+            border-color: var(--grey);
+            color: #fff;
+        }
+        .cert-org {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--grey);
         }
 
         /* --- CINEMATIC BUTTONS --- */
@@ -364,8 +433,7 @@
                             <li>Hindi <span>Fluent</span></li>
                             <li>English <span>Proficient</span></li>
                             <li>Kannada <span>Native</span></li>
-                            <li>Telugu <span>Intermediate</span></li>
-                            <li>Tamil / Marathi / Malayalam <span>Basic</span></li>
+                            <li>Telugu / Tamil / Marathi / Malayalam <span>Basic</span></li>
                         </ul>
                     </div>
                 </div>
@@ -386,8 +454,12 @@
                     <div class="media-wrapper">
                         <div class="scroll-hint">[ Swipe / Scroll -> ]</div>
                         <div class="card-media">
-                            <iframe src="https://www.youtube.com/embed/a1L1EviALUg" title="Yuvaratna Kannada" allowfullscreen></iframe>
-                            <iframe src="https://www.youtube.com/embed/o_E53tfZP1A" title="Yuvaratna Hindi" allowfullscreen></iframe>
+                            <div class="card-media-item">
+                                <iframe src="https://www.youtube.com/embed/a1L1EviALUg" title="Yuvaratna Kannada" allowfullscreen></iframe>
+                            </div>
+                            <div class="card-media-item">
+                                <iframe src="https://www.youtube.com/embed/o_E53tfZP1A" title="Yuvaratna Hindi" allowfullscreen></iframe>
+                            </div>
                         </div>
                     </div>
                     <h3 class="card-title">Yuvaratna</h3>
@@ -399,7 +471,9 @@
                 <div class="project-card">
                     <div class="media-wrapper">
                         <div class="card-media">
-                            <iframe src="https://www.youtube.com/embed/S-R_RO49UdY" title="Spooky College Trailer" allowfullscreen></iframe>
+                            <div class="card-media-item">
+                                <iframe src="https://www.youtube.com/embed/S-R_RO49UdY" title="Spooky College Trailer" allowfullscreen></iframe>
+                            </div>
                         </div>
                     </div>
                     <h3 class="card-title">Spooky College</h3>
@@ -411,7 +485,9 @@
                 <div class="project-card">
                     <div class="media-wrapper">
                         <div class="card-media">
-                            <iframe src="https://www.youtube.com/embed/-gAihzkv0gY" title="The Smile I Hate Short Film" allowfullscreen></iframe>
+                            <div class="card-media-item">
+                                <iframe src="https://www.youtube.com/embed/-gAihzkv0gY" title="The Smile I Hate Short Film" allowfullscreen></iframe>
+                            </div>
                         </div>
                     </div>
                     <h3 class="card-title">The Smile I Hate</h3>
@@ -423,7 +499,7 @@
         </section>
 
         <!-- CREATIVE STRATEGY -->
-        <section style="border-bottom: none;">
+        <section>
             <div class="section-header">
                 <span class="section-num">03</span>
                 <h2 class="section-title">Creative Strategy</h2>
@@ -436,8 +512,12 @@
                     <div class="media-wrapper">
                         <div class="scroll-hint">[ Swipe / Scroll -> ]</div>
                         <div class="card-media">
-                            <img src="./Techno%20Sport.png" alt="Technosport">
-                            <img src="./TEchno%20Sport%201.png" alt="Technosport 2">
+                            <div class="card-media-item">
+                                <img src="./Techno%20Sport.png" alt="Technosport">
+                            </div>
+                            <div class="card-media-item">
+                                <img src="./TEchno%20Sport%201.png" alt="Technosport 2">
+                            </div>
                         </div>
                     </div>
                     <h3 class="card-title">Technosport</h3>
@@ -451,12 +531,12 @@
                     <div class="media-wrapper">
                         <div class="scroll-hint">[ Swipe / Scroll -> ]</div>
                         <div class="card-media">
-                            <img src="./Campa%20IPL.png" alt="Campa Cola">
-                            <img src="./Campa%20IPL%201.png" alt="Campa Image 1">
-                            <img src="./Campa%20IPL%202.png" alt="Campa Image 2">
-                            <img src="./Campa%20IPL%203.png" alt="Campa Image 3">
-                            <img src="./Campa-Cola-Food%20Court-V2-01.jpg" alt="Campa Food Court">
-                            <img src="./Campa-Cola-Food%20Court-V2-02.jpg" alt="Campa Food Court">
+                            <div class="card-media-item"><img src="./Campa%20IPL.png" alt="Campa Cola"></div>
+                            <div class="card-media-item"><img src="./Campa%20IPL%201.png" alt="Campa Image 1"></div>
+                            <div class="card-media-item"><img src="./Campa%20IPL%202.png" alt="Campa Image 2"></div>
+                            <div class="card-media-item"><img src="./Campa%20IPL%203.png" alt="Campa Image 3"></div>
+                            <div class="card-media-item"><img src="./Campa-Cola-Food%20Court-V2-01.jpg" alt="Campa Food Court"></div>
+                            <div class="card-media-item"><img src="./Campa-Cola-Food%20Court-V2-02.jpg" alt="Campa Food Court"></div>
                         </div>
                     </div>
                     <h3 class="card-title">Campa Cola</h3>
@@ -470,15 +550,53 @@
                     <div class="media-wrapper">
                         <div class="scroll-hint">[ Swipe / Scroll -> ]</div>
                         <div class="card-media">
-                            <img src="./Nestle%20Maggie.png" alt="Nestle Maggi">
-                            <img src="./Nestle%20Maggie%201.png" alt="Maggi 2">
-                            <img src="./Nestle%20Maggie%202.png" alt="Maggi 3">
+                            <div class="card-media-item"><img src="./Nestle%20Maggie.png" alt="Nestle Maggi"></div>
+                            <div class="card-media-item"><img src="./Nestle%20Maggie%201.png" alt="Maggi 2"></div>
+                            <div class="card-media-item"><img src="./Nestle%20Maggie%202.png" alt="Maggi 3"></div>
                         </div>
                     </div>
                     <h3 class="card-title">Maggi (Nestlé)</h3>
                     <div class="card-role">Creative Copywriter</div>
                     <p class="card-desc">Ideated brand activations and festival-led content themes, collaborating deeply across Creative, Strategy, and Planning teams.</p>
                 </div>
+
+            </div>
+        </section>
+
+        <!-- CERTIFICATIONS SECTION -->
+        <section style="border-bottom: none;">
+            <div class="section-header">
+                <span class="section-num">04</span>
+                <h2 class="section-title">Certifications</h2>
+            </div>
+            
+            <div class="cert-grid">
+                
+                <!-- CERTIFICATE 1 (Cinematic Composition) -->
+                <!-- The "href" link makes the whole card clickable so it opens the PDF or PNG -->
+                <a href="./Certificate-%20Cinematic%20Composition.pdf" target="_blank" class="cert-link">
+                    <div class="cert-item">
+                        <div class="cert-media">
+                            <!-- If you uploaded a PNG for this, put the exact .png name in the src="" below -->
+                            <!-- If you only have the PDF, the box will just display the title elegantly -->
+                            <img src="./YOUR_IMAGE_NAME_HERE.png" alt="View Certificate" onerror="this.style.display='none'; this.parentNode.innerHTML='Click to View Document';">
+                        </div>
+                        <h3 class="cert-title">Cinematic Composition</h3>
+                        <div class="cert-org">Certification Details / Year</div>
+                    </div>
+                </a>
+
+                <!-- CERTIFICATE 2 (Claude 101) -->
+                <a href="./certificate-Claude%20101.pdf" target="_blank" class="cert-link">
+                    <div class="cert-item">
+                        <div class="cert-media">
+                            <!-- Put your uploaded .png file name here -->
+                            <img src="./YOUR_IMAGE_NAME_HERE.png" alt="View Certificate" onerror="this.style.display='none'; this.parentNode.innerHTML='Click to View Document';">
+                        </div>
+                        <h3 class="cert-title">Claude 101 Certification</h3>
+                        <div class="cert-org">Anthropic / Year</div>
+                    </div>
+                </a>
 
             </div>
         </section>
