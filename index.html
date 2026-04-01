@@ -484,9 +484,10 @@
             .collab-left, .collab-right { text-align: center; }
             .collaborate-section { padding-bottom: 60px; min-height: auto; }
 
-            /* Fix Clapperboard for Mobile: Steeper angle & adjusted text */
-            .clap-top { transform: rotate(-22deg); }
-            .intro-content { transform: translate(-50%, -60%); width: 90%; }
+            /* Fix Clapperboard for Mobile: Pull arms far apart so text fits flawlessly */
+            .clap-top { transform: translateY(-130px) rotate(-15deg); }
+            .clap-bottom { transform: translateY(130px); }
+            .intro-content { transform: translate(-50%, -50%); width: 90%; }
             .intro-content h1 { font-size: 2.2rem; }
             .intro-content p { font-size: 0.65rem; margin-bottom: 30px; }
             .enter-btn { padding: 12px 30px; font-size: 0.7rem; }
@@ -508,7 +509,8 @@
             width: 110vw; height: 60vh;
             background: #070707;
             transform-origin: left bottom;
-            transform: rotate(-10deg); /* Increased default desktop angle slightly to make room */
+            /* Move top arm up by 100px AND rotate so the text fits inside */
+            transform: translateY(-100px) rotate(-8deg); 
             transition: transform 0.15s cubic-bezier(0.4, 0, 1, 1);
             z-index: 2;
         }
@@ -526,6 +528,8 @@
             width: 110vw; height: 60vh;
             background: #070707;
             z-index: 1;
+            /* Move bottom arm down by 100px */
+            transform: translateY(100px); 
             transition: transform 0.8s cubic-bezier(0.77, 0, 0.175, 1);
         }
 
@@ -581,14 +585,17 @@
 
         /* --- CLAPPERBOARD ANIMATION STATES --- */
         #intro-overlay.clapped .clap-top {
-            transform: rotate(0deg) !important; /* SLAM SHUT */
+            transform: translateY(0px) rotate(0deg) !important; /* Removes gap and Slams Shut */
+        }
+        #intro-overlay.clapped .clap-bottom {
+            transform: translateY(0px) !important; /* Removes gap and Slams Shut */
         }
         #intro-overlay.open .clap-top {
             transition: transform 0.8s cubic-bezier(0.77, 0, 0.175, 1);
-            transform: translateY(-100%) !important; /* SLIDE UP */
+            transform: translateY(-100vh) rotate(-10deg) !important; /* Slide Up */
         }
         #intro-overlay.open .clap-bottom {
-            transform: translateY(100%); /* SLIDE DOWN */
+            transform: translateY(100vh) !important; /* Slide Down */
         }
 
     </style>
