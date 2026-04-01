@@ -18,21 +18,45 @@
             --dark-border: #1a1a1a;
         }
 
-        /* --- CUSTOM DARK SCROLLBAR --- */
-        ::-webkit-scrollbar {
-            width: 8px;
-            height: 8px;
+        /* --- FORCED CUSTOM DARK SCROLLBAR (WORKS ON ALL BROWSERS) --- */
+        html {
+            scrollbar-width: thin; /* For Firefox */
+            scrollbar-color: #2a2a2a #070707; /* For Firefox */
         }
-        ::-webkit-scrollbar-track {
-            background: #070707;
-            border-left: 1px solid var(--dark-border);
+        
+        body::-webkit-scrollbar {
+            width: 8px !important;
+            height: 8px !important;
+            background-color: #070707 !important;
         }
-        ::-webkit-scrollbar-thumb {
-            background: #2a2a2a;
-            border-radius: 4px;
+        body::-webkit-scrollbar-track {
+            background: #070707 !important;
+            border-left: 1px solid var(--dark-border) !important;
         }
-        ::-webkit-scrollbar-thumb:hover {
-            background: #444;
+        body::-webkit-scrollbar-thumb {
+            background: #2a2a2a !important;
+            border-radius: 4px !important;
+            border: 2px solid #070707 !important; /* Creates a clean padded look */
+        }
+        body::-webkit-scrollbar-thumb:hover {
+            background: #444 !important;
+        }
+        
+        /* Ensures the horizontal scrollbars in the project cards also match */
+        .card-media::-webkit-scrollbar {
+            height: 6px !important;
+        }
+        .card-media::-webkit-scrollbar-track {
+            background: #070707 !important; 
+            border-left: none !important;
+            border-top: 1px solid var(--dark-border) !important;
+        }
+        .card-media::-webkit-scrollbar-thumb {
+            background: #333 !important; 
+            border-radius: 3px !important; 
+        }
+        .card-media::-webkit-scrollbar-thumb:hover {
+            background: #555 !important; 
         }
 
         body {
@@ -339,11 +363,6 @@
             scroll-snap-type: x mandatory;
         }
         
-        .card-media::-webkit-scrollbar { height: 6px; }
-        .card-media::-webkit-scrollbar-track { background: #111; border-left: none; }
-        .card-media::-webkit-scrollbar-thumb { background: #333; border-radius: 3px; }
-        .card-media::-webkit-scrollbar-thumb:hover { background: #555; }
-
         .card-media-item {
             flex: 0 0 100%;
             scroll-snap-align: center;
