@@ -409,9 +409,62 @@
             .footer-contact { flex-direction: column; gap: 20px; align-items: center; }
             h1.hero { font-size: 4rem; }
         }
+
+        /* --- INTRO OVERLAY --- */
+        #intro-overlay {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100vw; height: 100vh;
+            background: #070707;
+            z-index: 999999;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            transition: opacity 1s ease, visibility 1s ease;
+        }
+        #intro-overlay h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            color: #fff;
+            margin: 0;
+            font-weight: 400;
+            text-transform: uppercase;
+        }
+        #intro-overlay p {
+            font-family: 'Inter', sans-serif;
+            color: #666;
+            letter-spacing: 5px;
+            font-size: 0.8rem;
+            margin-top: 10px;
+            margin-bottom: 40px;
+        }
+        .enter-btn {
+            background: transparent;
+            color: #fff;
+            border: 1px solid #333;
+            padding: 15px 40px;
+            font-family: 'Inter', sans-serif;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: all 0.4s ease;
+        }
+        .enter-btn:hover {
+            background: #fff;
+            color: #000;
+        }
     </style>
 </head>
 <body>
+
+    <!-- CINEMATIC INTRO SCREEN -->
+    <div id="intro-overlay">
+        <h1>Laxman Khot</h1>
+        <p>DIRECTOR — CREATIVE STRATEGIST</p>
+        <button class="enter-btn" onclick="enterPortfolio()">[ ENTER PORTFOLIO ]</button>
+    </div>
 
     <!-- Hidden YouTube Player Container -->
     <div id="youtube-audio" style="display: none;"></div>
@@ -745,6 +798,22 @@
             });
         }
 
+        // Fades out the intro screen and starts the music automatically
+        function enterPortfolio() {
+            const overlay = document.getElementById('intro-overlay');
+            overlay.style.opacity = '0';
+            setTimeout(() => { overlay.style.visibility = 'hidden'; }, 1000);
+
+            // Play the music because the user clicked!
+            if (player && player.getPlayerState) {
+                player.playVideo();
+                isPlaying = true;
+                document.getElementById('audio-text').innerText = 'BGM: ON';
+                document.getElementById('audio-icon').innerHTML = '<polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path>';
+            }
+        }
+
+        // Allows them to toggle it off/on later
         function toggleAudio() {
             const text = document.getElementById('audio-text');
             const icon = document.getElementById('audio-icon');
