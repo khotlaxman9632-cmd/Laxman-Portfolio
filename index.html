@@ -399,7 +399,7 @@
             stroke-width: 1.5;
             stroke-linecap: round;
             stroke-linejoin: round;
-            transition: stroke 0.3s ease;
+            transition: stroke stroke 0.3s ease;
         }
         
         .contact-item:hover .contact-icon {
@@ -557,7 +557,8 @@
             </div>
 
             <span class="rec">[ REC • ]</span>
-            <span>T/C 00:00:24:12</span>
+            <!-- LIVE TIMECODE REPLACED STATIC TEXT -->
+            <span id="live-time">T/C 00:00:00</span>
         </div>
 
         <!-- HEADER -->
@@ -847,6 +848,17 @@
         var isBgmPlaying = false;
         var wasBgmPlayingBeforeVideo = false; // Remembers if BGM was on before you clicked a video
         var projectVideoPlayers = [];
+
+        // LIVE TIMECODE SCRIPT
+        function updateLiveTime() {
+            const now = new Date();
+            const hh = String(now.getHours()).padStart(2, '0');
+            const mm = String(now.getMinutes()).padStart(2, '0');
+            const ss = String(now.getSeconds()).padStart(2, '0');
+            document.getElementById('live-time').innerText = `T/C ${hh}:${mm}:${ss}`;
+        }
+        setInterval(updateLiveTime, 1000);
+        updateLiveTime(); // Call immediately on load
 
         // Load the IFrame Player API code asynchronously.
         var tag = document.createElement('script');
