@@ -3,396 +3,401 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Laxman Khot - Film Production & Creative Strategy</title>
-    <!-- Importing a Modern Creative Font -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <title>Laxman Khot - Director & Creative Strategist</title>
+    <!-- Using Inter for that sharp, modern editorial look -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800;900&display=swap" rel="stylesheet">
     <style>
-        /* --- GLOBAL & DRAMATIC BACKGROUND --- */
-        body { 
-            margin: 0; 
-            font-family: 'Poppins', sans-serif; 
-            background-color: #030305; /* Pitch black/deepest blue */
-            color: #fff; 
-            overflow-x: hidden; 
-            /* Cinematic Vignette Overlay */
-            background-image: radial-gradient(circle at center, transparent 0%, #000 100%);
-            background-attachment: fixed;
+        :root {
+            --bg: #050505;
+            --fg: #ffffff;
+            --grey: #777777;
+            --border: #222222;
         }
 
-        /* --- 3D CINEMATIC LIGHT FLARES --- */
-        .light-flare {
-            position: fixed;
-            border-radius: 50%;
-            filter: blur(140px); 
-            z-index: -1; 
-            opacity: 0.5;
-            animation: drift 15s infinite ease-in-out alternate; 
-        }
-        /* Crimson Red */
-        .flare-1 { width: 600px; height: 600px; background: #ff2a5f; top: -100px; left: -150px; }
-        /* Sci-Fi Cyan */
-        .flare-2 { width: 700px; height: 700px; background: #00f0ff; bottom: -200px; right: -150px; animation-delay: -5s; }
-        /* Golden Hour Amber */
-        .flare-3 { width: 500px; height: 500px; background: #fac000; top: 40%; left: 35%; animation-delay: -10s; }
-
-        @keyframes drift {
-            0% { transform: translate(0, 0) scale(1) rotate(0deg); }
-            50% { transform: translate(100px, 100px) scale(1.2) rotate(180deg); }
-            100% { transform: translate(-50px, -50px) scale(0.9) rotate(360deg); }
+        body {
+            margin: 0;
+            background-color: var(--bg);
+            color: var(--fg);
+            font-family: 'Inter', sans-serif;
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
         }
 
-        /* --- ENTRANCE ANIMATION (Movie Intro Style) --- */
-        .fade-up {
-            opacity: 0;
-            transform: translateY(40px);
-            animation: fadeUpAnim 1.2s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+        .container {
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 0 40px;
         }
-        @keyframes fadeUpAnim {
-            to { opacity: 1; transform: translateY(0); }
-        }
-        
-        /* Delay classes for staggered intro */
-        .delay-1 { animation-delay: 0.2s; }
-        .delay-2 { animation-delay: 0.4s; }
-        .delay-3 { animation-delay: 0.6s; }
-        
-        /* --- HEADER --- */
-        header { 
-            padding: 100px 20px 80px; 
-            text-align: center; 
-            position: relative;
+
+        /* --- HERO HEADER --- */
+        header {
+            padding: 15vh 0 5vh;
+            border-bottom: 1px solid var(--border);
         }
         
-        h1 { 
-            margin: 0; 
-            font-size: 5em; 
-            text-transform: uppercase; 
-            letter-spacing: 8px; 
-            font-weight: 800;
-            color: #fff;
-            text-shadow: 0 0 30px rgba(0, 240, 255, 0.4), 0 0 80px rgba(255, 42, 95, 0.4);
-        }
-        
-        p.subtitle { 
-            color: #00f0ff; 
-            font-size: 1.4em; 
-            letter-spacing: 4px; 
-            margin-top: 15px; 
-            font-weight: 400;
+        h1.hero {
+            font-size: clamp(4rem, 12vw, 10rem);
+            font-weight: 900;
+            line-height: 0.85;
+            letter-spacing: -0.04em;
+            margin: 0;
             text-transform: uppercase;
         }
-        
-        .container { max-width: 1250px; margin: 0 auto; padding: 40px 20px; position: relative; z-index: 1;}
-        
-        h2 {
-            text-align: center;
-            margin-bottom: 60px;
-            font-size: 2.5em;
-            letter-spacing: 2px;
-            color: #fff;
-            text-transform: uppercase;
-            border-bottom: 2px solid rgba(255, 255, 255, 0.1);
-            display: inline-block;
-            padding-bottom: 10px;
-            left: 50%;
-            position: relative;
-            transform: translateX(-50%);
-        }
-        
-        /* --- TRUE 3D GLASS CARDS --- */
-        .projects-grid { 
-            display: grid; 
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); 
-            gap: 50px; 
-            perspective: 1200px; /* Establishes the 3D space */
-        }
-        
-        .project-card { 
-            background: rgba(15, 15, 20, 0.6); 
-            backdrop-filter: blur(15px); 
-            padding: 35px; 
-            border-radius: 20px; 
-            text-align: center; 
-            border: 1px solid rgba(255, 255, 255, 0.05); 
-            box-shadow: 0 20px 40px rgba(0,0,0,0.8), inset 0 1px 0 rgba(255,255,255,0.1);
-            transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1); 
-            transform-style: preserve-3d; /* Allows child elements to pop out */
-        }
-        
-        .project-card:hover { 
-            transform: translateY(-15px) rotateX(5deg) rotateY(-5deg); /* Physical 3D Tilt */
-            border-color: rgba(0, 240, 255, 0.4); 
-            box-shadow: -20px 30px 50px rgba(0,0,0,0.9), 0 0 30px rgba(0, 240, 255, 0.15); 
-            background: rgba(20, 20, 28, 0.8);
-        }
 
-        /* Making inner elements levitate on hover */
-        .project-card:hover h3, 
-        .project-card:hover .project-image,
-        .project-card:hover .role,
-        .project-card:hover .btn-small {
-            transform: translateZ(30px); /* Pushes elements outward toward the viewer */
-        }
-        
-        /* IMAGE GALLERY & VIDEO CSS */
-        .scroll-hint { 
-            font-size: 0.75em; 
-            color: #fac000; 
-            text-transform: uppercase; 
-            letter-spacing: 2px; 
-            text-align: right; 
-            margin-bottom: 12px; 
-            font-weight: 600;
-            transition: transform 0.5s;
-        }
-        .project-image { 
-            height: 220px; 
-            background: #000; 
-            margin-bottom: 25px; 
-            border-radius: 12px; 
-            display: flex; 
-            overflow-x: auto; 
-            overflow-y: hidden; 
-            scroll-snap-type: x mandatory; 
-            position: relative;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.7);
-            transition: transform 0.5s cubic-bezier(0.23, 1, 0.32, 1);
-        }
-        .project-image::-webkit-scrollbar { height: 6px; }
-        .project-image::-webkit-scrollbar-thumb { background: #00f0ff; border-radius: 3px; } 
-        .project-image::-webkit-scrollbar-track { background: #111; }
-        .project-image img, .project-image iframe { 
-            width: 100%; height: 100%; object-fit: cover; 
-            flex: 0 0 100%; scroll-snap-align: center; 
-        }
-        
-        h3 { 
-            margin: 15px 0 10px; 
-            font-size: 1.8em; 
-            font-weight: 700; 
-            transition: transform 0.5s cubic-bezier(0.23, 1, 0.32, 1);
-        }
-        .role { 
-            color: #ff2a5f; 
-            font-weight: 600; 
-            font-size: 0.9em; 
-            text-transform: uppercase; 
-            letter-spacing: 2px; 
-            margin-bottom: 15px;
-            transition: transform 0.5s;
-        }
-        .details { 
-            color: #a3a3c2; 
-            font-size: 1em; 
-            line-height: 1.7; 
-            font-weight: 300; 
-            transition: transform 0.5s;
-        }
-        
-        /* About Section */
-        .about-text { max-width: 900px; margin: 20px auto; color: #b3b3cc; line-height: 2; text-align: center; font-size: 1.15em; font-weight: 300;}
-        .about-text strong { color: #fff; font-weight: 600; color: #fac000;}
-        
-        .skills { 
-            max-width: 900px; 
-            margin: 50px auto; 
-            text-align: left; 
-            background: rgba(15, 15, 20, 0.6); 
-            backdrop-filter: blur(20px);
-            padding: 40px; 
-            border-radius: 20px; 
-            border: 1px solid rgba(255, 255, 255, 0.05); 
-            box-shadow: 0 20px 40px rgba(0,0,0,0.8);
+        .hero-sub {
             display: flex;
-            flex-wrap: wrap;
-            gap: 40px;
-        }
-        .skills-col { flex: 1; min-width: 300px; }
-        .skills h4 { margin-top: 0; color: #00f0ff; font-size: 1.3em; letter-spacing: 2px; text-transform: uppercase;} 
-        
-        /* Footer */
-        footer { text-align: center; padding: 80px 20px; color: #666; border-top: 1px solid rgba(255,255,255,0.05); margin-top: 100px; background: #020203; }
-        a { color: #ff2a5f; text-decoration: none; padding-bottom: 2px; transition: color 0.3s, text-shadow 0.3s; }
-        a:hover { color: #00f0ff; text-shadow: 0 0 10px rgba(0, 240, 255, 0.5); }
-        
-        /* Cinematic Hover Buttons */
-        .btn { 
-            display: inline-block; 
-            padding: 16px 40px; 
-            background: transparent;
-            color: #fff !important; 
-            text-decoration: none; 
-            border-radius: 30px; 
-            font-weight: 600; 
-            letter-spacing: 2px;
-            margin-top: 30px; 
-            transition: all 0.4s ease;
+            justify-content: space-between;
+            margin-top: 50px;
+            color: var(--grey);
             text-transform: uppercase;
-            font-size: 0.9em;
-            border: 2px solid #ff2a5f;
-            box-shadow: 0 0 15px rgba(255, 42, 95, 0.2);
-            position: relative;
-            overflow: hidden;
+            font-size: 0.85rem;
+            letter-spacing: 2px;
+            font-weight: 600;
         }
-        .btn:hover { 
-            background: #ff2a5f;
-            box-shadow: 0 0 30px rgba(255, 42, 95, 0.6);
-            transform: translateY(-3px);
+
+        /* --- SECTIONS --- */
+        section {
+            padding: 100px 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        h2.section-title {
+            font-size: 1.5rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            margin-bottom: 60px;
+            letter-spacing: -0.02em;
+            color: var(--fg);
+        }
+
+        /* --- ABOUT GRID --- */
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1.2fr 0.8fr;
+            gap: 100px;
+        }
+
+        .about-text p {
+            font-size: 1.3rem;
+            line-height: 1.6;
+            font-weight: 400;
+            color: #cccccc;
+            margin-top: 0;
+            margin-bottom: 30px;
+        }
+
+        .about-text strong {
+            color: var(--fg);
+            font-weight: 600;
+        }
+
+        .list-header {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            color: var(--grey);
+            letter-spacing: 2px;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+
+        ul.clean-list {
+            list-style: none;
+            padding: 0;
+            margin: 0 0 50px 0;
+        }
+
+        ul.clean-list li {
+            padding: 15px 0;
+            border-bottom: 1px solid var(--border);
+            font-size: 0.95rem;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        ul.clean-list li span {
+            color: var(--grey);
+        }
+
+        /* --- PROJECT GRID --- */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 80px 40px;
+        }
+
+        .project-card {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .media-wrapper {
+            position: relative;
+            width: 100%;
+            background: #111;
+            margin-bottom: 25px;
+        }
+
+        .scroll-hint {
+            position: absolute;
+            top: -25px;
+            right: 0;
+            font-size: 0.65rem;
+            letter-spacing: 2px;
+            color: var(--grey);
+            text-transform: uppercase;
+        }
+
+        .card-media {
+            width: 100%;
+            aspect-ratio: 16/9;
+            display: flex;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            scrollbar-width: none; /* Firefox */
+        }
+        .card-media::-webkit-scrollbar { display: none; } /* Chrome/Safari */
+
+        .card-media img, .card-media iframe {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            flex: 0 0 100%;
+            scroll-snap-align: start;
+            border: none;
+            filter: grayscale(20%);
+            transition: filter 0.5s ease;
+        }
+        .project-card:hover .card-media img {
+            filter: grayscale(0%);
+        }
+
+        .card-title {
+            font-size: 1.5rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: -0.02em;
+            margin: 0 0 5px 0;
+        }
+
+        .card-role {
+            color: var(--grey);
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .card-desc {
+            font-size: 0.95rem;
+            line-height: 1.6;
+            color: #999;
+            margin-bottom: 25px;
+        }
+
+        /* --- BRUTALIST BUTTONS --- */
+        .btn {
+            display: inline-block;
+            border: 1px solid var(--fg);
+            background: transparent;
+            color: var(--fg);
+            text-decoration: none;
+            text-transform: uppercase;
+            padding: 16px 32px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            letter-spacing: 2px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            width: fit-content;
+        }
+
+        .btn:hover {
+            background: var(--fg);
+            color: var(--bg);
+        }
+
+        .btn-small {
+            padding: 12px 24px;
+            font-size: 0.75rem;
+            margin-top: auto;
+        }
+
+        /* Footer */
+        footer {
+            padding: 80px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: var(--grey);
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
         
-        .btn-small { 
-            padding: 10px 24px; 
-            font-size: 0.8em; 
-            margin-top: 20px;
-            border: 1px solid #00f0ff;
-            box-shadow: 0 0 10px rgba(0, 240, 255, 0.2);
+        footer a {
+            color: var(--fg);
+            text-decoration: none;
+            border-bottom: 1px solid var(--border);
+            transition: border-color 0.3s ease;
         }
-        .btn-small:hover {
-            background: #00f0ff;
-            color: #000 !important;
-            box-shadow: 0 0 20px rgba(0, 240, 255, 0.6);
+
+        footer a:hover {
+            border-color: var(--fg);
+        }
+
+        @media (max-width: 900px) {
+            .about-grid { grid-template-columns: 1fr; gap: 40px; }
+            .hero-sub { flex-direction: column; gap: 15px; }
+            footer { flex-direction: column; gap: 20px; text-align: center; }
+            .container { padding: 0 20px; }
         }
     </style>
 </head>
 <body>
 
-    <!-- CINEMATIC LIGHT FLARES -->
-    <div class="light-flare flare-1"></div>
-    <div class="light-flare flare-2"></div>
-    <div class="light-flare flare-3"></div>
-
-    <header class="fade-up">
-        <h1>Laxman Khot</h1>
-        <p class="subtitle">Film Production & Creative Strategy</p>
-    </header>
-    
     <div class="container">
         
-        <!-- ABOUT SECTION (AT THE TOP) -->
-        <section class="about fade-up delay-1">
-            <p class="about-text">
-                I am a media professional with on-set experience across Kannada feature films, independent filmmaking, and broadcast media — backed by creative strategy work at <strong>McCann Worldgroup</strong>. I am comfortable across production coordination, script development, and multi-department collaboration.
-            </p>
-            <p class="about-text">
-                Having handled end-to-end production on independent short films, I understand everything from script analysis and location scouting to talent management, scheduling, and post-production. Fluent across 7 languages, I have a strong instinct for culturally authentic storytelling.
-            </p>
-            
-            <div class="skills">
-                <div class="skills-col">
-                    <h4>Industry Experience</h4>
-                    <ul style="color: #b3b3cc; line-height: 2.2; margin-bottom: 0;">
-                        <li><strong style="color: #fff;">Creative Copywriter</strong> at McCann Worldgroup</li>
-                        <li><strong style="color: #fff;">AI Linguist & Scriptwriter</strong> at Krutrim AI (Ola)</li>
-                        <li><strong style="color: #fff;">Copy Editor</strong> at NewFirst Kannada TV</li>
-                        <li><strong style="color: #fff;">Filmmaker</strong> at IFP 50-Hour Challenge</li>
-                    </ul>
-                </div>
-                <div class="skills-col">
-                    <h4>Languages</h4>
-                    <ul style="color: #b3b3cc; line-height: 2.2; list-style-type: none; padding-left: 0; margin-bottom: 0;">
-                        <li>› <strong style="color: #fff;">Hindi</strong> — Fluent</li>
-                        <li>› <strong style="color: #fff;">English</strong> — Proficient</li>
-                        <li>› <strong style="color: #fff;">Kannada</strong> — Native</li>
-                        <li>› <strong style="color: #fff;">Telugu</strong> — Intermediate</li>
-                        <li>› <strong style="color: #fff;">Tamil · Marathi · Malayalam</strong> — Basic</li>
-                    </ul>
-                </div>
+        <!-- HEADER -->
+        <header>
+            <h1 class="hero">Laxman Khot</h1>
+            <div class="hero-sub">
+                <span>Director & Creative Strategist</span>
+                <span>Based in New Delhi, IN</span>
+                <span>Portfolio 2026</span>
             </div>
+        </header>
 
-            <div style="text-align: center;">
-                <a href="./Laxman_Khot_CV_v19_1.docx" class="btn" download>Download CV</a>
+        <!-- ABOUT SECTION -->
+        <section>
+            <h2 class="section-title">01 / Profile</h2>
+            <div class="about-grid">
+                <div class="about-text">
+                    <p>I am a media professional with on-set experience across Kannada feature films, independent filmmaking, and broadcast media — backed by creative strategy work at <strong>McCann Worldgroup</strong>.</p>
+                    <p>Having handled end-to-end production on independent short films, I understand everything from script analysis and location scouting to talent management, scheduling, and post-production. Fluent across multiple languages, I have a strong instinct for culturally authentic storytelling.</p>
+                    
+                    <a href="./Laxman_Khot_CV_v19_1.docx" class="btn" download style="margin-top: 20px;">Download Resumé</a>
+                </div>
+                
+                <div>
+                    <div class="list-header">Selected Experience</div>
+                    <ul class="clean-list">
+                        <li><strong>Creative Copywriter</strong> <span>McCann Worldgroup</span></li>
+                        <li><strong>AI Linguist & Scriptwriter</strong> <span>Krutrim AI (Ola)</span></li>
+                        <li><strong>Copy Editor</strong> <span>NewFirst Kannada TV</span></li>
+                        <li><strong>Filmmaker</strong> <span>IFP 50-Hour Challenge</span></li>
+                    </ul>
+
+                    <div class="list-header">Languages</div>
+                    <ul class="clean-list" style="margin-bottom: 0;">
+                        <li>Hindi <span>Fluent</span></li>
+                        <li>English <span>Proficient</span></li>
+                        <li>Kannada <span>Native</span></li>
+                        <li>Telugu <span>Intermediate</span></li>
+                        <li>Tamil / Marathi / Malayalam <span>Basic</span></li>
+                    </ul>
+                </div>
             </div>
         </section>
 
-        <!-- FILMOGRAPHY PROJECTS SECTION -->
-        <section class="projects fade-up delay-2" style="margin-top: 120px;">
-            <h2>Filmography & Production</h2>
+        <!-- FILMOGRAPHY -->
+        <section>
+            <h2 class="section-title">02 / Filmography</h2>
             <div class="projects-grid">
                 
                 <!-- YUVARATNA -->
                 <div class="project-card">
-                    <div class="scroll-hint">➔ Scroll for Hindi Trailer</div>
-                    <div class="project-image">
-                        <div style="flex: 0 0 100%; scroll-snap-align: center; height: 100%;">
-                            <iframe width="100%" height="100%" src="https://www.youtube.com/embed/a1L1EviALUg" title="Yuvaratna Kannada Trailer" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="border-radius: 12px;"></iframe>
-                        </div>
-                        <div style="flex: 0 0 100%; scroll-snap-align: center; height: 100%;">
-                            <iframe width="100%" height="100%" src="https://www.youtube.com/embed/o_E53tfZP1A" title="Yuvaratna Hindi Trailer" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="border-radius: 12px;"></iframe>
+                    <div class="media-wrapper">
+                        <div class="scroll-hint">[ Swipe / Scroll -> ]</div>
+                        <div class="card-media">
+                            <iframe src="https://www.youtube.com/embed/a1L1EviALUg" title="Yuvaratna Kannada" allowfullscreen></iframe>
+                            <iframe src="https://www.youtube.com/embed/o_E53tfZP1A" title="Yuvaratna Hindi" allowfullscreen></iframe>
                         </div>
                     </div>
-                    <h3>Yuvaratna</h3>
-                    <p class="role">Production Support</p>
-                    <p class="details">Major commercial Kannada release (2019). Supported large-scale shoot operations. (Includes Kannada & Hindi Trailers)</p>
+                    <h3 class="card-title">Yuvaratna</h3>
+                    <div class="card-role">Production Support</div>
+                    <p class="card-desc">Major commercial Kannada release (2019). Supported large-scale shoot operations. Features Kannada & Hindi trailers.</p>
                 </div>
-                
+
                 <!-- SPOOKY COLLEGE -->
                 <div class="project-card">
-                    <div class="project-image" style="display: block;">
-                        <iframe width="100%" height="100%" src="https://www.youtube.com/embed/S-R_RO49UdY" title="Spooky College Trailer" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="border-radius: 12px; position: absolute; top: 0; left: 0;"></iframe>
+                    <div class="media-wrapper">
+                        <div class="card-media">
+                            <iframe src="https://www.youtube.com/embed/S-R_RO49UdY" title="Spooky College Trailer" allowfullscreen></iframe>
+                        </div>
                     </div>
-                    <h3>Spooky College</h3>
-                    <p class="role">Assistant Director</p>
-                    <p class="details">Full-length Kannada Feature Film. Handled shot planning, scheduling, and on-set coordination.</p>
+                    <h3 class="card-title">Spooky College</h3>
+                    <div class="card-role">Assistant Director</div>
+                    <p class="card-desc">Full-length Kannada Feature Film. Handled shot planning, scheduling, and comprehensive on-set coordination.</p>
                 </div>
 
                 <!-- THE SMILE I HATE -->
                 <div class="project-card">
-                    <div class="project-image" style="display: block;">
-                        <iframe width="100%" height="100%" src="https://www.youtube.com/embed/-gAihzkv0gY" title="The Smile I Hate Short Film" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="border-radius: 12px; position: absolute; top: 0; left: 0;"></iframe>
+                    <div class="media-wrapper">
+                        <div class="card-media">
+                            <iframe src="https://www.youtube.com/embed/-gAihzkv0gY" title="The Smile I Hate Short Film" allowfullscreen></iframe>
+                        </div>
                     </div>
-                    <h3>The Smile I Hate</h3>
-                    <p class="role">Writer / Director / Performer</p>
-                    <p class="details">Independent Short Film (2023). Managed end-to-end production with a peer-recognised directorial vision.</p>
+                    <h3 class="card-title">The Smile I Hate</h3>
+                    <div class="card-role">Writer / Director / Performer</div>
+                    <p class="card-desc">Independent Short Film (2023). Managed end-to-end production with a peer-recognised directorial vision.</p>
                 </div>
+
             </div>
         </section>
 
-        <!-- CREATIVE STRATEGY SECTION -->
-        <section class="projects fade-up delay-3" style="margin-top: 120px;">
-            <h2>Creative Strategy & Campaigns</h2>
+        <!-- CREATIVE STRATEGY -->
+        <section style="border-bottom: none;">
+            <h2 class="section-title">03 / Creative Strategy</h2>
             <div class="projects-grid">
                 
-                <!-- TECHNOSPORT CARD -->
+                <!-- TECHNOSPORT -->
                 <div class="project-card">
-                    <div class="scroll-hint">➔ Scroll to see more</div>
-                    <div class="project-image">
-                        <img src="./Techno%20Sport.png" alt="Technosport Campaign Image">
-                        <img src="./TEchno%20Sport%201.png" alt="Technosport Image 2">
+                    <div class="media-wrapper">
+                        <div class="scroll-hint">[ Swipe / Scroll -> ]</div>
+                        <div class="card-media">
+                            <img src="./Techno%20Sport.png" alt="Technosport">
+                            <img src="./TEchno%20Sport%201.png" alt="Technosport 2">
+                        </div>
                     </div>
-                    <h3>Technosport</h3>
-                    <p class="role">Creative Copywriter (McCann)</p>
-                    <p class="details">Ideated and developed a 360° campaign concept and festival-led brand activation. Translated brief into a pitch-ready framework.</p>
-                    <a href="./TECHNO%20SPORT%20MOVE%20EASY.pdf" target="_blank" class="btn btn-small">View Pitch / Script</a>
+                    <h3 class="card-title">Technosport</h3>
+                    <div class="card-role">Creative Copywriter</div>
+                    <p class="card-desc">Ideated and developed a 360° campaign concept and festival-led brand activation. Translated brief into a pitch-ready framework.</p>
+                    <a href="./TECHNO%20SPORT%20MOVE%20EASY.pdf" target="_blank" class="btn btn-small">View Pitch Deck</a>
                 </div>
 
-                <!-- CAMPA COLA CARD -->
+                <!-- CAMPA COLA -->
                 <div class="project-card">
-                    <div class="scroll-hint">➔ Scroll to see more</div>
-                    <div class="project-image">
-                        <img src="./Campa%20IPL.png" alt="Campa Cola IPL Campaign">
-                        <img src="./Campa%20IPL%201.png" alt="Campa Image 1">
-                        <img src="./Campa%20IPL%202.png" alt="Campa Image 2">
-                        <img src="./Campa%20IPL%203.png" alt="Campa Image 3">
-                        <img src="./Campa-Cola-Food%20Court-V2-01.jpg" alt="Campa Food Court">
-                        <img src="./Campa-Cola-Food%20Court-V2-02.jpg" alt="Campa Food Court">
+                    <div class="media-wrapper">
+                        <div class="scroll-hint">[ Swipe / Scroll -> ]</div>
+                        <div class="card-media">
+                            <img src="./Campa%20IPL.png" alt="Campa Cola">
+                            <img src="./Campa%20IPL%201.png" alt="Campa Image 1">
+                            <img src="./Campa%20IPL%202.png" alt="Campa Image 2">
+                            <img src="./Campa%20IPL%203.png" alt="Campa Image 3">
+                            <img src="./Campa-Cola-Food%20Court-V2-01.jpg" alt="Campa Food Court">
+                            <img src="./Campa-Cola-Food%20Court-V2-02.jpg" alt="Campa Food Court">
+                        </div>
                     </div>
-                    <h3>Campa Cola</h3>
-                    <p class="role">Creative Copywriter (McCann)</p>
-                    <p class="details">Developed creative routes, content themes, and pitch decks for major brand activations including the IPL and Ramadan campaigns.</p>
+                    <h3 class="card-title">Campa Cola</h3>
+                    <div class="card-role">Creative Copywriter</div>
+                    <p class="card-desc">Developed creative routes, content themes, and pitch decks for major brand activations including IPL and Ramadan campaigns.</p>
                     <a href="./Campa%20Power%20up%20Ramadan%20KV.pdf" target="_blank" class="btn btn-small">View Ramadan Pitch</a>
                 </div>
 
-                <!-- NESTLE MAGGI CARD -->
+                <!-- NESTLE -->
                 <div class="project-card">
-                    <div class="scroll-hint">➔ Scroll to see more</div>
-                    <div class="project-image">
-                        <img src="./Nestle%20Maggie.png" alt="Nestle Maggi Campaign">
-                        <img src="./Nestle%20Maggie%201.png" alt="Maggi Image 2">
-                        <img src="./Nestle%20Maggie%202.png" alt="Maggi Image 3">
+                    <div class="media-wrapper">
+                        <div class="scroll-hint">[ Swipe / Scroll -> ]</div>
+                        <div class="card-media">
+                            <img src="./Nestle%20Maggie.png" alt="Nestle Maggi">
+                            <img src="./Nestle%20Maggie%201.png" alt="Maggi 2">
+                            <img src="./Nestle%20Maggie%202.png" alt="Maggi 3">
+                        </div>
                     </div>
-                    <h3>Maggi (Nestlé)</h3>
-                    <p class="role">Creative Copywriter (McCann)</p>
-                    <p class="details">Ideated brand activations and festival-led content themes, collaborating across Creative, Strategy, and Planning teams.</p>
+                    <h3 class="card-title">Maggi (Nestlé)</h3>
+                    <div class="card-role">Creative Copywriter</div>
+                    <p class="card-desc">Ideated brand activations and festival-led content themes, collaborating deeply across Creative, Strategy, and Planning teams.</p>
                 </div>
 
             </div>
@@ -402,10 +407,10 @@
     
     <!-- FOOTER -->
     <footer>
-        <h2 style="font-size: 1.8em; margin-bottom: 20px; border: none; letter-spacing: 4px;">Let's Work Together</h2>
-        <p style="margin-bottom: 10px;">Email: <a href="mailto:khotlaxman9632@gmail.com">khotlaxman9632@gmail.com</a></p>
-        <p style="margin-bottom: 30px; color: #a3a3c2;">Phone: +91 96326 17304 | Based in New Delhi, India</p>
-        <p style="font-size: 0.8em; color: #444;">&copy; 2026 Laxman Khot. All rights reserved.</p>
+        <div>&copy; 2026 Laxman Khot</div>
+        <div>Email: <a href="mailto:khotlaxman9632@gmail.com">khotlaxman9632@gmail.com</a></div>
+        <div>Phone: +91 96326 17304</div>
     </footer>
+
 </body>
 </html>
