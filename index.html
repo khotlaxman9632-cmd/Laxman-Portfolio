@@ -551,10 +551,11 @@
                         <div class="scroll-hint">[ Swipe / Scroll -> ]</div>
                         <div class="card-media">
                             <div class="card-media-item">
-                                <iframe src="https://www.youtube.com/embed/a1L1EviALUg" title="Yuvaratna Kannada" allowfullscreen></iframe>
+                                <!-- Notice the added ?enablejsapi=1 and id="vid1" -->
+                                <iframe id="vid1" src="https://www.youtube.com/embed/a1L1EviALUg?enablejsapi=1" title="Yuvaratna Kannada" allowfullscreen></iframe>
                             </div>
                             <div class="card-media-item">
-                                <iframe src="https://www.youtube.com/embed/o_E53tfZP1A" title="Yuvaratna Hindi" allowfullscreen></iframe>
+                                <iframe id="vid2" src="https://www.youtube.com/embed/o_E53tfZP1A?enablejsapi=1" title="Yuvaratna Hindi" allowfullscreen></iframe>
                             </div>
                         </div>
                     </div>
@@ -568,7 +569,7 @@
                     <div class="media-wrapper">
                         <div class="card-media">
                             <div class="card-media-item">
-                                <iframe src="https://www.youtube.com/embed/S-R_RO49UdY" title="Spooky College Trailer" allowfullscreen></iframe>
+                                <iframe id="vid3" src="https://www.youtube.com/embed/S-R_RO49UdY?enablejsapi=1" title="Spooky College Trailer" allowfullscreen></iframe>
                             </div>
                         </div>
                     </div>
@@ -582,7 +583,7 @@
                     <div class="media-wrapper">
                         <div class="card-media">
                             <div class="card-media-item">
-                                <iframe src="https://www.youtube.com/embed/-gAihzkv0gY" title="The Smile I Hate Short Film" allowfullscreen></iframe>
+                                <iframe id="vid4" src="https://www.youtube.com/embed/-gAihzkv0gY?enablejsapi=1" title="The Smile I Hate Short Film" allowfullscreen></iframe>
                             </div>
                         </div>
                     </div>
@@ -772,8 +773,10 @@
 
     <!-- YouTube IFrame API Script -->
     <script>
-        var player;
-        var isPlaying = false;
+        var bgmPlayer;
+        var isBgmPlaying = false;
+        var wasBgmPlayingBeforeVideo = false; // Remembers if BGM was on before you clicked a video
+        var projectVideoPlayers = [];
 
         // Load the IFrame Player API code asynchronously.
         var tag = document.createElement('script');
@@ -781,54 +784,114 @@
         var firstScriptTag = document.getElementsByTagName('script')[0];
         firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 
-        // This function creates an <iframe> (and YouTube player) after the API code downloads.
+        // This function creates <iframe> (and YouTube players) after the API code downloads.
         function onYouTubeIframeAPIReady() {
-            player = new YT.Player('youtube-audio', {
+            // 1. Initialize the Background Music Player
+            bgmPlayer = new YT.Player('youtube-audio', {
                 height: '0',
                 width: '0',
-                videoId: 'UDVtMYqUAyw', // Your Hans Zimmer Link
+                videoId: 'UDVtMYqUAyw', // Hans Zimmer Link
                 playerVars: {
                     'autoplay': 0,
                     'controls': 0,
                     'showinfo': 0,
                     'rel': 0,
                     'loop': 1,
-                    'playlist': 'UDVtMYqUAyw' // Required for loop to work
+                    'playlist': 'UDVtMYqUAyw' 
                 }
+            });
+
+            // 2. Initialize the Project Video Players (Yuvaratna, Spooky College, etc)
+            const videoIds = ['vid1', 'vid2', 'vid3', 'vid4'];
+            videoIds.forEach(function(vid) {
+                var p = new YT.Player(vid, {
+                    events: {
+                        'onStateChange': onProjectVideoStateChange
+                    }
+                });
+                projectVideoPlayers.push(p);
             });
         }
 
-        // Fades out the intro screen and starts the music automatically
+        // 3. This runs whenever you Play, Pause, or Finish a project video
+        function onProjectVideoStateChange(event) {
+            // YT.PlayerState.PLAYING == 1
+            // YT.PlayerState.PAUSED == 2
+            // YT.PlayerState.ENDED == 0
+            
+            if (event.data == YT.PlayerState.PLAYING) {
+                // If a project video starts playing, pause the BGM
+                if (isBgmPlaying) {
+                    wasBgmPlayingBeforeVideo = true;
+                    bgmPlayer.pauseVideo();
+                    updateBgmUI(false);
+                }
+
+                // Automatically pause any OTHER project videos so only one plays at a time
+                projectVideoPlayers.forEach(function(p) {
+                    if (p !== event.target && p.getPlayerState() == YT.PlayerState.PLAYING) {
+                        p.pauseVideo();
+                    }
+                });
+
+            } else if (event.data == YT.PlayerState.PAUSED || event.data == YT.PlayerState.ENDED) {
+                // A project video stopped. Check if ANY video is still playing.
+                let anyVideoPlaying = false;
+                projectVideoPlayers.forEach(function(p) {
+                    if (p.getPlayerState() == YT.PlayerState.PLAYING) {
+                        anyVideoPlaying = true;
+                    }
+                });
+                
+                // If no project videos are playing anymore, and the BGM was on before, resume the BGM!
+                if (!anyVideoPlaying && wasBgmPlayingBeforeVideo) {
+                    bgmPlayer.playVideo();
+                    isBgmPlaying = true;
+                    wasBgmPlayingBeforeVideo = false;
+                    updateBgmUI(true);
+                }
+            }
+        }
+
+        // Updates the OFF/ON button visuals
+        function updateBgmUI(playing) {
+            const text = document.getElementById('audio-text');
+            const icon = document.getElementById('audio-icon');
+            if (playing) {
+                text.innerText = 'BGM: ON';
+                icon.innerHTML = '<polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path>';
+            } else {
+                text.innerText = 'BGM: OFF';
+                icon.innerHTML = '<polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><line x1="23" y1="9" x2="17" y2="15"></line><line x1="17" y1="9" x2="23" y2="15"></line>';
+            }
+        }
+
+        // Fades out the intro screen and starts the music
         function enterPortfolio() {
             const overlay = document.getElementById('intro-overlay');
             overlay.style.opacity = '0';
             setTimeout(() => { overlay.style.visibility = 'hidden'; }, 1000);
 
-            // Play the music because the user clicked!
-            if (player && player.getPlayerState) {
-                player.playVideo();
-                isPlaying = true;
-                document.getElementById('audio-text').innerText = 'BGM: ON';
-                document.getElementById('audio-icon').innerHTML = '<polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path>';
+            if (bgmPlayer && bgmPlayer.getPlayerState) {
+                bgmPlayer.playVideo();
+                isBgmPlaying = true;
+                wasBgmPlayingBeforeVideo = false;
+                updateBgmUI(true);
             }
         }
 
-        // Allows them to toggle it off/on later
+        // Allows them to toggle it off/on manually
         function toggleAudio() {
-            const text = document.getElementById('audio-text');
-            const icon = document.getElementById('audio-icon');
-
-            if (player && player.getPlayerState) {
-                if (isPlaying) {
-                    player.pauseVideo();
-                    isPlaying = false;
-                    text.innerText = 'BGM: OFF';
-                    icon.innerHTML = '<polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><line x1="23" y1="9" x2="17" y2="15"></line><line x1="17" y1="9" x2="23" y2="15"></line>';
+            if (bgmPlayer && bgmPlayer.getPlayerState) {
+                if (isBgmPlaying) {
+                    bgmPlayer.pauseVideo();
+                    isBgmPlaying = false;
+                    wasBgmPlayingBeforeVideo = false; // Reset memory since user manually turned it off
+                    updateBgmUI(false);
                 } else {
-                    player.playVideo();
-                    isPlaying = true;
-                    text.innerText = 'BGM: ON';
-                    icon.innerHTML = '<polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path>';
+                    bgmPlayer.playVideo();
+                    isBgmPlaying = true;
+                    updateBgmUI(true);
                 }
             }
         }
