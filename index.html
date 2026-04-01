@@ -465,35 +465,7 @@
             color: #fff;
         }
 
-        /* --- RESPONSIVE MOBILE FIXES --- */
-        @media (max-width: 900px) {
-            .about-grid { grid-template-columns: 1fr; gap: 60px; }
-            .top-bar { flex-direction: column; gap: 10px; align-items: center; }
-            h1.hero { font-size: 4rem; }
-            
-            .collab-bottom {
-                flex-direction: column;
-                align-items: center;
-                text-align: center;
-                gap: 30px;
-                position: relative;
-                bottom: 0;
-                padding: 0 20px;
-                margin-top: 60px;
-            }
-            .collab-left, .collab-right { text-align: center; }
-            .collaborate-section { padding-bottom: 60px; min-height: auto; }
-
-            /* Fix Clapperboard for Mobile: Pull arms far apart so text fits flawlessly */
-            .clap-top { transform: translateY(-130px) rotate(-15deg); }
-            .clap-bottom { transform: translateY(130px); }
-            .intro-content { transform: translate(-50%, -50%); width: 90%; }
-            .intro-content h1 { font-size: 2.2rem; }
-            .intro-content p { font-size: 0.65rem; margin-bottom: 30px; }
-            .enter-btn { padding: 12px 30px; font-size: 0.7rem; }
-        }
-
-        /* --- CLAPPERBOARD INTRO OVERLAY --- */
+        /* --- CLAPPERBOARD INTRO OVERLAY (DESKTOP DEFAULT) --- */
         #intro-overlay {
             position: fixed;
             top: 0; left: 0;
@@ -509,7 +481,6 @@
             width: 110vw; height: 60vh;
             background: #070707;
             transform-origin: left bottom;
-            /* Move top arm up by 100px AND rotate so the text fits inside */
             transform: translateY(-100px) rotate(-8deg); 
             transition: transform 0.15s cubic-bezier(0.4, 0, 1, 1);
             z-index: 2;
@@ -528,7 +499,6 @@
             width: 110vw; height: 60vh;
             background: #070707;
             z-index: 1;
-            /* Move bottom arm down by 100px */
             transform: translateY(100px); 
             transition: transform 0.8s cubic-bezier(0.77, 0, 0.175, 1);
         }
@@ -585,17 +555,45 @@
 
         /* --- CLAPPERBOARD ANIMATION STATES --- */
         #intro-overlay.clapped .clap-top {
-            transform: translateY(0px) rotate(0deg) !important; /* Removes gap and Slams Shut */
+            transform: translateY(0px) rotate(0deg) !important;
         }
         #intro-overlay.clapped .clap-bottom {
-            transform: translateY(0px) !important; /* Removes gap and Slams Shut */
+            transform: translateY(0px) !important;
         }
         #intro-overlay.open .clap-top {
             transition: transform 0.8s cubic-bezier(0.77, 0, 0.175, 1);
-            transform: translateY(-100vh) rotate(-10deg) !important; /* Slide Up */
+            transform: translateY(-100vh) rotate(-10deg) !important;
         }
         #intro-overlay.open .clap-bottom {
-            transform: translateY(100vh) !important; /* Slide Down */
+            transform: translateY(100vh) !important;
+        }
+
+        /* --- RESPONSIVE MOBILE FIXES (MUST BE PLACED LAST) --- */
+        @media (max-width: 900px) {
+            .about-grid { grid-template-columns: 1fr; gap: 60px; }
+            .top-bar { flex-direction: column; gap: 10px; align-items: center; }
+            h1.hero { font-size: 4rem; }
+            
+            .collab-bottom {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+                gap: 30px;
+                position: relative;
+                bottom: 0;
+                padding: 0 20px;
+                margin-top: 60px;
+            }
+            .collab-left, .collab-right { text-align: center; }
+            .collaborate-section { padding-bottom: 60px; min-height: auto; }
+
+            /* Fix Clapperboard for Mobile: Massive split using view-height */
+            .clap-top { transform: translateY(-16vh) rotate(-15deg); }
+            .clap-bottom { transform: translateY(16vh); }
+            .intro-content { transform: translate(-50%, -50%); width: 95%; }
+            .intro-content h1 { font-size: 2.2rem; }
+            .intro-content p { font-size: 0.65rem; margin-bottom: 30px; }
+            .enter-btn { padding: 12px 30px; font-size: 0.7rem; }
         }
 
     </style>
