@@ -9,7 +9,7 @@
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎬</text></svg>">
     
     <!-- Importing Cinematic Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;700&display=swap" rel="stylesheet">
     <style>
         :root {
             --bg: #070707;
@@ -350,68 +350,139 @@
             margin-top: auto;
         }
 
-        /* --- ENHANCED FOOTER --- */
-        footer {
-            padding: 80px 40px;
+        /* --- COLLABORATE / FOOTER SECTION --- */
+        .collaborate-section {
+            position: relative;
+            width: 100vw;
+            margin-left: calc(-50vw + 50%); /* Full bleed effect */
+            min-height: 85vh;
             display: flex;
-            flex-wrap: wrap;
-            justify-content: space-between;
+            flex-direction: column;
+            justify-content: center;
             align-items: center;
-            gap: 30px;
+            /* Default dark gradient. If you upload a photo, replace the line below with:
+               background: url('YOUR_IMAGE_LINK.jpg') center/cover no-repeat; */
+            background: radial-gradient(circle at center, #111 0%, #000 100%);
+            border-top: 1px solid var(--dark-border);
+            text-align: center;
+            padding: 80px 40px;
+            box-sizing: border-box;
+            overflow: hidden;
+            margin-top: 0;
+        }
+
+        .collab-overlay {
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0, 0, 0, 0.3); /* Darkens the background slightly */
+            z-index: 1;
+        }
+
+        .collab-content {
+            position: relative;
+            z-index: 10;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+        }
+
+        .collab-title {
+            font-family: 'Inter', sans-serif;
+            font-size: clamp(3rem, 8vw, 6rem);
+            font-weight: 700;
+            color: #fff;
+            margin: 0;
+            letter-spacing: -2px;
+        }
+
+        .collab-signature {
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            font-size: clamp(2.5rem, 5vw, 4.5rem);
+            color: #888;
+            margin: -5px 0 40px 0;
+            transform: rotate(-5deg); /* Gives it that handwritten angled look */
+        }
+
+        .collab-socials {
+            display: flex;
+            gap: 25px;
+            margin-bottom: 60px;
+        }
+
+        .collab-socials a {
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.3s ease, color 0.3s ease;
+        }
+
+        .collab-socials a:hover {
             color: var(--grey);
-            font-size: 0.8rem;
-            letter-spacing: 2px;
+            transform: translateY(-5px);
+        }
+
+        .collab-socials svg {
+            width: 32px;
+            height: 32px;
+            fill: currentColor;
+        }
+
+        .collab-bottom {
+            position: absolute;
+            bottom: 40px;
+            left: 0;
+            width: 100%;
+            padding: 0 8vw;
+            box-sizing: border-box;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            z-index: 10;
+            font-family: 'Inter', sans-serif;
+            color: #888;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+        }
+
+        .collab-left, .collab-right {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
         }
         
-        .footer-left {
-            font-size: 0.75rem;
-            text-transform: uppercase;
-        }
+        .collab-left { text-align: left; }
+        .collab-right { text-align: right; }
 
-        .footer-contact {
-            display: flex;
-            gap: 40px;
-            flex-wrap: wrap;
-            justify-content: center;
-        }
-
-        .contact-item {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-
-        .contact-item a {
-            color: var(--fg);
+        .collab-bottom a {
+            color: #888;
             text-decoration: none;
             transition: color 0.3s ease;
         }
-
-        .contact-item a:hover {
-            color: #ffffff;
-        }
-
-        .contact-icon {
-            width: 18px;
-            height: 18px;
-            fill: none;
-            stroke: var(--grey);
-            stroke-width: 1.5;
-            stroke-linecap: round;
-            stroke-linejoin: round;
-            transition: stroke stroke 0.3s ease;
-        }
         
-        .contact-item:hover .contact-icon {
-            stroke: var(--fg);
+        .collab-bottom a:hover {
+            color: #fff;
         }
 
         @media (max-width: 900px) {
             .about-grid { grid-template-columns: 1fr; gap: 60px; }
             .top-bar { flex-direction: column; gap: 10px; align-items: center; }
-            footer { flex-direction: column; text-align: center; }
-            .footer-contact { flex-direction: column; gap: 20px; align-items: center; }
             h1.hero { font-size: 4rem; }
+            
+            .collab-bottom {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+                gap: 30px;
+                position: relative;
+                bottom: 0;
+                padding: 0 20px;
+                margin-top: 60px;
+            }
+            .collab-left, .collab-right { text-align: center; }
+            .collaborate-section { padding-bottom: 60px; min-height: auto; }
         }
 
         /* --- CLAPPERBOARD INTRO OVERLAY --- */
@@ -557,7 +628,7 @@
             </div>
 
             <span class="rec">[ REC • ]</span>
-            <!-- LIVE TIMECODE REPLACED STATIC TEXT -->
+            <!-- LIVE TIMECODE -->
             <span id="live-time">T/C 00:00:00</span>
         </div>
 
@@ -806,41 +877,46 @@
 
     </div>
     
-    <!-- ENHANCED FOOTER WITH ICONS -->
-    <footer>
-        <div class="footer-left">
-            &copy; 2026 Laxman Khot
-        </div>
+    <!-- EPIC "LET'S COLLABORATE" FOOTER -->
+    <section class="collaborate-section">
+        <!-- Optional: Background Image overlay -->
+        <div class="collab-overlay"></div>
         
-        <div class="footer-contact">
-            <!-- Email -->
-            <div class="contact-item">
-                <svg class="contact-icon" viewBox="0 0 24 24">
-                    <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
-                    <polyline points="22,6 12,13 2,6"></polyline>
-                </svg>
-                <a href="mailto:khotlaxman9632@gmail.com">khotlaxman9632@gmail.com</a>
+        <div class="collab-content">
+            <h2 class="collab-title">Let's collaborate</h2>
+            <div class="collab-signature">Laxman Khot</div>
+            
+            <div class="collab-socials">
+                <!-- YouTube -->
+                <a href="https://www.youtube.com/@LaxmanKhot" target="_blank" aria-label="YouTube">
+                    <svg viewBox="0 0 24 24"><path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z"/></svg>
+                </a>
+                <!-- Instagram -->
+                <a href="https://www.instagram.com/laxman_khot_/" target="_blank" aria-label="Instagram">
+                    <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+                </a>
+                <!-- LinkedIn -->
+                <a href="https://www.linkedin.com/in/laxman-khot-a54689214" target="_blank" aria-label="LinkedIn">
+                    <svg viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+                </a>
+                <!-- Email -->
+                <a href="mailto:khotlaxman9632@gmail.com" aria-label="Email">
+                    <svg viewBox="0 0 24 24"><path d="M0 3v18h24v-18h-24zm21.518 2l-9.518 7.713-9.518-7.713h19.036zm-19.518 14v-11.817l10 8.104 10-8.104v11.817h-20z"/></svg>
+                </a>
             </div>
+        </div>
 
-            <!-- Phone -->
-            <div class="contact-item">
-                <svg class="contact-icon" viewBox="0 0 24 24">
-                    <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
-                </svg>
+        <div class="collab-bottom">
+            <div class="collab-left">
+                <span style="color: #fff; font-size: 1.1rem; font-weight: 500;">Laxman Khot</span>
+                <span>Director — Creative Strategist</span>
+            </div>
+            <div class="collab-right">
+                <a href="mailto:khotlaxman9632@gmail.com">khotlaxman9632@gmail.com</a>
                 <a href="tel:+919632617304">+91 96326 17304</a>
             </div>
-
-            <!-- LinkedIn -->
-            <div class="contact-item">
-                <svg class="contact-icon" viewBox="0 0 24 24">
-                    <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
-                    <rect x="2" y="9" width="4" height="12"></rect>
-                    <circle cx="4" cy="4" r="2"></circle>
-                </svg>
-                <a href="https://www.linkedin.com/in/laxman-khot-a54689214" target="_blank">LinkedIn</a>
-            </div>
         </div>
-    </footer>
+    </section>
 
     <!-- YouTube IFrame API Script -->
     <script>
