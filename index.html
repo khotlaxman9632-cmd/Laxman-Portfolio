@@ -8,7 +8,7 @@
     <!-- Custom Clapperboard Favicon -->
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎬</text></svg>">
     
-    <!-- Importing Cinematic Fonts (Added Great Vibes for the Signature) -->
+    <!-- Importing Cinematic Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;700&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -360,8 +360,7 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            /* Default dark gradient. If you upload a photo, replace the line below with:
-               background: url('YOUR_IMAGE_LINK.jpg') center/cover no-repeat; */
+            /* Default dark gradient */
             background: radial-gradient(circle at center, #111 0%, #000 100%);
             border-top: 1px solid var(--dark-border);
             text-align: center;
@@ -374,7 +373,7 @@
         .collab-overlay {
             position: absolute;
             top: 0; left: 0; right: 0; bottom: 0;
-            background: rgba(0, 0, 0, 0.3); /* Darkens the background slightly */
+            background: rgba(0, 0, 0, 0.3);
             z-index: 1;
         }
 
@@ -396,13 +395,12 @@
             letter-spacing: -2px;
         }
 
-        /* Highly Realistic Signature Styling */
         .collab-signature {
             font-family: 'Great Vibes', cursive;
             font-size: clamp(4rem, 8vw, 6.5rem);
             color: #e2e2e2;
             margin: -10px 0 40px 0;
-            transform: rotate(-4deg); /* Handwritten slant */
+            transform: rotate(-4deg);
             font-weight: 400;
         }
 
@@ -467,6 +465,7 @@
             color: #fff;
         }
 
+        /* --- RESPONSIVE MOBILE FIXES --- */
         @media (max-width: 900px) {
             .about-grid { grid-template-columns: 1fr; gap: 60px; }
             .top-bar { flex-direction: column; gap: 10px; align-items: center; }
@@ -484,6 +483,13 @@
             }
             .collab-left, .collab-right { text-align: center; }
             .collaborate-section { padding-bottom: 60px; min-height: auto; }
+
+            /* Fix Clapperboard for Mobile: Steeper angle & adjusted text */
+            .clap-top { transform: rotate(-22deg); }
+            .intro-content { transform: translate(-50%, -60%); width: 90%; }
+            .intro-content h1 { font-size: 2.2rem; }
+            .intro-content p { font-size: 0.65rem; margin-bottom: 30px; }
+            .enter-btn { padding: 12px 30px; font-size: 0.7rem; }
         }
 
         /* --- CLAPPERBOARD INTRO OVERLAY --- */
@@ -502,7 +508,7 @@
             width: 110vw; height: 60vh;
             background: #070707;
             transform-origin: left bottom;
-            transform: rotate(-6deg);
+            transform: rotate(-10deg); /* Increased default desktop angle slightly to make room */
             transition: transform 0.15s cubic-bezier(0.4, 0, 1, 1);
             z-index: 2;
         }
@@ -575,11 +581,11 @@
 
         /* --- CLAPPERBOARD ANIMATION STATES --- */
         #intro-overlay.clapped .clap-top {
-            transform: rotate(0deg); /* SLAM SHUT */
+            transform: rotate(0deg) !important; /* SLAM SHUT */
         }
         #intro-overlay.open .clap-top {
             transition: transform 0.8s cubic-bezier(0.77, 0, 0.175, 1);
-            transform: translateY(-100%); /* SLIDE UP */
+            transform: translateY(-100%) !important; /* SLIDE UP */
         }
         #intro-overlay.open .clap-bottom {
             transform: translateY(100%); /* SLIDE DOWN */
@@ -694,7 +700,6 @@
                         <div class="scroll-hint">[ Swipe / Scroll -> ]</div>
                         <div class="card-media">
                             <div class="card-media-item">
-                                <!-- Notice the added ?enablejsapi=1 and id="vid1" -->
                                 <iframe id="vid1" src="https://www.youtube.com/embed/a1L1EviALUg?enablejsapi=1" title="Yuvaratna Kannada" allowfullscreen></iframe>
                             </div>
                             <div class="card-media-item">
@@ -851,13 +856,13 @@
                     </div>
                 </a>
 
-                <!-- CERTIFICATE 3 (IFC 13) -->
+                <!-- CERTIFICATE 3 (IFP 13) -->
                 <a href="./IFC%2013.pdf" target="_blank" class="cert-link">
                     <div class="cert-item">
                         <div class="cert-media">
                             <span>[ View PDF ]</span>
                         </div>
-                        <h3 class="cert-title">IFC 13</h3>
+                        <h3 class="cert-title">IFP 13</h3>
                         <div class="cert-org">Certification</div>
                     </div>
                 </a>
@@ -880,7 +885,6 @@
     
     <!-- EPIC "LET'S COLLABORATE" FOOTER -->
     <section class="collaborate-section">
-        <!-- Optional: Background Image overlay -->
         <div class="collab-overlay"></div>
         
         <div class="collab-content">
