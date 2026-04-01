@@ -413,13 +413,26 @@
 </head>
 <body>
 
+    <!-- Hidden YouTube Player Container -->
+    <div id="youtube-audio" style="display: none;"></div>
+
     <!-- CSS Film Grain -->
     <div class="noise"></div>
 
     <div class="container">
         
+        <!-- TOP VIEWFINDER BAR -->
         <div class="top-bar">
-            <span>SYS. 01 / NEW DELHI</span>
+            <!-- AUDIO TOGGLE BUTTON -->
+            <div class="audio-toggle" onclick="toggleAudio()" style="cursor: pointer; display: flex; align-items: center; gap: 8px; transition: color 0.3s ease;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='var(--grey)'">
+                <svg id="audio-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+                    <line x1="23" y1="9" x2="17" y2="15"></line>
+                    <line x1="17" y1="9" x2="23" y2="15"></line>
+                </svg>
+                <span id="audio-text">BGM: OFF</span>
+            </div>
+
             <span class="rec">[ REC • ]</span>
             <span>T/C 00:00:24:12</span>
         </div>
@@ -704,5 +717,52 @@
         </div>
     </footer>
 
+    <!-- YouTube IFrame API Script -->
+    <script>
+        var player;
+        var isPlaying = false;
+
+        // Load the IFrame Player API code asynchronously.
+        var tag = document.createElement('script');
+        tag.src = "https://www.youtube.com/iframe_api";
+        var firstScriptTag = document.getElementsByTagName('script')[0];
+        firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+        // This function creates an <iframe> (and YouTube player) after the API code downloads.
+        function onYouTubeIframeAPIReady() {
+            player = new YT.Player('youtube-audio', {
+                height: '0',
+                width: '0',
+                videoId: 'UDVtMYqUAyw', // Your Hans Zimmer Link
+                playerVars: {
+                    'autoplay': 0,
+                    'controls': 0,
+                    'showinfo': 0,
+                    'rel': 0,
+                    'loop': 1,
+                    'playlist': 'UDVtMYqUAyw' // Required for loop to work
+                }
+            });
+        }
+
+        function toggleAudio() {
+            const text = document.getElementById('audio-text');
+            const icon = document.getElementById('audio-icon');
+
+            if (player && player.getPlayerState) {
+                if (isPlaying) {
+                    player.pauseVideo();
+                    isPlaying = false;
+                    text.innerText = 'BGM: OFF';
+                    icon.innerHTML = '<polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><line x1="23" y1="9" x2="17" y2="15"></line><line x1="17" y1="9" x2="23" y2="15"></line>';
+                } else {
+                    player.playVideo();
+                    isPlaying = true;
+                    text.innerText = 'BGM: ON';
+                    icon.innerHTML = '<polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path>';
+                }
+            }
+        }
+    </script>
 </body>
 </html>
