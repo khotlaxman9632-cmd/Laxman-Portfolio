@@ -410,20 +410,61 @@
             h1.hero { font-size: 4rem; }
         }
 
-        /* --- INTRO OVERLAY --- */
+        /* --- CLAPPERBOARD INTRO OVERLAY --- */
         #intro-overlay {
             position: fixed;
             top: 0; left: 0;
             width: 100vw; height: 100vh;
-            background: #070707;
             z-index: 999999;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            transition: opacity 1s ease, visibility 1s ease;
+            overflow: hidden;
+            background: #070707;
         }
-        #intro-overlay h1 {
+
+        .clap-top {
+            position: absolute;
+            bottom: 50%; left: -5%;
+            width: 110vw; height: 60vh;
+            background: #070707;
+            transform-origin: left bottom;
+            transform: rotate(-6deg);
+            transition: transform 0.15s cubic-bezier(0.4, 0, 1, 1);
+            z-index: 2;
+        }
+
+        .top-stripes {
+            position: absolute;
+            bottom: 0; left: 0; width: 100%; height: 35px;
+            background: repeating-linear-gradient(45deg, #e2e2e2, #e2e2e2 40px, #1a1a1a 40px, #1a1a1a 80px);
+            border-bottom: 2px solid #000;
+        }
+
+        .clap-bottom {
+            position: absolute;
+            top: 50%; left: -5%;
+            width: 110vw; height: 60vh;
+            background: #070707;
+            z-index: 1;
+            transition: transform 0.8s cubic-bezier(0.77, 0, 0.175, 1);
+        }
+
+        .bottom-stripes {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 35px;
+            background: repeating-linear-gradient(45deg, #1a1a1a, #1a1a1a 40px, #e2e2e2 40px, #e2e2e2 80px);
+            border-top: 2px solid #000;
+        }
+
+        .intro-content {
+            position: absolute;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            z-index: 10;
+            width: 100%;
+            transition: opacity 0.15s ease;
+        }
+
+        .intro-content h1 {
             font-family: 'Playfair Display', serif;
             font-size: 3rem;
             color: #fff;
@@ -431,7 +472,7 @@
             font-weight: 400;
             text-transform: uppercase;
         }
-        #intro-overlay p {
+        .intro-content p {
             font-family: 'Inter', sans-serif;
             color: #666;
             letter-spacing: 5px;
@@ -455,15 +496,40 @@
             background: #fff;
             color: #000;
         }
+
+        /* --- CLAPPERBOARD ANIMATION STATES --- */
+        #intro-overlay.clapped .clap-top {
+            transform: rotate(0deg); /* SLAM SHUT */
+        }
+        #intro-overlay.open .clap-top {
+            transition: transform 0.8s cubic-bezier(0.77, 0, 0.175, 1);
+            transform: translateY(-100%); /* SLIDE UP */
+        }
+        #intro-overlay.open .clap-bottom {
+            transform: translateY(100%); /* SLIDE DOWN */
+        }
+
     </style>
 </head>
 <body>
 
-    <!-- CINEMATIC INTRO SCREEN -->
+    <!-- CINEMATIC CLAPPERBOARD INTRO SCREEN -->
     <div id="intro-overlay">
-        <h1>Laxman Khot</h1>
-        <p>DIRECTOR — CREATIVE STRATEGIST</p>
-        <button class="enter-btn" onclick="enterPortfolio()">[ ENTER PORTFOLIO ]</button>
+        <!-- Top Arm of Clapperboard -->
+        <div class="clap-top" id="clap-top">
+            <div class="top-stripes"></div>
+        </div>
+        
+        <!-- Bottom Base of Clapperboard -->
+        <div class="clap-bottom" id="clap-bottom">
+            <div class="bottom-stripes"></div>
+        </div>
+
+        <div class="intro-content" id="intro-content">
+            <h1>Laxman Khot</h1>
+            <p>DIRECTOR — CREATIVE STRATEGIST</p>
+            <button class="enter-btn" onclick="enterPortfolio()">[ ACTION ]</button>
+        </div>
     </div>
 
     <!-- Hidden YouTube Player Container -->
@@ -866,18 +932,34 @@
             }
         }
 
-        // Fades out the intro screen and starts the music
+        // CLAPPERBOARD ANIMATION SCRIPT
         function enterPortfolio() {
             const overlay = document.getElementById('intro-overlay');
-            overlay.style.opacity = '0';
-            setTimeout(() => { overlay.style.visibility = 'hidden'; }, 1000);
+            const content = document.getElementById('intro-content');
 
-            if (bgmPlayer && bgmPlayer.getPlayerState) {
-                bgmPlayer.playVideo();
-                isBgmPlaying = true;
-                wasBgmPlayingBeforeVideo = false;
-                updateBgmUI(true);
-            }
+            // 1. Hide the text
+            content.style.opacity = '0';
+            
+            // 2. SLAM the clapperboard shut
+            overlay.classList.add('clapped');
+
+            // 3. Wait a fraction of a second for the "impact", then slide open
+            setTimeout(() => {
+                overlay.classList.add('open');
+                
+                // Start BGM at the exact moment the board splits
+                if (bgmPlayer && bgmPlayer.getPlayerState) {
+                    bgmPlayer.playVideo();
+                    isBgmPlaying = true;
+                    wasBgmPlayingBeforeVideo = false;
+                    updateBgmUI(true);
+                }
+            }, 200); 
+
+            // 4. Remove the overlay entirely after animation finishes so you can click things underneath
+            setTimeout(() => {
+                overlay.style.display = 'none';
+            }, 1200);
         }
 
         // Allows them to toggle it off/on manually
