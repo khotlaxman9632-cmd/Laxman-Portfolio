@@ -59,22 +59,27 @@
             z-index: 10;
         }
 
-        /* --- SCROLL REVEAL ANIMATIONS --- */
+        /* --- CINEMATIC SCROLL REVEAL ANIMATIONS --- */
         .reveal {
             opacity: 0;
-            transform: translateY(50px);
-            transition: all 1s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            transform: translateY(80px); /* Deep drop for dramatic float up */
+            transition: all 1.8s cubic-bezier(0.2, 0.8, 0.2, 1); /* Buttery smooth easing */
         }
         .reveal.active {
             opacity: 1;
             transform: translateY(0);
         }
         
+        /* Staggered Element Reveals */
+        .reveal-delay-1 { transition-delay: 0.2s; }
+        .reveal-delay-2 { transition-delay: 0.4s; }
+        .reveal-delay-3 { transition-delay: 0.6s; }
+        
         /* Staggered project cards reveal */
         .projects-grid .reveal:nth-child(1) { transition-delay: 0.1s; }
-        .projects-grid .reveal:nth-child(2) { transition-delay: 0.25s; }
-        .projects-grid .reveal:nth-child(3) { transition-delay: 0.4s; }
-        .projects-grid .reveal:nth-child(4) { transition-delay: 0.55s; }
+        .projects-grid .reveal:nth-child(2) { transition-delay: 0.3s; }
+        .projects-grid .reveal:nth-child(3) { transition-delay: 0.5s; }
+        .projects-grid .reveal:nth-child(4) { transition-delay: 0.7s; }
 
         /* --- VIEWFINDER TOP BAR --- */
         .top-bar {
@@ -98,8 +103,9 @@
             padding: 12vh 0 10vh;
             border-bottom: 1px solid var(--dark-border);
             opacity: 0;
-            transform: translateY(30px) scale(0.98);
-            transition: all 1.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            /* Extra dramatic scale and drop for the Hero */
+            transform: translateY(60px) scale(0.92);
+            transition: opacity 3s cubic-bezier(0.2, 0.8, 0.2, 1), transform 3s cubic-bezier(0.2, 0.8, 0.2, 1);
         }
         header.hero-active {
             opacity: 1;
@@ -133,22 +139,22 @@
             position: relative;
         }
 
-        /* --- BACKGROUND SVG ILLUSTRATION --- */
+        /* --- BACKGROUND SVG ILLUSTRATIONS --- */
         .bg-illustration {
             position: absolute;
-            right: -10%;
-            top: 15%;
-            width: 700px;
-            height: 700px;
-            opacity: 0.04;
+            opacity: 0.03; /* Extremely subtle watermark effect */
             z-index: -1;
             pointer-events: none;
             color: #ffffff;
-            animation: slowSpin 80s linear infinite;
         }
-        @keyframes slowSpin {
-            100% { transform: rotate(360deg); }
-        }
+        .reel-svg { right: -10%; top: 15%; width: 700px; height: 700px; animation: slowSpin 80s linear infinite; }
+        .lens-svg { left: -15%; top: 20%; width: 600px; height: 600px; animation: slowBreathe 15s ease-in-out infinite alternate; }
+        .script-svg { right: -5%; top: 10%; width: 500px; height: 500px; animation: slowFloat 20s ease-in-out infinite alternate; }
+        .viewfinder-svg { left: 5%; top: 15%; width: 450px; height: 450px; animation: slowSpin 100s linear infinite reverse; }
+
+        @keyframes slowSpin { 100% { transform: rotate(360deg); } }
+        @keyframes slowBreathe { 0% { transform: scale(0.9); } 100% { transform: scale(1.1); } }
+        @keyframes slowFloat { 0% { transform: translateY(0) rotate(-2deg); } 100% { transform: translateY(-40px) rotate(2deg); } }
 
         .section-header {
             display: flex;
@@ -548,7 +554,7 @@
             color: #fff;
         }
 
-        /* --- CLAPPERBOARD INTRO OVERLAY (DESKTOP DEFAULT) --- */
+        /* --- CLAPPERBOARD INTRO OVERLAY --- */
         #intro-overlay {
             position: fixed;
             top: 0; left: 0;
@@ -643,8 +649,6 @@
         #intro-overlay.clapped .clap-bottom {
             transform: translateY(0px) !important;
         }
-        
-        /* The important fix: safely force it completely open */
         #intro-overlay.open .clap-top {
             transition: transform 0.8s cubic-bezier(0.77, 0, 0.175, 1) !important;
             transform: translateY(-100vh) rotate(-10deg) !important;
@@ -654,7 +658,7 @@
             transform: translateY(100vh) !important;
         }
 
-        /* --- RESPONSIVE MOBILE FIXES (MUST BE PLACED LAST) --- */
+        /* --- RESPONSIVE MOBILE FIXES --- */
         @media (max-width: 900px) {
             .about-grid { grid-template-columns: 1fr; gap: 60px; }
             .top-bar { flex-direction: column; gap: 10px; align-items: center; }
@@ -674,7 +678,10 @@
             .collaborate-section { padding-bottom: 60px; min-height: auto; }
             
             /* SVG scaling for mobile */
-            .bg-illustration { right: -50%; width: 400px; height: 400px; top: 5%; }
+            .bg-illustration { width: 300px; height: 300px; }
+            .reel-svg { right: -30%; top: 5%; }
+            .lens-svg { left: -30%; top: 10%; }
+            .script-svg { right: -10%; top: 5%; }
 
             /* Fix Clapperboard for Mobile */
             .clap-top { transform: translateY(-16vh) rotate(-15deg); }
@@ -741,13 +748,12 @@
 
         <!-- ABOUT SECTION -->
         <section>
-            <!-- SVG Film Reel Illustration (Code Generated) -->
-            <svg class="bg-illustration" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="1.5" xmlns="http://www.w3.org/2000/svg">
+            <!-- SVG Film Reel Illustration (Spinning) -->
+            <svg class="bg-illustration reel-svg" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="1.5" xmlns="http://www.w3.org/2000/svg">
                 <circle cx="50" cy="50" r="45" stroke-dasharray="2 4"/>
                 <circle cx="50" cy="50" r="35"/>
                 <circle cx="50" cy="50" r="10"/>
                 <circle cx="50" cy="50" r="4" fill="currentColor"/>
-                <!-- Reel Spokes -->
                 <line x1="50" y1="15" x2="50" y2="40"/>
                 <line x1="50" y1="60" x2="50" y2="85"/>
                 <line x1="15" y1="50" x2="40" y2="50"/>
@@ -763,16 +769,18 @@
                 <h2 class="section-title">Director's Profile</h2>
             </div>
             
-            <div class="about-grid reveal">
+            <div class="about-grid">
                 <div class="about-text">
-                    <p>I am a media professional with on-set experience across Kannada feature films, independent filmmaking, and broadcast media — backed by creative strategy work at <strong>McCann Worldgroup.</strong></p>
-                    <p>Having handled end-to-end production on independent short films, I understand everything from script analysis and location scouting to talent management, scheduling, and post-production. Fluent across multiple languages, I have a strong instinct for <strong>culturally authentic storytelling.</strong></p>
+                    <p class="reveal reveal-delay-1">I am a media professional with on-set experience across Kannada feature films, independent filmmaking, and broadcast media — backed by creative strategy work at <strong>McCann Worldgroup.</strong></p>
+                    <p class="reveal reveal-delay-2">Having handled end-to-end production on independent short films, I understand everything from script analysis and location scouting to talent management, scheduling, and post-production. Fluent across multiple languages, I have a strong instinct for <strong>culturally authentic storytelling.</strong></p>
                     
-                    <a href="./Laxman_Khot_CV_v19_1.docx" class="btn" download style="margin-top: 20px;">Download Resumé</a>
+                    <div class="reveal reveal-delay-3">
+                        <a href="./Laxman_Khot_CV_v19_1.docx" class="btn" download style="margin-top: 20px;">Download Resumé</a>
+                    </div>
                 </div>
                 
                 <div>
-                    <div class="meta-list">
+                    <div class="meta-list reveal reveal-delay-1">
                         <div class="meta-title">Selected Experience</div>
                         <ul class="clean-list">
                             <li>Creative Copywriter <span>McCann Worldgroup</span></li>
@@ -783,7 +791,7 @@
                         </ul>
                     </div>
 
-                    <div class="meta-list">
+                    <div class="meta-list reveal reveal-delay-2">
                         <div class="meta-title">Languages</div>
                         <ul class="clean-list">
                             <li>Hindi <span>Fluent</span></li>
@@ -798,6 +806,18 @@
 
         <!-- FILMOGRAPHY -->
         <section>
+            <!-- SVG Abstract Camera Lens Illustration (Breathing) -->
+            <svg class="bg-illustration lens-svg" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="1" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="50" cy="50" r="45"/>
+                <circle cx="50" cy="50" r="35" stroke-dasharray="4 4"/>
+                <circle cx="50" cy="50" r="25"/>
+                <circle cx="50" cy="50" r="10" fill="currentColor" opacity="0.5"/>
+                <line x1="50" y1="5" x2="50" y2="15"/>
+                <line x1="50" y1="85" x2="50" y2="95"/>
+                <line x1="5" y1="50" x2="15" y2="50"/>
+                <line x1="85" y1="50" x2="95" y2="50"/>
+            </svg>
+
             <div class="section-header reveal">
                 <span class="section-num">02</span>
                 <h2 class="section-title">Filmography</h2>
@@ -856,6 +876,17 @@
 
         <!-- CREATIVE STRATEGY -->
         <section>
+            <!-- SVG Abstract Script Page Illustration (Floating) -->
+            <svg class="bg-illustration script-svg" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="1.5" xmlns="http://www.w3.org/2000/svg">
+                <rect x="20" y="10" width="60" height="80" stroke-dasharray="2 4"/>
+                <line x1="30" y1="25" x2="70" y2="25"/>
+                <line x1="30" y1="35" x2="60" y2="35"/>
+                <line x1="30" y1="45" x2="65" y2="45"/>
+                <line x1="30" y1="55" x2="50" y2="55"/>
+                <line x1="30" y1="65" x2="70" y2="65"/>
+                <line x1="30" y1="75" x2="45" y2="75"/>
+            </svg>
+
             <div class="section-header reveal">
                 <span class="section-num">03</span>
                 <h2 class="section-title">Creative Strategy</h2>
@@ -938,6 +969,16 @@
 
         <!-- CERTIFICATIONS SECTION -->
         <section style="border-bottom: none;">
+            <!-- SVG Viewfinder Illustration (Spinning) -->
+            <svg class="bg-illustration viewfinder-svg" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="2" xmlns="http://www.w3.org/2000/svg">
+                <polyline points="20,40 20,20 40,20"/>
+                <polyline points="80,40 80,20 60,20"/>
+                <polyline points="20,60 20,80 40,80"/>
+                <polyline points="80,60 80,80 60,80"/>
+                <line x1="50" y1="45" x2="50" y2="55"/>
+                <line x1="45" y1="50" x2="55" y2="50"/>
+            </svg>
+
             <div class="section-header reveal">
                 <span class="section-num">04</span>
                 <h2 class="section-title">Certifications</h2>
@@ -946,7 +987,7 @@
             <div class="cert-grid">
                 
                 <!-- CERTIFICATE 1 (Cinematic Composition) -->
-                <a href="./Certificate-%20Cinematic%20Composition.pdf" target="_blank" class="cert-link reveal">
+                <a href="./Certificate-%20Cinematic%20Composition.pdf" target="_blank" class="cert-link reveal reveal-delay-1">
                     <div class="cert-item">
                         <div class="cert-media">
                             <span>[ View PDF ]</span>
@@ -957,7 +998,7 @@
                 </a>
 
                 <!-- CERTIFICATE 2 (Claude 101) -->
-                <a href="./certificate-Claude%20101.pdf" target="_blank" class="cert-link reveal">
+                <a href="./certificate-Claude%20101.pdf" target="_blank" class="cert-link reveal reveal-delay-2">
                     <div class="cert-item">
                         <div class="cert-media">
                             <span>[ View PDF ]</span>
@@ -968,7 +1009,7 @@
                 </a>
 
                 <!-- CERTIFICATE 3 (IFP 13) -->
-                <a href="./IFC%2013.pdf" target="_blank" class="cert-link reveal">
+                <a href="./IFC%2013.pdf" target="_blank" class="cert-link reveal reveal-delay-3">
                     <div class="cert-item">
                         <div class="cert-media">
                             <span>[ View PDF ]</span>
@@ -979,7 +1020,7 @@
                 </a>
 
                 <!-- CERTIFICATE 4 (IFP 15) -->
-                <a href="./IFP%2015.pdf" target="_blank" class="cert-link reveal">
+                <a href="./IFP%2015.pdf" target="_blank" class="cert-link reveal reveal-delay-3">
                     <div class="cert-item">
                         <div class="cert-media">
                             <span>[ View PDF ]</span>
@@ -1115,16 +1156,16 @@
             // 2. Slam board
             overlay.classList.add('clapped');
 
-            // 3. Force board open (removing clapped guarantees no CSS conflict)
+            // 3. Force board open
             setTimeout(() => {
                 overlay.classList.remove('clapped'); 
                 overlay.classList.add('open');
                 
+                // Extremely slow and dramatic HERO reveal
                 setTimeout(() => {
                     document.getElementById('main-hero').classList.add('hero-active');
-                }, 400);
+                }, 600);
 
-                // Play Audio safely wrapped in try/catch so it doesn't break script
                 try {
                     if (bgmPlayer && typeof bgmPlayer.playVideo === 'function') {
                         bgmPlayer.playVideo();
@@ -1137,7 +1178,7 @@
                 }
             }, 200); 
 
-            // 4. Destroy overlay layer to ensure you can click the site
+            // 4. Destroy overlay layer
             setTimeout(() => {
                 overlay.style.display = 'none';
             }, 1200);
@@ -1179,7 +1220,6 @@
                 observer.observe(el);
             });
             
-            // Extreme failsafe: if intersection observer gets stuck, reveal everything after 3s
             setTimeout(() => {
                 document.querySelectorAll('.reveal').forEach(el => el.classList.add('active'));
             }, 3000);
