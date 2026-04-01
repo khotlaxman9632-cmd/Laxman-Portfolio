@@ -3,15 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Laxman Khot - Director & Creative Strategist</title>
-    <!-- Using Inter for that sharp, modern editorial look -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800;900&display=swap" rel="stylesheet">
+    <title>Laxman Khot - Film & Creative</title>
+    <!-- Importing Cinematic Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg: #050505;
-            --fg: #ffffff;
-            --grey: #777777;
-            --border: #222222;
+            --bg: #070707;
+            --fg: #e2e2e2;
+            --grey: #666666;
+            --dark-border: #1a1a1a;
         }
 
         body {
@@ -23,51 +23,95 @@
             overflow-x: hidden;
         }
 
-        .container {
-            max-width: 1600px;
-            margin: 0 auto;
-            padding: 0 40px;
+        /* --- FILM GRAIN OVERLAY --- */
+        .noise {
+            position: fixed;
+            top: 0; left: 0; width: 100vw; height: 100vh;
+            pointer-events: none;
+            z-index: 9999;
+            opacity: 0.05;
+            background-image: url('data:image/svg+xml;utf8,%3Csvg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"%3E%3Cfilter id="noiseFilter"%3E%3CfeTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="3" stitchTiles="stitch"/%3E%3C/filter%3E%3Crect width="100%25" height="100%25" filter="url(%23noiseFilter)"/%3E%3C/svg%3E');
         }
 
-        /* --- HERO HEADER --- */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 40px;
+            position: relative;
+            z-index: 10;
+        }
+
+        /* --- VIEWFINDER TOP BAR --- */
+        .top-bar {
+            display: flex;
+            justify-content: space-between;
+            padding: 30px 0;
+            font-size: 0.75rem;
+            letter-spacing: 2px;
+            color: var(--grey);
+            border-bottom: 1px solid var(--dark-border);
+            text-transform: uppercase;
+        }
+        .top-bar .rec {
+            color: #d92525;
+            animation: blink 2s infinite;
+        }
+        @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+
+        /* --- HERO SECTION --- */
         header {
-            padding: 15vh 0 5vh;
-            border-bottom: 1px solid var(--border);
+            padding: 12vh 0 10vh;
+            border-bottom: 1px solid var(--dark-border);
         }
         
         h1.hero {
-            font-size: clamp(4rem, 12vw, 10rem);
-            font-weight: 900;
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(5rem, 15vw, 12rem);
+            font-weight: 400;
             line-height: 0.85;
-            letter-spacing: -0.04em;
+            letter-spacing: -0.02em;
             margin: 0;
             text-transform: uppercase;
+            color: #ffffff;
         }
 
-        .hero-sub {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 50px;
+        .hero-role {
+            font-family: 'Inter', sans-serif;
+            margin-top: 40px;
             color: var(--grey);
-            text-transform: uppercase;
-            font-size: 0.85rem;
-            letter-spacing: 2px;
-            font-weight: 600;
+            font-size: 0.9rem;
+            letter-spacing: 4px;
+            font-weight: 300;
         }
 
         /* --- SECTIONS --- */
         section {
-            padding: 100px 0;
-            border-bottom: 1px solid var(--border);
+            padding: 120px 0;
+            border-bottom: 1px solid var(--dark-border);
+        }
+
+        .section-header {
+            display: flex;
+            align-items: baseline;
+            gap: 20px;
+            margin-bottom: 60px;
+        }
+
+        .section-num {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            color: var(--grey);
+            font-style: italic;
         }
 
         h2.section-title {
-            font-size: 1.5rem;
-            font-weight: 800;
+            font-family: 'Inter', sans-serif;
+            font-size: 1rem;
+            font-weight: 400;
             text-transform: uppercase;
-            margin-bottom: 60px;
-            letter-spacing: -0.02em;
+            letter-spacing: 4px;
             color: var(--fg);
+            margin: 0;
         }
 
         /* --- ABOUT GRID --- */
@@ -78,44 +122,55 @@
         }
 
         .about-text p {
-            font-size: 1.3rem;
-            line-height: 1.6;
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            line-height: 1.5;
             font-weight: 400;
-            color: #cccccc;
+            color: #b3b3b3;
             margin-top: 0;
-            margin-bottom: 30px;
+            margin-bottom: 40px;
         }
 
         .about-text strong {
             color: var(--fg);
-            font-weight: 600;
+            font-weight: 400;
+            font-style: italic;
         }
 
-        .list-header {
-            font-size: 0.75rem;
+        .meta-list {
+            margin-bottom: 50px;
+        }
+
+        .meta-title {
+            font-size: 0.65rem;
             text-transform: uppercase;
             color: var(--grey);
-            letter-spacing: 2px;
+            letter-spacing: 3px;
             margin-bottom: 20px;
-            font-weight: 600;
+            border-bottom: 1px solid var(--dark-border);
+            padding-bottom: 10px;
         }
 
         ul.clean-list {
             list-style: none;
             padding: 0;
-            margin: 0 0 50px 0;
+            margin: 0;
         }
 
         ul.clean-list li {
-            padding: 15px 0;
-            border-bottom: 1px solid var(--border);
-            font-size: 0.95rem;
+            padding: 10px 0;
+            font-size: 0.85rem;
             display: flex;
             justify-content: space-between;
+            color: #a0a0a0;
+            letter-spacing: 1px;
         }
 
         ul.clean-list li span {
             color: var(--grey);
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            font-size: 1rem;
         }
 
         /* --- PROJECT GRID --- */
@@ -128,21 +183,23 @@
         .project-card {
             display: flex;
             flex-direction: column;
+            group: hover;
         }
 
         .media-wrapper {
             position: relative;
             width: 100%;
-            background: #111;
+            background: #000;
             margin-bottom: 25px;
+            border: 1px solid #111;
         }
 
         .scroll-hint {
             position: absolute;
             top: -25px;
             right: 0;
-            font-size: 0.65rem;
-            letter-spacing: 2px;
+            font-size: 0.55rem;
+            letter-spacing: 3px;
             color: var(--grey);
             text-transform: uppercase;
         }
@@ -153,10 +210,11 @@
             display: flex;
             overflow-x: auto;
             scroll-snap-type: x mandatory;
-            scrollbar-width: none; /* Firefox */
+            scrollbar-width: none;
         }
-        .card-media::-webkit-scrollbar { display: none; } /* Chrome/Safari */
+        .card-media::-webkit-scrollbar { display: none; }
 
+        /* Grayscale to Color Cinematic Reveal */
         .card-media img, .card-media iframe {
             width: 100%;
             height: 100%;
@@ -164,50 +222,50 @@
             flex: 0 0 100%;
             scroll-snap-align: start;
             border: none;
-            filter: grayscale(20%);
-            transition: filter 0.5s ease;
+            filter: grayscale(100%) contrast(1.2) brightness(0.9);
+            transition: filter 0.8s ease;
         }
-        .project-card:hover .card-media img {
-            filter: grayscale(0%);
+        .project-card:hover .card-media img, 
+        .project-card:hover .card-media iframe {
+            filter: grayscale(0%) contrast(1) brightness(1);
         }
 
         .card-title {
-            font-size: 1.5rem;
-            font-weight: 800;
-            text-transform: uppercase;
-            letter-spacing: -0.02em;
-            margin: 0 0 5px 0;
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            font-weight: 400;
+            margin: 0 0 10px 0;
+            color: #fff;
         }
 
         .card-role {
             color: var(--grey);
-            font-size: 0.8rem;
+            font-size: 0.7rem;
             text-transform: uppercase;
-            letter-spacing: 1px;
+            letter-spacing: 2px;
             margin-bottom: 15px;
-            font-weight: 600;
         }
 
         .card-desc {
-            font-size: 0.95rem;
+            font-size: 0.9rem;
             line-height: 1.6;
-            color: #999;
+            color: #888;
             margin-bottom: 25px;
+            font-weight: 300;
         }
 
-        /* --- BRUTALIST BUTTONS --- */
+        /* --- CINEMATIC BUTTONS --- */
         .btn {
             display: inline-block;
-            border: 1px solid var(--fg);
+            border: 1px solid var(--grey);
             background: transparent;
             color: var(--fg);
             text-decoration: none;
             text-transform: uppercase;
-            padding: 16px 32px;
-            font-size: 0.8rem;
-            font-weight: 600;
-            letter-spacing: 2px;
-            transition: all 0.3s ease;
+            padding: 14px 30px;
+            font-size: 0.75rem;
+            letter-spacing: 3px;
+            transition: all 0.4s ease;
             cursor: pointer;
             width: fit-content;
         }
@@ -215,30 +273,31 @@
         .btn:hover {
             background: var(--fg);
             color: var(--bg);
+            border-color: var(--fg);
         }
 
         .btn-small {
-            padding: 12px 24px;
-            font-size: 0.75rem;
+            padding: 10px 20px;
+            font-size: 0.65rem;
             margin-top: auto;
         }
 
-        /* Footer */
+        /* --- FOOTER --- */
         footer {
             padding: 80px 40px;
             display: flex;
             justify-content: space-between;
             align-items: center;
             color: var(--grey);
-            font-size: 0.85rem;
+            font-size: 0.75rem;
             text-transform: uppercase;
-            letter-spacing: 1px;
+            letter-spacing: 2px;
         }
         
         footer a {
             color: var(--fg);
             text-decoration: none;
-            border-bottom: 1px solid var(--border);
+            border-bottom: 1px solid var(--grey);
             transition: border-color 0.3s ease;
         }
 
@@ -247,62 +306,79 @@
         }
 
         @media (max-width: 900px) {
-            .about-grid { grid-template-columns: 1fr; gap: 40px; }
-            .hero-sub { flex-direction: column; gap: 15px; }
+            .about-grid { grid-template-columns: 1fr; gap: 60px; }
+            .top-bar { flex-direction: column; gap: 10px; align-items: center; }
             footer { flex-direction: column; gap: 20px; text-align: center; }
-            .container { padding: 0 20px; }
+            h1.hero { font-size: 4rem; }
         }
     </style>
 </head>
 <body>
 
+    <!-- CSS Film Grain -->
+    <div class="noise"></div>
+
     <div class="container">
         
+        <div class="top-bar">
+            <span>SYS. 01 / NEW DELHI</span>
+            <span class="rec">[ REC • ]</span>
+            <span>T/C 00:00:24:12</span>
+        </div>
+
         <!-- HEADER -->
         <header>
-            <h1 class="hero">Laxman Khot</h1>
-            <div class="hero-sub">
-                <span>Director & Creative Strategist</span>
-                <span>Based in New Delhi, IN</span>
-                <span>Portfolio 2026</span>
-            </div>
+            <h1 class="hero">Laxman<br>Khot.</h1>
+            <div class="hero-role">DIRECTOR — CREATIVE STRATEGIST</div>
         </header>
 
         <!-- ABOUT SECTION -->
         <section>
-            <h2 class="section-title">01 / Profile</h2>
+            <div class="section-header">
+                <span class="section-num">01</span>
+                <h2 class="section-title">Director's Profile</h2>
+            </div>
+            
             <div class="about-grid">
                 <div class="about-text">
-                    <p>I am a media professional with on-set experience across Kannada feature films, independent filmmaking, and broadcast media — backed by creative strategy work at <strong>McCann Worldgroup</strong>.</p>
-                    <p>Having handled end-to-end production on independent short films, I understand everything from script analysis and location scouting to talent management, scheduling, and post-production. Fluent across multiple languages, I have a strong instinct for culturally authentic storytelling.</p>
+                    <p>I am a media professional with on-set experience across Kannada feature films, independent filmmaking, and broadcast media — backed by creative strategy work at <strong>McCann Worldgroup.</strong></p>
+                    <p>Having handled end-to-end production on independent short films, I understand everything from script analysis and location scouting to talent management, scheduling, and post-production. Fluent across multiple languages, I have a strong instinct for <strong>culturally authentic storytelling.</strong></p>
                     
                     <a href="./Laxman_Khot_CV_v19_1.docx" class="btn" download style="margin-top: 20px;">Download Resumé</a>
                 </div>
                 
                 <div>
-                    <div class="list-header">Selected Experience</div>
-                    <ul class="clean-list">
-                        <li><strong>Creative Copywriter</strong> <span>McCann Worldgroup</span></li>
-                        <li><strong>AI Linguist & Scriptwriter</strong> <span>Krutrim AI (Ola)</span></li>
-                        <li><strong>Copy Editor</strong> <span>NewFirst Kannada TV</span></li>
-                        <li><strong>Filmmaker</strong> <span>IFP 50-Hour Challenge</span></li>
-                    </ul>
+                    <div class="meta-list">
+                        <div class="meta-title">Selected Experience</div>
+                        <ul class="clean-list">
+                            <li>Creative Copywriter <span>McCann Worldgroup</span></li>
+                            <li>AI Linguist & Scriptwriter <span>Krutrim AI (Ola)</span></li>
+                            <li>Copy Editor <span>NewFirst Kannada TV</span></li>
+                            <li>Filmmaker <span>IFP 50-Hour Challenge</span></li>
+                        </ul>
+                    </div>
 
-                    <div class="list-header">Languages</div>
-                    <ul class="clean-list" style="margin-bottom: 0;">
-                        <li>Hindi <span>Fluent</span></li>
-                        <li>English <span>Proficient</span></li>
-                        <li>Kannada <span>Native</span></li>
-                        <li>Telugu <span>Intermediate</span></li>
-                        <li>Tamil / Marathi / Malayalam <span>Basic</span></li>
-                    </ul>
+                    <div class="meta-list">
+                        <div class="meta-title">Languages</div>
+                        <ul class="clean-list">
+                            <li>Hindi <span>Fluent</span></li>
+                            <li>English <span>Proficient</span></li>
+                            <li>Kannada <span>Native</span></li>
+                            <li>Telugu <span>Intermediate</span></li>
+                            <li>Tamil / Marathi / Malayalam <span>Basic</span></li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </section>
 
         <!-- FILMOGRAPHY -->
         <section>
-            <h2 class="section-title">02 / Filmography</h2>
+            <div class="section-header">
+                <span class="section-num">02</span>
+                <h2 class="section-title">Filmography</h2>
+            </div>
+            
             <div class="projects-grid">
                 
                 <!-- YUVARATNA -->
@@ -348,7 +424,11 @@
 
         <!-- CREATIVE STRATEGY -->
         <section style="border-bottom: none;">
-            <h2 class="section-title">03 / Creative Strategy</h2>
+            <div class="section-header">
+                <span class="section-num">03</span>
+                <h2 class="section-title">Creative Strategy</h2>
+            </div>
+            
             <div class="projects-grid">
                 
                 <!-- TECHNOSPORT -->
