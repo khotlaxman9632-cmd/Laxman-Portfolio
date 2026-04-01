@@ -18,6 +18,23 @@
             --dark-border: #1a1a1a;
         }
 
+        /* --- CUSTOM DARK SCROLLBAR --- */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #070707;
+            border-left: 1px solid var(--dark-border);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #2a2a2a;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #444;
+        }
+
         body {
             margin: 0;
             background-color: var(--bg);
@@ -25,6 +42,41 @@
             font-family: 'Inter', sans-serif;
             -webkit-font-smoothing: antialiased;
             overflow-x: hidden;
+            /* Hide default cursor on desktop */
+            cursor: none;
+        }
+
+        /* Ensure default cursor is hidden on interactive elements too */
+        a, button, iframe, .audio-toggle, .cert-item, .project-card {
+            cursor: none !important;
+        }
+
+        /* --- CINEMATIC CUSTOM CURSOR --- */
+        .cursor-dot, .cursor-outline {
+            position: fixed;
+            top: 0; left: 0;
+            transform: translate(-50%, -50%);
+            border-radius: 50%;
+            z-index: 9999999;
+            pointer-events: none;
+        }
+        .cursor-dot {
+            width: 8px;
+            height: 8px;
+            background-color: var(--fg);
+        }
+        .cursor-outline {
+            width: 40px;
+            height: 40px;
+            border: 1px solid rgba(226, 226, 226, 0.5);
+            transition: width 0.2s ease-out, height 0.2s ease-out, background-color 0.2s ease-out, border-color 0.2s ease-out;
+        }
+        /* Cursor Hover State */
+        .cursor-outline.hovering {
+            width: 70px;
+            height: 70px;
+            background-color: rgba(226, 226, 226, 0.1);
+            border-color: transparent;
         }
 
         /* --- ANIMATED FILM GRAIN OVERLAY --- */
@@ -45,7 +97,7 @@
             top: -25vh; left: -25vw; 
             width: 150vw; height: 150vh;
             pointer-events: none;
-            z-index: 9999;
+            z-index: 9998;
             opacity: 0.06;
             background-image: url('data:image/svg+xml;utf8,%3Csvg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"%3E%3Cfilter id="noiseFilter"%3E%3CfeTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="3" stitchTiles="stitch"/%3E%3C/filter%3E%3Crect width="100%25" height="100%25" filter="url(%23noiseFilter)"/%3E%3C/svg%3E');
             animation: grainAnimation 8s steps(10) infinite;
@@ -62,8 +114,8 @@
         /* --- CINEMATIC SCROLL REVEAL ANIMATIONS --- */
         .reveal {
             opacity: 0;
-            transform: translateY(80px); /* Deep drop for dramatic float up */
-            transition: all 1.8s cubic-bezier(0.2, 0.8, 0.2, 1); /* Buttery smooth easing */
+            transform: translateY(80px);
+            transition: all 1.8s cubic-bezier(0.2, 0.8, 0.2, 1);
         }
         .reveal.active {
             opacity: 1;
@@ -103,7 +155,6 @@
             padding: 12vh 0 10vh;
             border-bottom: 1px solid var(--dark-border);
             opacity: 0;
-            /* Extra dramatic scale and drop for the Hero */
             transform: translateY(60px) scale(0.92);
             transition: opacity 3s cubic-bezier(0.2, 0.8, 0.2, 1), transform 3s cubic-bezier(0.2, 0.8, 0.2, 1);
         }
@@ -142,7 +193,7 @@
         /* --- BACKGROUND SVG ILLUSTRATIONS --- */
         .bg-illustration {
             position: absolute;
-            opacity: 0.03; /* Extremely subtle watermark effect */
+            opacity: 0.03;
             z-index: -1;
             pointer-events: none;
             color: #ffffff;
@@ -289,7 +340,7 @@
         }
         
         .card-media::-webkit-scrollbar { height: 6px; }
-        .card-media::-webkit-scrollbar-track { background: #111; }
+        .card-media::-webkit-scrollbar-track { background: #111; border-left: none; }
         .card-media::-webkit-scrollbar-thumb { background: #333; border-radius: 3px; }
         .card-media::-webkit-scrollbar-thumb:hover { background: #555; }
 
@@ -349,7 +400,6 @@
             transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
             display: flex;
             flex-direction: column;
-            cursor: pointer;
         }
         
         .cert-item:hover {
@@ -411,7 +461,6 @@
             font-size: 0.75rem;
             letter-spacing: 3px;
             transition: all 0.4s ease;
-            cursor: pointer;
             width: fit-content;
             position: relative;
             overflow: hidden;
@@ -559,9 +608,14 @@
             position: fixed;
             top: 0; left: 0;
             width: 100vw; height: 100vh;
-            z-index: 999999;
+            z-index: 99999999; /* Highest possible */
             overflow: hidden;
             background: #070707;
+            /* Allow standard cursor here so they can click ACTION easily */
+            cursor: auto;
+        }
+        #intro-overlay .enter-btn {
+            cursor: pointer !important;
         }
 
         .clap-top {
@@ -634,7 +688,6 @@
             letter-spacing: 3px;
             text-transform: uppercase;
             font-size: 0.8rem;
-            cursor: pointer;
             transition: all 0.4s ease;
         }
         .enter-btn:hover {
@@ -690,11 +743,20 @@
             .intro-content h1 { font-size: 2.2rem; }
             .intro-content p { font-size: 0.65rem; margin-bottom: 30px; }
             .enter-btn { padding: 12px 30px; font-size: 0.7rem; }
+
+            /* Disable Custom Cursor on Mobile */
+            .cursor-dot, .cursor-outline { display: none !important; }
+            body { cursor: auto; }
+            a, button, iframe, .audio-toggle, .cert-item, .project-card { cursor: pointer !important; }
         }
 
     </style>
 </head>
 <body>
+
+    <!-- CUSTOM CURSOR -->
+    <div class="cursor-dot" id="cursor-dot"></div>
+    <div class="cursor-outline" id="cursor-outline"></div>
 
     <!-- CINEMATIC CLAPPERBOARD INTRO SCREEN -->
     <div id="intro-overlay">
@@ -726,7 +788,7 @@
         <!-- TOP VIEWFINDER BAR -->
         <div class="top-bar">
             <!-- AUDIO TOGGLE BUTTON -->
-            <div class="audio-toggle" onclick="toggleAudio()" style="cursor: pointer; display: flex; align-items: center; gap: 8px; transition: color 0.3s ease;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='var(--grey)'">
+            <div class="audio-toggle interactive-el" onclick="toggleAudio()" style="display: flex; align-items: center; gap: 8px; transition: color 0.3s ease;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='var(--grey)'">
                 <svg id="audio-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                     <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
                     <line x1="23" y1="9" x2="17" y2="15"></line>
@@ -775,7 +837,7 @@
                     <p class="reveal reveal-delay-2">Having handled end-to-end production on independent short films, I understand everything from script analysis and location scouting to talent management, scheduling, and post-production. Fluent across multiple languages, I have a strong instinct for <strong>culturally authentic storytelling.</strong></p>
                     
                     <div class="reveal reveal-delay-3">
-                        <a href="./Laxman_Khot_CV_v19_1.docx" class="btn" download style="margin-top: 20px;">Download Resumé</a>
+                        <a href="./Laxman_Khot_CV_v19_1.docx" class="btn interactive-el" download style="margin-top: 20px;">Download Resumé</a>
                     </div>
                 </div>
                 
@@ -826,7 +888,7 @@
             <div class="projects-grid">
                 
                 <!-- YUVARATNA -->
-                <div class="project-card reveal">
+                <div class="project-card interactive-el reveal">
                     <div class="media-wrapper">
                         <div class="scroll-hint">[ Swipe / Scroll -> ]</div>
                         <div class="card-media">
@@ -844,7 +906,7 @@
                 </div>
 
                 <!-- SPOOKY COLLEGE -->
-                <div class="project-card reveal">
+                <div class="project-card interactive-el reveal">
                     <div class="media-wrapper">
                         <div class="card-media">
                             <div class="card-media-item">
@@ -858,7 +920,7 @@
                 </div>
 
                 <!-- THE SMILE I HATE -->
-                <div class="project-card reveal">
+                <div class="project-card interactive-el reveal">
                     <div class="media-wrapper">
                         <div class="card-media">
                             <div class="card-media-item">
@@ -895,7 +957,7 @@
             <div class="projects-grid">
                 
                 <!-- TECHNOSPORT -->
-                <div class="project-card reveal">
+                <div class="project-card interactive-el reveal">
                     <div class="media-wrapper">
                         <div class="scroll-hint">[ Swipe / Scroll -> ]</div>
                         <div class="card-media">
@@ -910,11 +972,11 @@
                     <h3 class="card-title">Technosport</h3>
                     <div class="card-role">Creative Copywriter</div>
                     <p class="card-desc">Ideated and developed a 360° campaign concept and festival-led brand activation. Translated brief into a pitch-ready framework.</p>
-                    <a href="./TECHNO%20SPORT%20MOVE%20EASY.pdf" target="_blank" class="btn btn-small">View Pitch Deck</a>
+                    <a href="./TECHNO%20SPORT%20MOVE%20EASY.pdf" target="_blank" class="btn btn-small interactive-el">View Pitch Deck</a>
                 </div>
 
                 <!-- CAMPA COLA -->
-                <div class="project-card reveal">
+                <div class="project-card interactive-el reveal">
                     <div class="media-wrapper">
                         <div class="scroll-hint">[ Swipe / Scroll -> ]</div>
                         <div class="card-media">
@@ -929,11 +991,11 @@
                     <h3 class="card-title">Campa Cola</h3>
                     <div class="card-role">Creative Copywriter</div>
                     <p class="card-desc">Developed creative routes, content themes, and pitch decks for major brand activations including IPL and Ramadan campaigns.</p>
-                    <a href="./Campa%20Power%20up%20Ramadan%20KV.pdf" target="_blank" class="btn btn-small">View Ramadan Pitch</a>
+                    <a href="./Campa%20Power%20up%20Ramadan%20KV.pdf" target="_blank" class="btn btn-small interactive-el">View Ramadan Pitch</a>
                 </div>
 
                 <!-- NESTLE -->
-                <div class="project-card reveal">
+                <div class="project-card interactive-el reveal">
                     <div class="media-wrapper">
                         <div class="scroll-hint">[ Swipe / Scroll -> ]</div>
                         <div class="card-media">
@@ -948,7 +1010,7 @@
                 </div>
 
                 <!-- COLLEGE NEWSLETTER -->
-                <div class="project-card reveal">
+                <div class="project-card interactive-el reveal">
                     <div class="media-wrapper">
                         <a href="./MBSphere%20Volume%202%20Edition%203%20(1).pdf" target="_blank" style="display: block; width: 100%; height: 100%;">
                             <div class="card-media">
@@ -961,7 +1023,7 @@
                     <h3 class="card-title">MBSphere Newsletter</h3>
                     <div class="card-role">Editorial & Layout Design</div>
                     <p class="card-desc">Spearheaded the editorial direction, layout design, and content curation for the official college newsletter, blending cinematic aesthetics with print storytelling.</p>
-                    <a href="./MBSphere%20Volume%202%20Edition%203%20(1).pdf" target="_blank" class="btn btn-small">View Newsletter PDF</a>
+                    <a href="./MBSphere%20Volume%202%20Edition%203%20(1).pdf" target="_blank" class="btn btn-small interactive-el">View Newsletter PDF</a>
                 </div>
 
             </div>
@@ -987,7 +1049,7 @@
             <div class="cert-grid">
                 
                 <!-- CERTIFICATE 1 (Cinematic Composition) -->
-                <a href="./Certificate-%20Cinematic%20Composition.pdf" target="_blank" class="cert-link reveal reveal-delay-1">
+                <a href="./Certificate-%20Cinematic%20Composition.pdf" target="_blank" class="cert-link interactive-el reveal reveal-delay-1">
                     <div class="cert-item">
                         <div class="cert-media">
                             <span>[ View PDF ]</span>
@@ -998,7 +1060,7 @@
                 </a>
 
                 <!-- CERTIFICATE 2 (Claude 101) -->
-                <a href="./certificate-Claude%20101.pdf" target="_blank" class="cert-link reveal reveal-delay-2">
+                <a href="./certificate-Claude%20101.pdf" target="_blank" class="cert-link interactive-el reveal reveal-delay-2">
                     <div class="cert-item">
                         <div class="cert-media">
                             <span>[ View PDF ]</span>
@@ -1009,7 +1071,7 @@
                 </a>
 
                 <!-- CERTIFICATE 3 (IFP 13) -->
-                <a href="./IFC%2013.pdf" target="_blank" class="cert-link reveal reveal-delay-3">
+                <a href="./IFC%2013.pdf" target="_blank" class="cert-link interactive-el reveal reveal-delay-3">
                     <div class="cert-item">
                         <div class="cert-media">
                             <span>[ View PDF ]</span>
@@ -1020,7 +1082,7 @@
                 </a>
 
                 <!-- CERTIFICATE 4 (IFP 15) -->
-                <a href="./IFP%2015.pdf" target="_blank" class="cert-link reveal reveal-delay-3">
+                <a href="./IFP%2015.pdf" target="_blank" class="cert-link interactive-el reveal reveal-delay-3">
                     <div class="cert-item">
                         <div class="cert-media">
                             <span>[ View PDF ]</span>
@@ -1045,15 +1107,15 @@
             
             <div class="collab-socials">
                 <!-- Instagram -->
-                <a href="https://www.instagram.com/laxman_khot_/" target="_blank" aria-label="Instagram">
+                <a href="https://www.instagram.com/laxman_khot_/" target="_blank" class="interactive-el" aria-label="Instagram">
                     <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
                 </a>
                 <!-- LinkedIn -->
-                <a href="https://www.linkedin.com/in/laxman-khot-a54689214" target="_blank" aria-label="LinkedIn">
+                <a href="https://www.linkedin.com/in/laxman-khot-a54689214" target="_blank" class="interactive-el" aria-label="LinkedIn">
                     <svg viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
                 </a>
                 <!-- Email -->
-                <a href="mailto:khotlaxman9632@gmail.com" aria-label="Email">
+                <a href="mailto:khotlaxman9632@gmail.com" class="interactive-el" aria-label="Email">
                     <svg viewBox="0 0 24 24"><path d="M0 3v18h24v-18h-24zm21.518 2l-9.518 7.713-9.518-7.713h19.036zm-19.518 14v-11.817l10 8.104 10-8.104v11.817h-20z"/></svg>
                 </a>
             </div>
@@ -1065,14 +1127,52 @@
                 <span>khotlaxman9632-cmd.github.io/Laxman-Portfolio</span>
             </div>
             <div class="collab-right">
-                <a href="mailto:khotlaxman9632@gmail.com">khotlaxman9632@gmail.com</a>
-                <a href="tel:+919632617304">+91 96326 17304</a>
+                <a href="mailto:khotlaxman9632@gmail.com" class="interactive-el">khotlaxman9632@gmail.com</a>
+                <a href="tel:+919632617304" class="interactive-el">+91 96326 17304</a>
             </div>
         </div>
     </section>
 
     <!-- YouTube IFrame API Script -->
     <script>
+        // TAB TITLE PAUSED EFFECT
+        let originalTitle = document.title;
+        document.addEventListener('visibilitychange', function() {
+            if (document.hidden) {
+                document.title = "⏸️ Paused... | Laxman Khot";
+            } else {
+                document.title = originalTitle;
+            }
+        });
+
+        // CUSTOM CURSOR SCRIPT
+        const cursorDot = document.getElementById('cursor-dot');
+        const cursorOutline = document.getElementById('cursor-outline');
+        
+        window.addEventListener('mousemove', function(e) {
+            const posX = e.clientX;
+            const posY = e.clientY;
+            
+            cursorDot.style.left = `${posX}px`;
+            cursorDot.style.top = `${posY}px`;
+            
+            // Smooth trailing effect for the outline using animate API
+            cursorOutline.animate({
+                left: `${posX}px`,
+                top: `${posY}px`
+            }, { duration: 500, fill: "forwards" });
+        });
+
+        // Hover effects for the cursor
+        document.querySelectorAll('.interactive-el, a, button, iframe').forEach(el => {
+            el.addEventListener('mouseenter', () => {
+                cursorOutline.classList.add('hovering');
+            });
+            el.addEventListener('mouseleave', () => {
+                cursorOutline.classList.remove('hovering');
+            });
+        });
+
         var bgmPlayer;
         var isBgmPlaying = false;
         var wasBgmPlayingBeforeVideo = false;
@@ -1181,6 +1281,7 @@
             // 4. Destroy overlay layer
             setTimeout(() => {
                 overlay.style.display = 'none';
+                document.body.style.cursor = 'none'; // Re-enforce custom cursor after overlay removal
             }, 1200);
         }
 
