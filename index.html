@@ -863,7 +863,9 @@
                         <div>DIRECTOR:<span>Laxman Khot</span></div>
                         <div>CAMERA:<span>Portfolio</span></div>
                         <div class="date-row">
-                            <div class="date-text">DATE:</div>
+                            <div class="date-text" style="display: flex; align-items: flex-end;">
+                                DATE: <span id="clapper-date" style="font-family: 'Great Vibes', cursive; font-size: 1.8rem; color: #ddd; text-transform: none; font-weight: 400; letter-spacing: 0; line-height: 0.8; margin-left: 15px;"></span>
+                            </div>
                             <div class="date-details">Day-Night Int Ext Mos<br>Filter Sync</div>
                         </div>
                     </div>
@@ -1430,6 +1432,16 @@
                 }
             }
         }
+
+        // SET LIVE DATE ON CLAPPERBOARD
+        document.addEventListener("DOMContentLoaded", () => {
+            const dateElement = document.getElementById('clapper-date');
+            if (dateElement) {
+                const options = { year: 'numeric', month: 'short', day: 'numeric' };
+                // This will format it like "Oct 24, 2023"
+                dateElement.innerText = new Date().toLocaleDateString('en-US', options); 
+            }
+        });
 
         // INTERSECTION OBSERVER (SCROLL REVEAL ANIMATIONS)
         document.addEventListener("DOMContentLoaded", () => {
