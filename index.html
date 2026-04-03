@@ -622,83 +622,167 @@
             color: #fff;
         }
 
-        /* --- CLAPPERBOARD INTRO OVERLAY --- */
+        /* --- REALISTIC CENTERED CLAPPERBOARD --- */
         #intro-overlay {
             position: fixed;
             top: 0; left: 0;
             width: 100vw; height: 100vh;
-            z-index: 99999999; /* Highest possible */
-            overflow: hidden;
+            z-index: 99999999;
             background: #070707;
-            /* Allow standard cursor here so they can click ACTION easily */
             cursor: auto;
+            transition: background 0.8s ease;
         }
-        #intro-overlay .enter-btn {
-            cursor: pointer !important;
-        }
-
-        .clap-top {
-            position: absolute;
-            bottom: 50%; left: -5%;
-            width: 110vw; height: 60vh;
-            background: #070707;
-            transform-origin: left bottom;
-            transform: translateY(-100px) rotate(-8deg); 
-            transition: transform 0.15s cubic-bezier(0.4, 0, 1, 1);
-            z-index: 2;
-        }
-
-        .top-stripes {
-            position: absolute;
-            bottom: 0; left: 0; width: 100%; height: 35px;
-            background: repeating-linear-gradient(45deg, #e2e2e2, #e2e2e2 40px, #1a1a1a 40px, #1a1a1a 80px);
-            border-bottom: 2px solid #000;
-        }
-
-        .clap-bottom {
-            position: absolute;
-            top: 50%; left: -5%;
-            width: 110vw; height: 60vh;
-            background: #070707;
-            z-index: 1;
-            transform: translateY(100px); 
-            transition: transform 0.8s cubic-bezier(0.77, 0, 0.175, 1);
-        }
-
-        .bottom-stripes {
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 35px;
-            background: repeating-linear-gradient(45deg, #1a1a1a, #1a1a1a 40px, #e2e2e2 40px, #e2e2e2 80px);
-            border-top: 2px solid #000;
-        }
-
-        .intro-content {
+        
+        .clapperboard-wrapper {
             position: absolute;
             top: 50%; left: 50%;
             transform: translate(-50%, -50%);
-            text-align: center;
-            z-index: 10;
-            width: 100%;
-            transition: opacity 0.15s ease;
+            width: 90vw;
+            max-width: 500px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            transition: all 0.8s cubic-bezier(0.77, 0, 0.175, 1);
         }
 
-        .intro-content h1 {
-            font-family: 'Playfair Display', serif;
-            font-size: 3rem;
+        .clapper-stick {
+            width: 100%;
+            height: 45px;
+            background: repeating-linear-gradient(-45deg, #e2e2e2, #e2e2e2 35px, #1a1a1a 35px, #1a1a1a 70px);
+            border: 2px solid #fff;
+            border-radius: 6px 6px 0 0;
+            transform-origin: 20px 100%;
+            transform: rotate(-22deg);
+            margin-bottom: 2px;
+            transition: transform 0.12s cubic-bezier(0.4, 0, 1, 1);
+            position: relative;
+            z-index: 2;
+        }
+        
+        /* Hinge pin */
+        .clapper-stick::after {
+            content: '';
+            position: absolute;
+            bottom: 5px; left: 15px;
+            width: 12px; height: 12px;
+            background: #aaa;
+            border-radius: 50%;
+        }
+
+        .clapper-base {
+            width: 100%;
+            background: #111;
+            border: 2px solid #fff;
+            border-radius: 0 0 6px 6px;
             color: #fff;
-            margin: 0;
-            font-weight: 400;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.8);
+            position: relative;
+            z-index: 1;
+        }
+
+        .clapper-base-top {
+            width: 100%;
+            height: 45px;
+            background: repeating-linear-gradient(-45deg, #1a1a1a, #1a1a1a 35px, #e2e2e2 35px, #e2e2e2 70px);
+            border-bottom: 2px solid #fff;
+        }
+
+        .clapper-details {
+            padding: 25px;
+            font-family: 'Inter', sans-serif;
             text-transform: uppercase;
         }
-        .intro-content p {
-            font-family: 'Inter', sans-serif;
-            color: #666;
-            letter-spacing: 5px;
+
+        .clap-prod {
+            font-weight: 700;
             font-size: 0.8rem;
-            margin-top: 10px;
-            margin-bottom: 40px;
+            letter-spacing: 2px;
+            border-bottom: 2px solid #fff;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
         }
+        .clap-prod span {
+            font-family: 'Great Vibes', cursive;
+            font-size: 1.8rem;
+            text-transform: none;
+            line-height: 0.8;
+            color: #ddd;
+        }
+
+        .clap-row-1 {
+            display: flex;
+            border-bottom: 2px solid #fff;
+            padding-bottom: 15px;
+            margin-bottom: 15px;
+        }
+
+        .clap-box {
+            flex: 1;
+            text-align: left;
+            border-right: 2px solid #fff;
+            padding-left: 15px;
+            font-size: 0.65rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+        }
+        .clap-box:first-child { padding-left: 0; }
+        .clap-box:last-child { border-right: none; }
+        
+        .clap-box span {
+            display: block;
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            font-weight: 400;
+            margin-top: 5px;
+            text-align: center;
+        }
+
+        .clap-lines {
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+        }
+        
+        .clap-lines > div {
+            border-bottom: 2px solid #fff;
+            padding: 12px 0;
+            display: flex;
+            align-items: flex-end;
+            gap: 15px;
+        }
+        .clap-lines > div:last-child {
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+
+        .clap-lines span {
+            font-family: 'Great Vibes', cursive;
+            font-size: 1.8rem;
+            font-weight: 400;
+            text-transform: none;
+            line-height: 0.8;
+            color: #ddd;
+        }
+
+        .date-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+        }
+        .date-details {
+            text-align: right;
+            font-size: 0.5rem;
+            line-height: 1.4;
+            color: #888;
+            letter-spacing: 1px;
+        }
+
         .enter-btn {
+            margin-top: 40px;
             background: transparent;
             color: #fff;
             border: 1px solid #333;
@@ -708,26 +792,11 @@
             text-transform: uppercase;
             font-size: 0.8rem;
             transition: all 0.4s ease;
+            cursor: pointer;
         }
         .enter-btn:hover {
             background: #fff;
             color: #000;
-        }
-
-        /* --- CLAPPERBOARD ANIMATION STATES --- */
-        #intro-overlay.clapped .clap-top {
-            transform: translateY(0px) rotate(0deg) !important;
-        }
-        #intro-overlay.clapped .clap-bottom {
-            transform: translateY(0px) !important;
-        }
-        #intro-overlay.open .clap-top {
-            transition: transform 0.8s cubic-bezier(0.77, 0, 0.175, 1) !important;
-            transform: translateY(-100vh) rotate(-10deg) !important;
-        }
-        #intro-overlay.open .clap-bottom {
-            transition: transform 0.8s cubic-bezier(0.77, 0, 0.175, 1) !important;
-            transform: translateY(100vh) !important;
         }
 
         /* --- RESPONSIVE MOBILE FIXES --- */
@@ -756,12 +825,12 @@
             .script-svg { right: -10%; top: 5%; }
 
             /* Fix Clapperboard for Mobile */
-            .clap-top { transform: translateY(-16vh) rotate(-15deg); }
-            .clap-bottom { transform: translateY(16vh); }
-            .intro-content { transform: translate(-50%, -50%); width: 95%; }
-            .intro-content h1 { font-size: 2.2rem; }
-            .intro-content p { font-size: 0.65rem; margin-bottom: 30px; }
-            .enter-btn { padding: 12px 30px; font-size: 0.7rem; }
+            .clapperboard-wrapper { width: 95vw; }
+            .clap-prod span { font-size: 1.4rem; }
+            .clap-box span { font-size: 1.8rem; }
+            .clap-lines span { font-size: 1.4rem; margin-left: 5px; }
+            .date-details { font-size: 0.4rem; }
+            .enter-btn { padding: 12px 30px; font-size: 0.7rem; margin-top: 25px; }
 
             /* Disable Custom Cursor on Mobile */
             .cursor-dot, .cursor-outline { display: none !important; }
@@ -777,21 +846,29 @@
     <div class="cursor-dot" id="cursor-dot"></div>
     <div class="cursor-outline" id="cursor-outline"></div>
 
-    <!-- CINEMATIC CLAPPERBOARD INTRO SCREEN -->
+    <!-- NEW REALISTIC CENTERED CLAPPERBOARD -->
     <div id="intro-overlay">
-        <!-- Top Arm of Clapperboard -->
-        <div class="clap-top" id="clap-top">
-            <div class="top-stripes"></div>
-        </div>
-        
-        <!-- Bottom Base of Clapperboard -->
-        <div class="clap-bottom" id="clap-bottom">
-            <div class="bottom-stripes"></div>
-        </div>
-
-        <div class="intro-content" id="intro-content">
-            <h1>Laxman Khot</h1>
-            <p>DIRECTOR — CREATIVE STRATEGIST</p>
+        <div class="clapperboard-wrapper" id="clapperboard-wrapper">
+            <div class="clapper-stick" id="clapper-stick"></div>
+            <div class="clapper-base">
+                <div class="clapper-base-top"></div>
+                <div class="clapper-details">
+                    <div class="clap-prod">PROD. <span>Laxman Khot Portfolio</span></div>
+                    <div class="clap-row-1">
+                        <div class="clap-box">ROLL<span>01</span></div>
+                        <div class="clap-box">SCENE<span>1A</span></div>
+                        <div class="clap-box">TAKE<span>01</span></div>
+                    </div>
+                    <div class="clap-lines">
+                        <div>DIRECTOR:<span>Laxman Khot</span></div>
+                        <div>CAMERA:<span>Portfolio</span></div>
+                        <div class="date-row">
+                            <div class="date-text">DATE:</div>
+                            <div class="date-details">Day-Night Int Ext Mos<br>Filter Sync</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
             <button class="enter-btn" onclick="enterPortfolio()">[ ACTION ]</button>
         </div>
     </div>
@@ -1252,6 +1329,7 @@
                 playerVars: { 'autoplay': 0, 'controls': 0, 'showinfo': 0, 'rel': 0, 'loop': 1, 'playlist': 'UDVtMYqUAyw' }
             });
 
+            // ALL 7 VIDEOS + 4 PREVIOUS
             const videoIds = ['vid1', 'vid2', 'vid3', 'vid4', 'vid5', 'vid6', 'vid7', 'vid8', 'vid9', 'vid10', 'vid11'];
             videoIds.forEach(function(vid) {
                 var p = new YT.Player(vid, { events: { 'onStateChange': onProjectVideoStateChange } });
@@ -1297,26 +1375,29 @@
             }
         }
 
-        // FAILSAFE CLAPPERBOARD ANIMATION SCRIPT
+        // NEW CENTERED CLAPPERBOARD ANIMATION
         function enterPortfolio() {
             const overlay = document.getElementById('intro-overlay');
-            const content = document.getElementById('intro-content');
+            const wrapper = document.getElementById('clapperboard-wrapper');
+            const stick = document.getElementById('clapper-stick');
+            const btn = document.querySelector('.enter-btn');
 
-            // 1. Hide text
-            content.style.opacity = '0';
+            // 1. Hide button
+            btn.style.opacity = '0';
             
-            // 2. Slam board
-            overlay.classList.add('clapped');
+            // 2. Slam the clapper stick shut!
+            stick.style.transform = 'rotate(0deg)';
 
-            // 3. Force board open
+            // 3. Wait a millisecond for the "Clap" visual, then zoom out and fade
             setTimeout(() => {
-                overlay.classList.remove('clapped'); 
-                overlay.classList.add('open');
+                wrapper.style.transform = 'translate(-50%, -50%) scale(4)';
+                wrapper.style.opacity = '0';
+                overlay.style.background = 'transparent';
                 
                 // Extremely slow and dramatic HERO reveal
                 setTimeout(() => {
                     document.getElementById('main-hero').classList.add('hero-active');
-                }, 600);
+                }, 400);
 
                 try {
                     if (bgmPlayer && typeof bgmPlayer.playVideo === 'function') {
@@ -1325,15 +1406,13 @@
                         wasBgmPlayingBeforeVideo = false;
                         updateBgmUI(true);
                     }
-                } catch(e) {
-                    console.log("Audio autoplay blocked by browser");
-                }
-            }, 200); 
+                } catch(e) {}
+            }, 250); 
 
-            // 4. Destroy overlay layer
+            // 4. Destroy overlay layer completely
             setTimeout(() => {
                 overlay.style.display = 'none';
-                document.body.style.cursor = 'none'; // Re-enforce custom cursor after overlay removal
+                document.body.style.cursor = 'none'; 
             }, 1200);
         }
 
