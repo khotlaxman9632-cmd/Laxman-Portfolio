@@ -18,6 +18,16 @@
             --dark-border: #1a1a1a;
         }
 
+        /* --- FEATURE 3: CINEMATIC TEXT HIGHLIGHT --- */
+        ::selection {
+            background-color: #e2e2e2;
+            color: #070707;
+        }
+        ::-moz-selection {
+            background-color: #e2e2e2;
+            color: #070707;
+        }
+
         /* --- FORCED CUSTOM DARK SCROLLBAR (WORKS ON ALL BROWSERS) --- */
         html {
             scrollbar-width: thin; /* For Firefox */
@@ -71,7 +81,7 @@
         }
 
         /* Ensure default cursor is hidden on interactive elements too */
-        a, button, iframe, .audio-toggle, .cert-item, .project-card {
+        a, button, iframe, .audio-toggle, .cert-item, .project-card, #lightbox {
             cursor: none !important;
         }
 
@@ -799,6 +809,80 @@
             color: #000;
         }
 
+        /* --- FEATURE 1: LIGHTBOX MODAL --- */
+        #lightbox {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100vw; height: 100vh;
+            background: rgba(0, 0, 0, 0.95);
+            z-index: 9999990; /* Right below the custom cursor */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.4s ease;
+        }
+        #lightbox.active {
+            opacity: 1;
+            pointer-events: all;
+        }
+        #lightbox img {
+            max-width: 90vw;
+            max-height: 90vh;
+            object-fit: contain;
+            border: 1px solid #333;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.8);
+        }
+        #lightbox-close {
+            position: absolute;
+            top: 30px; right: 40px;
+            color: var(--grey);
+            font-family: 'Inter', sans-serif;
+            font-size: 0.8rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            cursor: none;
+            transition: color 0.3s ease;
+        }
+        #lightbox-close:hover {
+            color: #fff;
+        }
+
+        /* --- FEATURE 2: BACK TO TOP BUTTON --- */
+        #back-to-top {
+            position: fixed;
+            bottom: 40px; right: 40px;
+            width: 45px; height: 65px;
+            background: #111;
+            border: 1px solid #333;
+            z-index: 9999;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: all 0.4s ease;
+            cursor: none;
+            /* Film strip styling */
+            background-image: radial-gradient(circle at center, transparent 3px, #111 4px);
+            background-size: 100% 12px;
+            border-left: 4px dashed #000;
+            border-right: 4px dashed #000;
+        }
+        #back-to-top.visible {
+            opacity: 1;
+            pointer-events: all;
+        }
+        #back-to-top:hover {
+            border-color: #e2e2e2;
+            transform: translateY(-5px);
+        }
+        #back-to-top svg {
+            width: 20px; height: 20px;
+            fill: none; stroke: #e2e2e2; stroke-width: 2;
+        }
+
         /* --- RESPONSIVE MOBILE FIXES --- */
         @media (max-width: 900px) {
             .about-grid { grid-template-columns: 1fr; gap: 60px; }
@@ -832,10 +916,14 @@
             .date-details { font-size: 0.4rem; }
             .enter-btn { padding: 12px 30px; font-size: 0.7rem; margin-top: 25px; }
 
+            /* New Features Mobile Fixes */
+            #back-to-top { bottom: 20px; right: 20px; width: 35px; height: 50px; }
+            #lightbox-close { top: 20px; right: 20px; }
+
             /* Disable Custom Cursor on Mobile */
             .cursor-dot, .cursor-outline { display: none !important; }
             body { cursor: auto; }
-            a, button, iframe, .audio-toggle, .cert-item, .project-card { cursor: pointer !important; }
+            a, button, iframe, .audio-toggle, .cert-item, .project-card, #lightbox, #lightbox-close, #back-to-top { cursor: pointer !important; }
         }
 
     </style>
@@ -845,6 +933,19 @@
     <!-- CUSTOM CURSOR -->
     <div class="cursor-dot" id="cursor-dot"></div>
     <div class="cursor-outline" id="cursor-outline"></div>
+
+    <!-- FEATURE 1: FULLSCREEN LIGHTBOX -->
+    <div id="lightbox" class="interactive-el">
+        <div id="lightbox-close" class="interactive-el">[ CLOSE ]</div>
+        <img id="lightbox-img" src="" alt="Expanded View">
+    </div>
+
+    <!-- FEATURE 2: BACK TO TOP FILM STRIP BUTTON -->
+    <div id="back-to-top" class="interactive-el" title="Back to Top">
+        <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="18 15 12 9 6 15"></polyline>
+        </svg>
+    </div>
 
     <!-- NEW REALISTIC CENTERED CLAPPERBOARD -->
     <div id="intro-overlay">
@@ -1090,13 +1191,13 @@
                 <!-- TECHNOSPORT -->
                 <div class="project-card interactive-el reveal">
                     <div class="media-wrapper">
-                        <div class="scroll-hint">[ Swipe / Scroll -> ]</div>
+                        <div class="scroll-hint">[ Click to Enlarge | Swipe -> ]</div>
                         <div class="card-media">
                             <div class="card-media-item">
-                                <img src="./Techno%20Sport.png" alt="Technosport">
+                                <img src="./Techno%20Sport.png" alt="Technosport" class="interactive-el">
                             </div>
                             <div class="card-media-item">
-                                <img src="./TEchno%20Sport%201.png" alt="Technosport 2">
+                                <img src="./TEchno%20Sport%201.png" alt="Technosport 2" class="interactive-el">
                             </div>
                         </div>
                     </div>
@@ -1109,14 +1210,14 @@
                 <!-- CAMPA COLA -->
                 <div class="project-card interactive-el reveal">
                     <div class="media-wrapper">
-                        <div class="scroll-hint">[ Swipe / Scroll -> ]</div>
+                        <div class="scroll-hint">[ Click to Enlarge | Swipe -> ]</div>
                         <div class="card-media">
-                            <div class="card-media-item"><img src="./Campa%20IPL.png" alt="Campa Cola"></div>
-                            <div class="card-media-item"><img src="./Campa%20IPL%201.png" alt="Campa Image 1"></div>
-                            <div class="card-media-item"><img src="./Campa%20IPL%202.png" alt="Campa Image 2"></div>
-                            <div class="card-media-item"><img src="./Campa%20IPL%203.png" alt="Campa Image 3"></div>
-                            <div class="card-media-item"><img src="./Campa-Cola-Food%20Court-V2-01.jpg" alt="Campa Food Court"></div>
-                            <div class="card-media-item"><img src="./Campa-Cola-Food%20Court-V2-02.jpg" alt="Campa Food Court"></div>
+                            <div class="card-media-item"><img src="./Campa%20IPL.png" alt="Campa Cola" class="interactive-el"></div>
+                            <div class="card-media-item"><img src="./Campa%20IPL%201.png" alt="Campa Image 1" class="interactive-el"></div>
+                            <div class="card-media-item"><img src="./Campa%20IPL%202.png" alt="Campa Image 2" class="interactive-el"></div>
+                            <div class="card-media-item"><img src="./Campa%20IPL%203.png" alt="Campa Image 3" class="interactive-el"></div>
+                            <div class="card-media-item"><img src="./Campa-Cola-Food%20Court-V2-01.jpg" alt="Campa Food Court" class="interactive-el"></div>
+                            <div class="card-media-item"><img src="./Campa-Cola-Food%20Court-V2-02.jpg" alt="Campa Food Court" class="interactive-el"></div>
                         </div>
                     </div>
                     <h3 class="card-title">Campa Cola</h3>
@@ -1128,11 +1229,11 @@
                 <!-- NESTLE -->
                 <div class="project-card interactive-el reveal">
                     <div class="media-wrapper">
-                        <div class="scroll-hint">[ Swipe / Scroll -> ]</div>
+                        <div class="scroll-hint">[ Click to Enlarge | Swipe -> ]</div>
                         <div class="card-media">
-                            <div class="card-media-item"><img src="./Nestle%20Maggie.png" alt="Nestle Maggi"></div>
-                            <div class="card-media-item"><img src="./Nestle%20Maggie%201.png" alt="Maggi 2"></div>
-                            <div class="card-media-item"><img src="./Nestle%20Maggie%202.png" alt="Maggi 3"></div>
+                            <div class="card-media-item"><img src="./Nestle%20Maggie.png" alt="Nestle Maggi" class="interactive-el"></div>
+                            <div class="card-media-item"><img src="./Nestle%20Maggie%201.png" alt="Maggi 2" class="interactive-el"></div>
+                            <div class="card-media-item"><img src="./Nestle%20Maggie%202.png" alt="Maggi 3" class="interactive-el"></div>
                         </div>
                     </div>
                     <h3 class="card-title">Maggi (Nestlé)</h3>
@@ -1334,141 +1435,4 @@
             // ALL 7 VIDEOS + 4 PREVIOUS
             const videoIds = ['vid1', 'vid2', 'vid3', 'vid4', 'vid5', 'vid6', 'vid7', 'vid8', 'vid9', 'vid10', 'vid11'];
             videoIds.forEach(function(vid) {
-                var p = new YT.Player(vid, { events: { 'onStateChange': onProjectVideoStateChange } });
-                projectVideoPlayers.push(p);
-            });
-        }
-
-        function onProjectVideoStateChange(event) {
-            if (event.data == YT.PlayerState.PLAYING) {
-                if (isBgmPlaying) {
-                    wasBgmPlayingBeforeVideo = true;
-                    bgmPlayer.pauseVideo();
-                    updateBgmUI(false);
-                }
-                projectVideoPlayers.forEach(function(p) {
-                    if (p !== event.target && p.getPlayerState() == YT.PlayerState.PLAYING) {
-                        p.pauseVideo();
-                    }
-                });
-            } else if (event.data == YT.PlayerState.PAUSED || event.data == YT.PlayerState.ENDED) {
-                let anyVideoPlaying = false;
-                projectVideoPlayers.forEach(function(p) {
-                    if (p.getPlayerState() == YT.PlayerState.PLAYING) { anyVideoPlaying = true; }
-                });
-                if (!anyVideoPlaying && wasBgmPlayingBeforeVideo) {
-                    bgmPlayer.playVideo();
-                    isBgmPlaying = true;
-                    wasBgmPlayingBeforeVideo = false;
-                    updateBgmUI(true);
-                }
-            }
-        }
-
-        function updateBgmUI(playing) {
-            const text = document.getElementById('audio-text');
-            const icon = document.getElementById('audio-icon');
-            if (playing) {
-                text.innerText = 'BGM: ON';
-                icon.innerHTML = '<polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path>';
-            } else {
-                text.innerText = 'BGM: OFF';
-                icon.innerHTML = '<polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><line x1="23" y1="9" x2="17" y2="15"></line><line x1="17" y1="9" x2="23" y2="15"></line>';
-            }
-        }
-
-        // NEW CENTERED CLAPPERBOARD ANIMATION
-        function enterPortfolio() {
-            const overlay = document.getElementById('intro-overlay');
-            const wrapper = document.getElementById('clapperboard-wrapper');
-            const stick = document.getElementById('clapper-stick');
-            const btn = document.querySelector('.enter-btn');
-
-            // 1. Hide button
-            btn.style.opacity = '0';
-            
-            // 2. Slam the clapper stick shut!
-            stick.style.transform = 'rotate(0deg)';
-
-            // 3. Wait a millisecond for the "Clap" visual, then zoom out and fade
-            setTimeout(() => {
-                wrapper.style.transform = 'translate(-50%, -50%) scale(4)';
-                wrapper.style.opacity = '0';
-                overlay.style.background = 'transparent';
-                
-                // Extremely slow and dramatic HERO reveal
-                setTimeout(() => {
-                    document.getElementById('main-hero').classList.add('hero-active');
-                }, 400);
-
-                try {
-                    if (bgmPlayer && typeof bgmPlayer.playVideo === 'function') {
-                        bgmPlayer.playVideo();
-                        isBgmPlaying = true;
-                        wasBgmPlayingBeforeVideo = false;
-                        updateBgmUI(true);
-                    }
-                } catch(e) {}
-            }, 250); 
-
-            // 4. Destroy overlay layer completely
-            setTimeout(() => {
-                overlay.style.display = 'none';
-                document.body.style.cursor = 'none'; 
-            }, 1200);
-        }
-
-        function toggleAudio() {
-            if (bgmPlayer && bgmPlayer.getPlayerState) {
-                if (isBgmPlaying) {
-                    bgmPlayer.pauseVideo();
-                    isBgmPlaying = false;
-                    wasBgmPlayingBeforeVideo = false;
-                    updateBgmUI(false);
-                } else {
-                    bgmPlayer.playVideo();
-                    isBgmPlaying = true;
-                    updateBgmUI(true);
-                }
-            }
-        }
-
-        // SET LIVE DATE ON CLAPPERBOARD
-        document.addEventListener("DOMContentLoaded", () => {
-            const dateElement = document.getElementById('clapper-date');
-            if (dateElement) {
-                const options = { year: 'numeric', month: 'short', day: 'numeric' };
-                // This will format it like "Oct 24, 2023"
-                dateElement.innerText = new Date().toLocaleDateString('en-US', options); 
-            }
-        });
-
-        // INTERSECTION OBSERVER (SCROLL REVEAL ANIMATIONS)
-        document.addEventListener("DOMContentLoaded", () => {
-            const observerOptions = {
-                root: null,
-                rootMargin: '0px',
-                threshold: 0.15 
-            };
-
-            const observer = new IntersectionObserver((entries, observer) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('active');
-                        observer.unobserve(entry.target); 
-                    }
-                });
-            }, observerOptions);
-
-            document.querySelectorAll('.reveal').forEach(el => {
-                observer.observe(el);
-            });
-            
-            setTimeout(() => {
-                document.querySelectorAll('.reveal').forEach(el => el.classList.add('active'));
-            }, 3000);
-        });
-
-    </script>
-</body>
-</html>
+                var p = new YT.Player(vid, { events: { '*
