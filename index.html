@@ -24,21 +24,21 @@
             scrollbar-color: #2a2a2a #070707; /* For Firefox */
         }
         
-        body::-webkit-scrollbar {
+        ::-webkit-scrollbar {
             width: 8px !important;
             height: 8px !important;
             background-color: #070707 !important;
         }
-        body::-webkit-scrollbar-track {
+        ::-webkit-scrollbar-track {
             background: #070707 !important;
             border-left: 1px solid var(--dark-border) !important;
         }
-        body::-webkit-scrollbar-thumb {
+        ::-webkit-scrollbar-thumb {
             background: #2a2a2a !important;
             border-radius: 4px !important;
             border: 2px solid #070707 !important; /* Creates a clean padded look */
         }
-        body::-webkit-scrollbar-thumb:hover {
+        ::-webkit-scrollbar-thumb:hover {
             background: #444 !important;
         }
         
@@ -952,6 +952,39 @@
                     <p class="card-desc">Independent Short Film (2023). Managed end-to-end production with a peer-recognised directorial vision.</p>
                 </div>
 
+                <!-- FITT IIT DELHI -->
+                <div class="project-card interactive-el reveal">
+                    <div class="media-wrapper">
+                        <div class="scroll-hint">[ Swipe / Scroll -> ]</div>
+                        <div class="card-media">
+                            <div class="card-media-item">
+                                <iframe id="vid5" src="https://www.youtube.com/embed/nAYSQn3-T_0?enablejsapi=1" title="FITT IIT Delhi Media Event" allowfullscreen></iframe>
+                            </div>
+                            <div class="card-media-item">
+                                <iframe id="vid6" src="https://www.youtube.com/embed/eB6jHXkB9yg?enablejsapi=1" title="FITT IIT Delhi Short 1" allowfullscreen></iframe>
+                            </div>
+                            <div class="card-media-item">
+                                <iframe id="vid7" src="https://www.youtube.com/embed/ZfQwE7xa33k?enablejsapi=1" title="FITT IIT Delhi Short 2" allowfullscreen></iframe>
+                            </div>
+                            <div class="card-media-item">
+                                <iframe id="vid8" src="https://www.youtube.com/embed/hqDCvi-zpAg?enablejsapi=1" title="FITT IIT Delhi Short 3" allowfullscreen></iframe>
+                            </div>
+                            <div class="card-media-item">
+                                <iframe id="vid9" src="https://www.youtube.com/embed/A7QxuwZdIVk?enablejsapi=1" title="FITT IIT Delhi Short 4" allowfullscreen></iframe>
+                            </div>
+                            <div class="card-media-item">
+                                <iframe id="vid10" src="https://www.youtube.com/embed/7Z9nDNe2yAo?enablejsapi=1" title="FITT IIT Delhi Short 5" allowfullscreen></iframe>
+                            </div>
+                            <div class="card-media-item">
+                                <iframe id="vid11" src="https://www.youtube.com/embed/u6LmeMAutts?enablejsapi=1" title="FITT IIT Delhi Short 6" allowfullscreen></iframe>
+                            </div>
+                        </div>
+                    </div>
+                    <h3 class="card-title">FITT Incubation Centre, IIT Delhi</h3>
+                    <div class="card-role">Media Volunteer (Aug 2025)</div>
+                    <p class="card-desc">Managed end-to-end media operations at a FITT-organised event — covering camera handling, creative designing, and on-ground media relations, translating academic communication skills into real-world media management.</p>
+                </div>
+
             </div>
         </section>
 
@@ -1219,7 +1252,7 @@
                 playerVars: { 'autoplay': 0, 'controls': 0, 'showinfo': 0, 'rel': 0, 'loop': 1, 'playlist': 'UDVtMYqUAyw' }
             });
 
-            const videoIds = ['vid1', 'vid2', 'vid3', 'vid4'];
+            const videoIds = ['vid1', 'vid2', 'vid3', 'vid4', 'vid5', 'vid6', 'vid7', 'vid8', 'vid9', 'vid10', 'vid11'];
             videoIds.forEach(function(vid) {
                 var p = new YT.Player(vid, { events: { 'onStateChange': onProjectVideoStateChange } });
                 projectVideoPlayers.push(p);
